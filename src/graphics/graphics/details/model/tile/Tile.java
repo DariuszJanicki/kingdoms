@@ -12,6 +12,7 @@ public class Tile extends Component {
     /* ========== CONSTRUCTOR ========== */
     public Tile(Rect rect) {
         super(rect);
+        registerMouseAction(this::setInfo);
     }
 
     /* ========== PUBLIC ========== */
@@ -20,7 +21,13 @@ public class Tile extends Component {
         return this;
     }
 
+    @Override
     public void draw(GameGraphics g) {
         g.draw(field.getTerrainTile().getImage(), rect);
+    }
+
+    /* ========== PUBLIC ========== */
+    private void setInfo() {
+        model.setCurrentTileInfo(field.getTerrain() + " " + field.getCoords());
     }
 }

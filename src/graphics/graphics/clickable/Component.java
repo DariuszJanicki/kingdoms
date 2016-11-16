@@ -3,6 +3,7 @@ package graphics.graphics.clickable;
 import graphics.graphics.Drawable;
 import graphics.graphics.Point;
 import graphics.graphics.Rect;
+import graphics.graphics.details.model.ComponentModel;
 import utils.Functional;
 import utils.Opt;
 
@@ -10,6 +11,7 @@ import java.util.Optional;
 
 public abstract class Component extends Drawable {
 
+    protected ComponentModel model = ComponentModel.INSTANCE;
     private Opt<Functional> actionOnClick = Opt.empty();
     protected Rect rect;
 

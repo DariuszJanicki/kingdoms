@@ -2,16 +2,15 @@ package graphics.graphics.details;
 
 import graphics.frame.constants.FrameConstants;
 import graphics.graphics.Point;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
 
-@Getter
-@AllArgsConstructor
-public class Coords {
+public class Coords extends Tuple {
 
-    private Integer x;
-    private Integer y;
+    /* ========== CONSTRUCTOR ========== */
+    public Coords(Integer x, Integer y) {
+        super(x, y);
+    }
 
+    /* ========== PUBLIC ========== */
     public Point toPoint() {
         return new Point(x, y).mul(FrameConstants.baseTile);
     }
@@ -34,5 +33,10 @@ public class Coords {
 
     public Coords west() {
         return new Coords(x - 1, y);
+    }
+
+    @Override
+    public String toString() {
+        return "[" + x + ", " + y + "]";
     }
 }

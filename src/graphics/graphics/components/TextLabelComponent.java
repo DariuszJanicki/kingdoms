@@ -3,25 +3,24 @@ package graphics.graphics.components;
 import graphics.graphics.GameGraphics;
 import graphics.graphics.Rect;
 import graphics.graphics.clickable.Component;
-import lombok.Setter;
 
 import java.awt.*;
+import java.util.Objects;
 
 public class TextLabelComponent extends Component {
 
-    @Setter
-    private String label;
-
     /* ========== CONSTRUCTOR ========== */
-    public TextLabelComponent(Rect rect, String label) {
+    public TextLabelComponent(Rect rect) {
         super(rect);
-        this.label = label;
     }
 
     /* ========== CONSTRUCTOR ========== */
     @Override
     public void draw(GameGraphics g) {
         g.setColor(Color.BLACK);
-        g.getGraphics().drawString(label, rect.getStartPoint().getX() + 5, rect.getStartPoint().getY() + 15);
+        String currentTileInfo = model.getCurrentTileInfo();
+        if (Objects.nonNull(currentTileInfo)) {
+            g.getGraphics().drawString(currentTileInfo, rect.getStartPoint().getX() + 5, rect.getStartPoint().getY() + 15);
+        }
     }
 }

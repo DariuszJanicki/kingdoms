@@ -1,16 +1,14 @@
 package graphics.graphics.details;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
+public class Size extends Tuple {
 
-@Getter
-@AllArgsConstructor
-public class Size {
+    /* ========== CONSTRUCTOR ========== */
+    public Size(Integer x, Integer y) {
+        super(x, y);
+    }
 
-    private int x;
-    private int y;
-
+    /* ========== CONSTRUCTOR ========== */
     public Size div(int div) {
-        return new Size(x /= div, y /= div);
+        return new Size(x / div, y / div);
     }
 }
