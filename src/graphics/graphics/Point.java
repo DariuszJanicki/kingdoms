@@ -15,7 +15,7 @@ public class Point {
     }
 
     public Point plus(Point point) {
-        return new Point(x + point.x, y + point.y);
+        return plus(point.x, point.y);
     }
 
     @Override
@@ -24,6 +24,10 @@ public class Point {
     }
 
     public Point add(Integer x, Integer y) {
+        return new Point(this.x + x, this.y + y);
+    }
+
+    public Point plus(int x, int y) {
         return new Point(this.x + x, this.y + y);
     }
 }

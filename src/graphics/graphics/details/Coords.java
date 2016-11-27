@@ -18,7 +18,7 @@ public class Coords extends Tuple {
     }
 
     public Coords plus(Coords coords) {
-        return new Coords(x + coords.x, y + coords.y);
+        return plus(coords.x, coords.y);
     }
 
     public Coords north() {
@@ -77,4 +77,33 @@ public class Coords extends Tuple {
     public int yDifference(Coords coords) {
         return y - coords.y;
     }
+
+    public Coords plus(int x, int y) {
+        return new Coords(this.x + x, this.y + y);
+    }
+
+    public boolean check(Size size, Size size1) {
+        return checkX(size, size1) && checkY(size, size1);
+    }
+
+    private boolean checkX(Size map, Size size) {
+        return x >= 0 && x < map.getX() - size.getX();
+    }
+
+    private boolean checkY(Size map, Size size) {
+        return y >= 0 && y < map.getY() - size.getY();
+    }
+
+    public boolean check(Size size) {
+        return checkX(size) && checkY(size);
+    }
+
+    public boolean checkX(Size size) {
+        return x >= 0 && x < size.getX();
+    }
+
+    public boolean checkY(Size size) {
+        return y >= 0 && y < size.getY();
+    }
+
 }

@@ -12,33 +12,33 @@ import graphics.graphics.details.model.map.GameMap;
 import graphics.graphics.details.model.tile.Tile;
 import graphics.graphics.details.model.tile.field.Field;
 import lombok.Getter;
+import utils.Opt;
 
 public class Board extends Component {
 
     private GameMap map;
-    private Size size;
+    private TileArray tiles;
 
-    private Tile[][] tiles;
+    private Size size;
 
     @Getter
     private Point delta = new Point(0, 0);
-    private Coords destinationLocation = new Coords(0, 0);
-    private Coords currentLocation = new Coords(0, 0);
+    private Coords destination = new Coords(0, 0);
+    private Coords current = new Coords(0, 0);
 
     public Board(Rect rect, GameMap map) {
         super(rect);
 
         this.map = map;
         this.size = rect.toSize().div(FrameConstants.baseTile);
-
-        createTiles(size);
+        tiles = new TileArray(size.plus(3, 3), this);
     }
 
     /* ========== PUBLIC ========== */
     @Override
     public void draw(GameGraphics g) {
-        for (int i = 0; i <= size.getX() + 1; ++i) {
-            for (int j = 0; j <= size.getY() + 1; ++j) {
+        for (int i = -1; i <= size.getX(); ++i) {
+            for (int j = -1; j <= size.getY(); ++j) {
                 draw(g, new Coords(i, j));
             }
         }
@@ -46,35 +46,28 @@ public class Board extends Component {
 
     @Override
     public void tick() {
-        if (currentLocation.notEqual(destinationLocation)) {
-            int x = Mat.signum(currentLocation.xDifference(destinationLocation));
-            int y = Mat.signum(currentLocation.yDifference(destinationLocation));
-
-            if (Math.abs(delta.getX()) < FrameConstants.baseTile && Math.abs(delta.getY()) < FrameConstants.baseTile) {
-                delta = new Point(delta.getX() + 3 * x, delta.getY() + 3 * y);
-            } else {
-                if (Math.abs(delta.getY()) >= FrameConstants.baseTile) {
-                    currentLocation = new Coords(currentLocation.getX(), currentLocation.getY() - y);
-                } else if (Math.abs(delta.getX()) >= FrameConstants.baseTile) {
-                    currentLocation = new Coords(currentLocation.getX() - x, currentLocation.getY());
-                }
-                delta = new Point(0, 0);
-            }
+        if (current.notEqual(destination)) {
+            move();
         }
     }
 
-    public void setDestinationLocation(Coords coords) {
-        if (checkCoords(destinationLocation.plus(coords))
-                && currentLocation.difference(destinationLocation).length() < 3) {
-            destinationLocation = destinationLocation.plus(coords);
+    public void setDestination(Coords coords) {
+        Coords transformed = destination.plus(coords);
+
+        if (checkCoords(transformed) && checkDifference()) {
+            destination = transformed;
         }
     }
 
     /* ========== PRIVATE ========== */
     private void draw(GameGraphics g, Coords tileCoords) {
-        Coords mapCoords = tileCoords.plus(currentLocation);
+        Coords mapCoords = tileCoords.plus(current);
         map.get(mapCoords)
-                .ifPresent(f -> drawTile(g, f, getTile(tileCoords)));
+                .ifPresent(f -> drawTile(g, f, tiles.get(tileCoords)));
+    }
+
+    private void drawTile(GameGraphics g, Field field, Opt<Tile> tile) {
+        tile.ifPresent(t -> drawTile(g, field, t));
     }
 
     private void drawTile(GameGraphics g, Field field, Tile tile) {
@@ -82,31 +75,42 @@ public class Board extends Component {
         g.draw(field.getTerrainTile().getImage(), tile.getRect().move(delta));
     }
 
-    private Tile getTile(Coords coords) {
-        return tiles[coords.getX()][coords.getY()];
-    }
-
     private boolean checkCoords(Coords coords) {
-        return checkX(coords) && checkY(coords);
+        return coords.check(map.getSize(), size);
     }
 
-    private boolean checkX(Coords coords) {
-        return coords.getX() >= 0 && coords.getX() + size.getX() < map.getX();
+    private boolean checkDifference() {
+        return current.difference(destination).length() < 3;
     }
 
-    private boolean checkY(Coords coords) {
-        return coords.getY() >= 0 && coords.getY() + size.getY() < map.getY();
-    }
+    private void move() {
+        int x = Mat.signum(current.xDifference(destination));
+        int y = Mat.signum(current.yDifference(destination));
 
-    private void createTiles(Size size) {
-        tiles = new Tile[size.getX() + 2][];
-        for (int i = 0; i <= size.getX() + 1; ++i) {
-            tiles[i] = new Tile[size.getY() + 2];
-            for (int j = 0; j <= size.getY() + 1; ++j) {
-                Point point = new Coords(i, j).toPoint().plus(rect.getStartPoint());
-                Tile tile = new Tile(new Rect(point, point.add(FrameConstants.baseTile, FrameConstants.baseTile)));
-                add(tiles[i][j] = tile);
-            }
+        if (nextTileNotReachedYet()) {
+            delta = delta.plus(8 * x, 8 * y);
+        } else {
+            switchCurrentLocation(x, y);
         }
     }
+
+    private void switchCurrentLocation(int x, int y) {
+        if (!lesser(delta.getY())) {
+            current = current.plus(0, -y);
+        }
+
+        if (!lesser(delta.getX())) {
+            current = current.plus(-x, 0);
+        }
+        delta = new Point(0, 0);
+    }
+
+    private boolean nextTileNotReachedYet() {
+        return lesser(delta.getX()) && lesser(delta.getY());
+    }
+
+    private boolean lesser(Integer x) {
+        return Math.abs(x) < FrameConstants.baseTile;
+    }
+
 }

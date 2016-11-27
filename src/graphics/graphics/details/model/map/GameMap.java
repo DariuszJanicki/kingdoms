@@ -20,25 +20,8 @@ public class GameMap {
 
     /* ========== PUBLIC ========== */
     public Opt<Field> get(Coords coords) {
-        return Opt.ofNullable(checkX(coords) && checkY(coords)
+        return Opt.ofNullable(coords.check(size)
                 ? map[coords.getX()][coords.getY()]
                 : null);
-    }
-
-    public int getX() {
-        return size.getX();
-    }
-
-    public int getY() {
-        return size.getY();
-    }
-
-    /* ========== PRIVATE ========== */
-    private boolean checkX(Coords coords) {
-        return coords.getX() >= 0 && coords.getX() < size.getX();
-    }
-
-    private boolean checkY(Coords coords) {
-        return coords.getY() >= 0 && coords.getY() < size.getY();
     }
 }

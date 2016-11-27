@@ -49,21 +49,21 @@ public class Keyboard implements KeyListener {
 
     private void up() {
         Board board = DrawPanel.singleton().getMainComponent().getBoard();
-        board.setDestinationLocation(Coords.toNorth());
+        board.setDestination(Coords.toNorth());
     }
 
     private void down() {
         Board board = DrawPanel.singleton().getMainComponent().getBoard();
-        board.setDestinationLocation(Coords.toSouth());
+        board.setDestination(Coords.toSouth());
     }
 
     private void right() {
         Board board = DrawPanel.singleton().getMainComponent().getBoard();
-        board.setDestinationLocation(Coords.toEast());
+        board.setDestination(Coords.toEast());
     }
 
     private void left() {
         Board board = DrawPanel.singleton().getMainComponent().getBoard();
-        board.setDestinationLocation(Coords.toWest());
+        board.setDestination(Coords.toWest());
     }
 }
