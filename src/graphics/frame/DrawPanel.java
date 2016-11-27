@@ -1,9 +1,7 @@
 package graphics.frame;
 
 
-import graphics.frame.constants.FrameConstants;
 import graphics.graphics.GameGraphics;
-import graphics.graphics.Point;
 import graphics.graphics.Rect;
 import graphics.graphics.components.MainComponent;
 import graphics.input.Keyboard;
@@ -13,6 +11,9 @@ import utils.Opt;
 
 import java.awt.*;
 import java.awt.image.BufferStrategy;
+
+import static graphics.frame.constants.FrameConstants.frameHeight;
+import static graphics.frame.constants.FrameConstants.frameWidth;
 
 public final class DrawPanel extends Canvas {
 
@@ -29,35 +30,32 @@ public final class DrawPanel extends Canvas {
     /* ========== CONSTRUCTOR ========== */
     private DrawPanel() {
         addMouseListener(new Mouse());
+        addKeyListener(new Keyboard());
 
-        Rect rect = new Rect(
-                new Point(0, 0),
-                new Point(FrameConstants.width, FrameConstants.height)
-        );
-
-        mainComponent = new MainComponent(rect);
+        mainComponent = new MainComponent(new Rect(0, 0, frameWidth, frameHeight));
         setVisible(true);
     }
 
     /* ========== PROTECTED ========== */
     void draw() {
-        BufferStrategy bs = getBufferStrategy();
+        BufferStrategy strategy = getBufferStrategy();
 
-        if (bs == null) {
+        if (strategy == null) {
             createBufferStrategy(2);
             return;
         }
 
-        drawGraphics(bs);
-        bs.show();
+        drawGraphics(strategy.getDrawGraphics());
+        strategy.show();
     }
 
     void tick() {
+        mainComponent.preTick();
     }
 
     /* ========== PRIVATE ========== */
-    private void drawGraphics(BufferStrategy bs) {
-        GameGraphics g = new GameGraphics(bs.getDrawGraphics());
+    private void drawGraphics(Graphics graphics) {
+        GameGraphics g = new GameGraphics(graphics);
         mainComponent.preDraw(g);
         g.dispose();
     }

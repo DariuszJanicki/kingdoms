@@ -1,6 +1,7 @@
 package graphics.input;
 
 import graphics.frame.DrawPanel;
+import graphics.graphics.details.Coords;
 import graphics.graphics.details.model.board.Board;
 import utils.Functional;
 
@@ -31,6 +32,7 @@ public class Keyboard implements KeyListener {
         Functional functional = keyMapping.get(e.getKeyCode());
 
         if (functional != null) {
+            System.out.println(functional);
             functional.execute();
         }
     }
@@ -47,21 +49,21 @@ public class Keyboard implements KeyListener {
 
     private void up() {
         Board board = DrawPanel.singleton().getMainComponent().getBoard();
-        board.setCurrentLocation(board.getCurrentLocation().north());
+        board.setDestinationLocation(Coords.toNorth());
     }
 
     private void down() {
         Board board = DrawPanel.singleton().getMainComponent().getBoard();
-        board.setCurrentLocation(board.getCurrentLocation().south());
+        board.setDestinationLocation(Coords.toSouth());
     }
 
     private void right() {
         Board board = DrawPanel.singleton().getMainComponent().getBoard();
-        board.setCurrentLocation(board.getCurrentLocation().east());
+        board.setDestinationLocation(Coords.toEast());
     }
 
     private void left() {
         Board board = DrawPanel.singleton().getMainComponent().getBoard();
-        board.setCurrentLocation(board.getCurrentLocation().west());
+        board.setDestinationLocation(Coords.toWest());
     }
 }

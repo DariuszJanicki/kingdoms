@@ -15,7 +15,7 @@ public class Point {
     }
 
     public Point plus(Point point) {
-        return new Point(x + point.getX(), y + point.getY());
+        return new Point(x + point.x, y + point.y);
     }
 
     @Override

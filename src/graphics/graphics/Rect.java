@@ -17,6 +17,11 @@ public class Rect {
         this.endPoint = new Point(x2, y2);
     }
 
+    /* ========== FACTORY ========== */
+    public static Rect of(int x1, int y1, int x2, int y2) {
+        return new Rect(x1, y1, x2, y2);
+    }
+
     /* ========== PUBLIC ========== */
     public boolean contains(Point point) {
         return point.getX() >= startPoint.getX() &&
@@ -32,5 +37,9 @@ public class Rect {
 
     public Size toSize() {
         return new Size(endPoint.getX() - startPoint.getX(), endPoint.getY() - startPoint.getY());
+    }
+
+    public Rect move(Point point) {
+        return new Rect(startPoint.plus(point), endPoint.plus(point));
     }
 }

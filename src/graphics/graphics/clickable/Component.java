@@ -4,6 +4,7 @@ import graphics.graphics.Drawable;
 import graphics.graphics.Point;
 import graphics.graphics.Rect;
 import graphics.graphics.details.model.ComponentModel;
+import lombok.Getter;
 import utils.Functional;
 import utils.Opt;
 
@@ -13,6 +14,8 @@ public abstract class Component extends Drawable {
 
     protected ComponentModel model = ComponentModel.INSTANCE;
     private Opt<Functional> actionOnClick = Opt.empty();
+
+    @Getter
     protected Rect rect;
 
     /* ========== CONSTRUCTOR ========== */
@@ -29,18 +32,16 @@ public abstract class Component extends Drawable {
         return first.isPresent() ? first.get().getClickedComponent(point) : this;
     }
 
-    public void registerComponent(Component component) {
-        components.add(component);
-    }
-
-    public void registerMouseAction(Functional functional) {
-        this.actionOnClick = Opt.ofNullable(functional);
-    }
-
     public void click() {
-        System.out.println(this);
         actionOnClick.ifPresent(Functional::execute);
     }
 
-    /* ========== PRIVATE ========== */
+    public void add(Component component) {
+        components.add(component);
+    }
+
+    /* ========== PROTECTED ========== */
+    protected void registerMouseAction(Functional functional) {
+        this.actionOnClick = Opt.ofNullable(functional);
+    }
 }

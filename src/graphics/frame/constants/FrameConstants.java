@@ -6,6 +6,6 @@ public interface FrameConstants {
 
     int baseTile = 32;
 
-    int width = baseTile * 30;
-    int height = baseTile * 20;
+    int frameWidth = baseTile * 30 + 16;
+    int frameHeight = baseTile * 20 + 39;
 }

@@ -2,7 +2,7 @@ package graphics.frame;
 
 class FpsTimer implements Runnable {
 
-    private final long TPS = 10;
+    private final long TPS = 30;
     private final long SECOND = 1000000000;
     private final long TICK = SECOND / TPS;
 

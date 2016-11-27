@@ -1,8 +1,6 @@
 package graphics.frame;
 
 import graphics.frame.constants.FrameConstants;
-import graphics.input.Keyboard;
-import graphics.input.Mouse;
 import utils.Opt;
 
 import javax.swing.*;
@@ -26,9 +24,7 @@ public final class MainFrame extends JFrame {
     /* ========== PRIVATE ========== */
     private void initUI() {
         setTitle(FrameConstants.title);
-        setSize(FrameConstants.width, FrameConstants.height);
-
-        addKeyListener(new Keyboard());
+        setSize(FrameConstants.frameWidth, FrameConstants.frameHeight);
 
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

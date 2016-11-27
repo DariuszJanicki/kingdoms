@@ -15,5 +15,13 @@ public abstract class Drawable {
         components.forEach(c -> c.preDraw(g));
     }
 
+    public void preTick() {
+        tick();
+        components.forEach(Drawable::tick);
+    }
+
     public abstract void draw(GameGraphics g);
+
+    public void tick() {
+    }
 }

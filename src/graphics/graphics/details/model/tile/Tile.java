@@ -23,7 +23,6 @@ public class Tile extends Component {
 
     @Override
     public void draw(GameGraphics g) {
-        g.draw(field.getTerrainTile().getImage(), rect);
     }
 
     /* ========== PUBLIC ========== */
