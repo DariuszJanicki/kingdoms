@@ -1,7 +1,7 @@
 package graphics.graphics.details.model.tile;
 
 import graphics.graphics.GameGraphics;
-import graphics.graphics.Rect;
+import graphics.graphics.details.points.Rect;
 import graphics.graphics.clickable.Component;
 import graphics.graphics.details.model.tile.field.Field;
 

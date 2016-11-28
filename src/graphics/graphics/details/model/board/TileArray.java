@@ -1,10 +1,10 @@
 package graphics.graphics.details.model.board;
 
 import graphics.frame.constants.FrameConstants;
-import graphics.graphics.Point;
-import graphics.graphics.Rect;
-import graphics.graphics.details.Coords;
-import graphics.graphics.details.Size;
+import graphics.graphics.details.points.Point;
+import graphics.graphics.details.points.Rect;
+import graphics.graphics.details.points.Coords;
+import graphics.graphics.details.points.Size;
 import graphics.graphics.details.model.tile.Tile;
 import utils.Opt;
 
@@ -31,7 +31,7 @@ public class TileArray {
         for (int i = 0; i <= size.getX() + 1; ++i) {
             tiles[i] = new Tile[size.getY() + 2];
             for (int j = 0; j <= size.getY() + 1; ++j) {
-                Point point = new Coords(i, j).toPoint().plus(board.getRect().getStartPoint());
+                Point point = new Coords(i, j).toPoint().add(board.getRect().getStartPoint());
                 Tile tile = new Tile(new Rect(point, point.add(FrameConstants.baseTile, FrameConstants.baseTile)));
                 board.add(tiles[i][j] = tile);
             }

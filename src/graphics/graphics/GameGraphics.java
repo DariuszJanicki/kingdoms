@@ -1,5 +1,7 @@
 package graphics.graphics;
 
+import graphics.graphics.details.points.Rect;
+import graphics.graphics.details.points.Point;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -16,7 +18,7 @@ public class GameGraphics {
         draw(rect.getStartPoint(), rect.getEndPoint());
     }
 
-    public void draw(Point startPoint, Point endPoint) {
+    public void draw(graphics.graphics.details.points.Point startPoint, Point endPoint) {
         graphics.fillRect(
                 startPoint.getX(),
                 startPoint.getY(),

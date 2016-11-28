@@ -1,4 +1,4 @@
-package graphics.graphics;
+package graphics.utils;
 
 public class Mat {
 

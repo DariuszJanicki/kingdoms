@@ -1,4 +1,4 @@
-package graphics.graphics.details;
+package graphics.graphics.details.points;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

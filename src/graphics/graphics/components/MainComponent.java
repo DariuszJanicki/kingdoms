@@ -1,9 +1,9 @@
 package graphics.graphics.components;
 
 import graphics.graphics.GameGraphics;
-import graphics.graphics.Rect;
+import graphics.graphics.details.points.Rect;
 import graphics.graphics.clickable.Component;
-import graphics.graphics.details.Size;
+import graphics.graphics.details.points.Size;
 import graphics.graphics.details.generator.BoardGenerator;
 import graphics.graphics.details.model.board.Board;
 import graphics.graphics.details.model.map.GameMap;
@@ -29,7 +29,7 @@ public class MainComponent extends Component {
 
     /* ========== PRIVATE ========== */
     private void createBoard() {
-        GameMap map = BoardGenerator.INSTANCE.generateMap(new Size(40, 40));
+        GameMap map = BoardGenerator.INSTANCE.generateMap(Size.of(40, 40));
         board = new Board(Rect.of(160, 0, 960, 640), map);
         add(board);
     }

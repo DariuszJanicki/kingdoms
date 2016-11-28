@@ -1,6 +1,6 @@
 package graphics.frame;
 
-class FpsTimer implements Runnable {
+final class FpsTimer implements Runnable {
 
     private final long TPS = 30;
     private final long SECOND = 1000000000;

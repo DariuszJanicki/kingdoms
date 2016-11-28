@@ -1,7 +1,7 @@
 package graphics.graphics.details.model.map;
 
-import graphics.graphics.details.Coords;
-import graphics.graphics.details.Size;
+import graphics.graphics.details.points.Coords;
+import graphics.graphics.details.points.Size;
 import graphics.graphics.details.model.tile.field.Field;
 import lombok.Getter;
 import utils.Opt;

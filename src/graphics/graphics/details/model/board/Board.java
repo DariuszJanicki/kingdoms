@@ -2,12 +2,12 @@ package graphics.graphics.details.model.board;
 
 import graphics.frame.constants.FrameConstants;
 import graphics.graphics.GameGraphics;
-import graphics.graphics.Mat;
-import graphics.graphics.Point;
-import graphics.graphics.Rect;
+import graphics.utils.Mat;
+import graphics.graphics.details.points.Point;
+import graphics.graphics.details.points.Rect;
 import graphics.graphics.clickable.Component;
-import graphics.graphics.details.Coords;
-import graphics.graphics.details.Size;
+import graphics.graphics.details.points.Coords;
+import graphics.graphics.details.points.Size;
 import graphics.graphics.details.model.map.GameMap;
 import graphics.graphics.details.model.tile.Tile;
 import graphics.graphics.details.model.tile.field.Field;
@@ -22,7 +22,7 @@ public class Board extends Component {
     private Size size;
 
     @Getter
-    private Point delta = new Point(0, 0);
+    private Point delta = Point.of(0, 0);
     private Coords destination = new Coords(0, 0);
     private Coords current = new Coords(0, 0);
 
@@ -31,7 +31,7 @@ public class Board extends Component {
 
         this.map = map;
         this.size = rect.toSize().div(FrameConstants.baseTile);
-        tiles = new TileArray(size.plus(3, 3), this);
+        tiles = new TileArray(size.add(3, 3), this);
     }
 
     /* ========== PUBLIC ========== */
@@ -72,7 +72,8 @@ public class Board extends Component {
 
     private void drawTile(GameGraphics g, Field field, Tile tile) {
         tile.setField(field);
-        g.draw(field.getTerrainTile().getImage(), tile.getRect().move(delta));
+        g.draw(field.getTile().getImage(), tile.getRect().move(delta));
+        field.getSettlement().ifPresent(s -> g.draw(s.getTile().getImage(), tile.getRect().move(delta)));
     }
 
     private boolean checkCoords(Coords coords) {
@@ -88,7 +89,7 @@ public class Board extends Component {
         int y = Mat.signum(current.yDifference(destination));
 
         if (nextTileNotReachedYet()) {
-            delta = delta.plus(8 * x, 8 * y);
+            delta = delta.add(8 * x, 8 * y);
         } else {
             switchCurrentLocation(x, y);
         }
@@ -102,7 +103,7 @@ public class Board extends Component {
         if (!lesser(delta.getX())) {
             current = current.plus(-x, 0);
         }
-        delta = new Point(0, 0);
+        delta = Point.of(0, 0);
     }
 
     private boolean nextTileNotReachedYet() {

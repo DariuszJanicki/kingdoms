@@ -1,7 +1,7 @@
 package graphics.input;
 
 import graphics.frame.DrawPanel;
-import graphics.graphics.details.Coords;
+import graphics.graphics.details.points.Coords;
 import graphics.graphics.details.model.board.Board;
 import utils.Functional;
 

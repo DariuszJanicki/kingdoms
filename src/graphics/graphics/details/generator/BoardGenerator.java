@@ -1,12 +1,15 @@
 package graphics.graphics.details.generator;
 
-import graphics.graphics.details.Coords;
-import graphics.graphics.details.Size;
-import graphics.graphics.details.loader.TerrainTileTypeList;
+import graphics.graphics.details.loader.tile.list.SettlementTileTypeList;
+import graphics.graphics.details.loader.tile.list.TerrainTileTypeList;
 import graphics.graphics.details.model.map.GameMap;
+import graphics.graphics.details.model.settlement.Settlement;
+import graphics.graphics.details.model.settlement.SettlementType;
 import graphics.graphics.details.model.terrain.Direction;
 import graphics.graphics.details.model.terrain.Terrain;
 import graphics.graphics.details.model.tile.field.Field;
+import graphics.graphics.details.points.Coords;
+import graphics.graphics.details.points.Size;
 import utils.Dice;
 import utils.Opt;
 
@@ -46,8 +49,18 @@ public enum BoardGenerator {
     private void fillTerrain(GameMap map) {
         for (int i = 0; i < map.getSize().getX(); ++i) {
             for (int j = 0; j < map.getSize().getY(); ++j) {
-                map.get(new Coords(i, j)).ifPresent(f -> setTerrainTile(map, f));
+                map.get(new Coords(i, j)).ifPresent(f -> process(map, f));
             }
+        }
+    }
+
+    private void process(GameMap map, Field field) {
+        setTerrainTile(map, field);
+
+        if (Dice.k(20) == 0 && field.getTerrain() != Terrain.WATER) {
+            SettlementType type = new Dice<SettlementType>().randomElementOf(SettlementType.values());
+            Settlement settlement = new Settlement(type, field, SettlementTileTypeList.singleton().getTile(type));
+            field.setSettlement(Opt.of(settlement));
         }
     }
 
@@ -61,7 +74,7 @@ public enum BoardGenerator {
                 equals(terrain, map.get(coords.east())),
                 equals(terrain, map.get(coords.west())));
 
-        field.setTerrainTile(TerrainTileTypeList.INSTANCE.getTile(terrain, direction));
+        field.setTile(TerrainTileTypeList.singleton().getTile(terrain, direction));
     }
 
     private boolean equals(Terrain terrain, Opt<Field> field) {

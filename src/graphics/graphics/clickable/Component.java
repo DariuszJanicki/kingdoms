@@ -1,8 +1,8 @@
 package graphics.graphics.clickable;
 
 import graphics.graphics.Drawable;
-import graphics.graphics.Point;
-import graphics.graphics.Rect;
+import graphics.graphics.details.points.Point;
+import graphics.graphics.details.points.Rect;
 import graphics.graphics.details.model.ComponentModel;
 import lombok.Getter;
 import utils.Functional;

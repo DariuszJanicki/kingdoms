@@ -1,11 +1,10 @@
-package graphics.graphics.details;
+package graphics.graphics.details.points;
 
 import graphics.frame.constants.FrameConstants;
-import graphics.graphics.Point;
 
 import java.util.Objects;
 
-public class Coords extends Tuple {
+public final class Coords extends Tuple {
 
     /* ========== CONSTRUCTOR ========== */
     public Coords(Integer x, Integer y) {
@@ -14,7 +13,7 @@ public class Coords extends Tuple {
 
     /* ========== PUBLIC ========== */
     public Point toPoint() {
-        return new Point(x, y).mul(FrameConstants.baseTile);
+        return Point.of(x, y).mul(FrameConstants.baseTile);
     }
 
     public Coords plus(Coords coords) {

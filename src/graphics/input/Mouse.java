@@ -1,7 +1,7 @@
 package graphics.input;
 
 import graphics.frame.DrawPanel;
-import graphics.graphics.Point;
+import graphics.graphics.details.points.Point;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -34,6 +34,6 @@ public class Mouse implements MouseListener {
     private void click(MouseEvent e) {
         DrawPanel.singleton()
                 .getMainComponent()
-                .getClickedComponent(new Point(e.getX(), e.getY())).click();
+                .getClickedComponent(Point.of(e.getX(), e.getY())).click();
     }
 }

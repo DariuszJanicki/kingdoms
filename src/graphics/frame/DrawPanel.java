@@ -2,7 +2,7 @@ package graphics.frame;
 
 
 import graphics.graphics.GameGraphics;
-import graphics.graphics.Rect;
+import graphics.graphics.details.points.Rect;
 import graphics.graphics.components.MainComponent;
 import graphics.input.Keyboard;
 import graphics.input.Mouse;
@@ -32,7 +32,7 @@ public final class DrawPanel extends Canvas {
         addMouseListener(new Mouse());
         addKeyListener(new Keyboard());
 
-        mainComponent = new MainComponent(new Rect(0, 0, frameWidth, frameHeight));
+        mainComponent = new MainComponent(Rect.of(0, 0, frameWidth, frameHeight));
         setVisible(true);
     }
 
