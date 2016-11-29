@@ -25,4 +25,8 @@ public class Field {
         this.terrain = terrain;
         this.coords = coords;
     }
+
+    public void tick() {
+        settlement.ifPresent(Settlement::tick);
+    }
 }

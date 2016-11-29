@@ -24,4 +24,12 @@ public class GameMap {
                 ? map[coords.getX()][coords.getY()]
                 : null);
     }
+
+    public void tick() {
+        for (int i = 0; i <= size.getX(); ++i) {
+            for (int j = 0; j <= size.getY(); ++j) {
+                get(new Coords(i, j)).ifPresent(Field::tick);
+            }
+        }
+    }
 }

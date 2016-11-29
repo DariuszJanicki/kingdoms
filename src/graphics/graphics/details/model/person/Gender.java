@@ -1,7 +1,28 @@
 package graphics.graphics.details.model.person;
 
+import lombok.AllArgsConstructor;
+import utils.Bool;
+import utils.Dice;
+
+@AllArgsConstructor
 public enum Gender {
 
-    MALE, FEMALE
+    MALE("Mężczyzna"), FEMALE("Kobieta");
 
+    private String name;
+
+    /* ========== STATIC ========== */
+    public static Gender random() {
+        return new Dice<Gender>().randomElementOf(values());
+    }
+
+    /* ========== PUBLIC ========== */
+    public Bool isMale() {
+        return Bool.of(this == MALE);
+    }
+
+    @Override
+    public String toString() {
+        return name;
+    }
 }

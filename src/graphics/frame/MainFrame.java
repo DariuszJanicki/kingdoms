@@ -34,6 +34,6 @@ public final class MainFrame extends JFrame {
 
     private void initDrawPanel() {
         add(DrawPanel.singleton());
-        new Thread(new FpsTimer()).start();
+        new Thread(FpsTimer.singleton()).start();
     }
 }

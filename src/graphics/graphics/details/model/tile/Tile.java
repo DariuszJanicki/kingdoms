@@ -25,6 +25,11 @@ public class Tile extends Component {
     public void draw(GameGraphics g) {
     }
 
+    @Override
+    public void tick() {
+        field.tick();
+    }
+
     /* ========== PUBLIC ========== */
     private void setInfo() {
         model.setCurrentTileInfo(field.getTerrain() + " " + field.getCoords());

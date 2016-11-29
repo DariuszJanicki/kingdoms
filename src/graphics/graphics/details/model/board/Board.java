@@ -49,6 +49,8 @@ public class Board extends Component {
         if (current.notEqual(destination)) {
             move();
         }
+
+        map.tick();
     }
 
     public void setDestination(Coords coords) {

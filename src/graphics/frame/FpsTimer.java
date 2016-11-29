@@ -1,6 +1,18 @@
 package graphics.frame;
 
-final class FpsTimer implements Runnable {
+import graphics.graphics.details.model.person.GameDate;
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
+public final class FpsTimer implements Runnable {
+
+    private static FpsTimer singleton;
+
+    /* ========== SINGLETON ========== */
+    public static FpsTimer singleton() {
+        return singleton == null ? singleton = new FpsTimer() : singleton;
+    }
 
     private final long TPS = 30;
     private final long SECOND = 1000000000;
@@ -10,6 +22,13 @@ final class FpsTimer implements Runnable {
     private int ticks = 0;
     private long fpsTime = System.nanoTime();
     private long tpsTime = System.nanoTime();
+
+    private GameDate gameDate = GameDate.init();
+
+    /* ========== PUBLIC ========== */
+    public GameDate getCurrentDate() {
+        return GameDate.of(gameDate);
+    }
 
     @Override
     public void run() {
@@ -21,6 +40,7 @@ final class FpsTimer implements Runnable {
         }
     }
 
+    /* ========== PRIVATE ========== */
     private void draw() {
         frames++;
         DrawPanel.singleton().draw();
@@ -37,6 +57,7 @@ final class FpsTimer implements Runnable {
     private void tick() {
         ticks++;
         DrawPanel.singleton().tick();
+        gameDate.dayPassed();
     }
 
     private void reset(long currentTime) {
