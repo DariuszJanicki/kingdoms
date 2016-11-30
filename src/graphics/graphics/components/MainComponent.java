@@ -1,12 +1,13 @@
 package graphics.graphics.components;
 
 import graphics.graphics.GameGraphics;
-import graphics.graphics.details.points.Rect;
 import graphics.graphics.clickable.Component;
-import graphics.graphics.details.points.Size;
 import graphics.graphics.details.generator.BoardGenerator;
 import graphics.graphics.details.model.board.Board;
 import graphics.graphics.details.model.map.GameMap;
+import graphics.graphics.details.points.Rect;
+import graphics.graphics.details.points.Size;
+import graphics.input.GameMouseEvent;
 import lombok.Getter;
 
 public class MainComponent extends Component {
@@ -25,6 +26,11 @@ public class MainComponent extends Component {
     /* ========== PUBLIC ========== */
     @Override
     public void draw(GameGraphics g) {
+    }
+
+    @Override
+    public void click(GameMouseEvent e) {
+        components.forEach(c -> c.click(e));
     }
 
     /* ========== PRIVATE ========== */

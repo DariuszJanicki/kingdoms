@@ -2,17 +2,22 @@ package graphics.graphics.details.model.board;
 
 import graphics.frame.constants.FrameConstants;
 import graphics.graphics.GameGraphics;
-import graphics.utils.Mat;
-import graphics.graphics.details.points.Point;
-import graphics.graphics.details.points.Rect;
 import graphics.graphics.clickable.Component;
-import graphics.graphics.details.points.Coords;
-import graphics.graphics.details.points.Size;
+import graphics.graphics.components.BoardOptionList;
 import graphics.graphics.details.model.map.GameMap;
 import graphics.graphics.details.model.tile.Tile;
 import graphics.graphics.details.model.tile.field.Field;
+import graphics.graphics.details.points.Coords;
+import graphics.graphics.details.points.Point;
+import graphics.graphics.details.points.Rect;
+import graphics.graphics.details.points.Size;
+import graphics.input.GameMouseEvent;
+import graphics.utils.Mat;
 import lombok.Getter;
 import utils.Opt;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class Board extends Component {
 
@@ -32,6 +37,7 @@ public class Board extends Component {
         this.map = map;
         this.size = rect.toSize().div(FrameConstants.baseTile);
         tiles = new TileArray(size.add(3, 3), this);
+        registerRightMouseAction(this::rightMouse);
     }
 
     /* ========== PUBLIC ========== */
@@ -116,4 +122,13 @@ public class Board extends Component {
         return Math.abs(x) < FrameConstants.baseTile;
     }
 
+    private void rightMouse(GameMouseEvent e) {
+        clear();
+        add(new BoardOptionList(Rect.of(e.getPoint(), Point.of(32, 96).add(e.getPoint()))));
+    }
+
+    private void clear() {
+        List<Component> collect = components.stream().filter(c -> c instanceof BoardOptionList).collect(Collectors.toList());
+        components.removeAll(collect);
+    }
 }

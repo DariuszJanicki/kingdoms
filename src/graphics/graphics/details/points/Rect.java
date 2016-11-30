@@ -21,6 +21,10 @@ public final class Rect {
         return new Rect(x1, y1, x2, y2);
     }
 
+    public static Rect of(Point point1, Point point2) {
+        return new Rect(point1, point2);
+    }
+
     /* ========== OVERRIDE ========== */
     @Override
     public String toString() {

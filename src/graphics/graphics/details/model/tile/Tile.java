@@ -1,9 +1,10 @@
 package graphics.graphics.details.model.tile;
 
 import graphics.graphics.GameGraphics;
-import graphics.graphics.details.points.Rect;
 import graphics.graphics.clickable.Component;
 import graphics.graphics.details.model.tile.field.Field;
+import graphics.graphics.details.points.Rect;
+import graphics.input.GameMouseEvent;
 
 public class Tile extends Component {
 
@@ -12,7 +13,7 @@ public class Tile extends Component {
     /* ========== CONSTRUCTOR ========== */
     public Tile(Rect rect) {
         super(rect);
-        registerMouseAction(this::setInfo);
+        registerLeftMouseAction(this::leftMouse);
     }
 
     /* ========== PUBLIC ========== */
@@ -30,8 +31,8 @@ public class Tile extends Component {
         field.tick();
     }
 
-    /* ========== PUBLIC ========== */
-    private void setInfo() {
+    /* ========== PRIVATE ========== */
+    private void leftMouse(GameMouseEvent e) {
         model.setCurrentTileInfo(field.getTerrain() + " " + field.getCoords());
     }
 }
