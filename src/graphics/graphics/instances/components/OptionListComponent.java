@@ -1,4 +1,4 @@
-package graphics.graphics.components.abstrac;
+package graphics.graphics.instances.components;
 
 import graphics.graphics.GameGraphics;
 import graphics.graphics.clickable.Component;

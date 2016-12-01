@@ -1,7 +1,7 @@
-package graphics.graphics.components;
+package graphics.graphics.instances;
 
 import graphics.graphics.GameGraphics;
-import graphics.graphics.components.abstrac.OptionListComponent;
+import graphics.graphics.instances.components.OptionListComponent;
 import graphics.graphics.details.points.Rect;
 
 import java.awt.*;

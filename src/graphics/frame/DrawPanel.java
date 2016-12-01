@@ -3,7 +3,7 @@ package graphics.frame;
 
 import graphics.graphics.GameGraphics;
 import graphics.graphics.details.points.Rect;
-import graphics.graphics.components.MainComponent;
+import graphics.graphics.instances.MainComponent;
 import graphics.input.Keyboard;
 import graphics.input.Mouse;
 import lombok.Getter;

@@ -3,7 +3,7 @@ package graphics.graphics.details.model.board;
 import graphics.frame.constants.FrameConstants;
 import graphics.graphics.GameGraphics;
 import graphics.graphics.clickable.Component;
-import graphics.graphics.components.BoardOptionList;
+import graphics.graphics.instances.BoardOptionList;
 import graphics.graphics.details.model.map.GameMap;
 import graphics.graphics.details.model.tile.Tile;
 import graphics.graphics.details.model.tile.field.Field;
@@ -42,7 +42,7 @@ public class Board extends Component {
 
     /* ========== PUBLIC ========== */
     @Override
-    public void draw(GameGraphics g) {
+    public void draw    (GameGraphics g) {
         for (int i = -1; i <= size.getX(); ++i) {
             for (int j = -1; j <= size.getY(); ++j) {
                 draw(g, new Coords(i, j));

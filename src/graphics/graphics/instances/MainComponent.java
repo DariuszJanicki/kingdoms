@@ -1,4 +1,4 @@
-package graphics.graphics.components;
+package graphics.graphics.instances;
 
 import graphics.graphics.GameGraphics;
 import graphics.graphics.clickable.Component;
@@ -43,7 +43,7 @@ public class MainComponent extends Component {
     private void createMenu() {
         GameMenu menu = new GameMenu(Rect.of(0, 32, 192, 640));
         add(menu);
-        menu.add(new TextLabelComponent(Rect.of(0, 32, 96, 96)));
+        menu.add(new TileInfo(Rect.of(0, 32, 96, 96)));
 
         add(new GameMenu(Rect.of(0, 0, 960, 32)));
     }

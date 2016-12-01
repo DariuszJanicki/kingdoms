@@ -1,15 +1,20 @@
-package graphics.graphics.components;
+package graphics.graphics.instances.components;
 
 import graphics.graphics.GameGraphics;
-import graphics.graphics.details.points.Rect;
 import graphics.graphics.clickable.Component;
+import graphics.graphics.details.points.Rect;
 
 import java.awt.*;
 
-public class GameMenu extends Component {
+/**
+ * Place for any other components.
+ *
+ * @author Janicki Dariusz
+ */
+public abstract class MenuComponent extends Component {
 
     /* ========== CONSTRUCTOR ========== */
-    public GameMenu(Rect rect) {
+    public MenuComponent(Rect rect) {
         super(rect);
     }
 
