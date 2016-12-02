@@ -2,7 +2,7 @@ package graphics.graphics.instances;
 
 import graphics.graphics.GameGraphics;
 import graphics.graphics.details.points.Rect;
-import graphics.graphics.instances.components.LabelComponent;
+import graphics.graphics.component.LabelComponent;
 import utils.Opt;
 
 public class TileInfo extends LabelComponent {

@@ -1,8 +1,8 @@
 package graphics.graphics.details.model.board;
 
 import graphics.frame.constants.FrameConstants;
+import graphics.graphics.component.setting.AbstractComponent;
 import graphics.graphics.GameGraphics;
-import graphics.graphics.clickable.Component;
 import graphics.graphics.instances.BoardOptionList;
 import graphics.graphics.details.model.map.GameMap;
 import graphics.graphics.details.model.tile.Tile;
@@ -19,7 +19,7 @@ import utils.Opt;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class Board extends Component {
+public class Board extends AbstractComponent {
 
     private GameMap map;
     private TileArray tiles;
@@ -124,11 +124,11 @@ public class Board extends Component {
 
     private void rightMouse(GameMouseEvent e) {
         clear();
-        add(new BoardOptionList(Rect.of(e.getPoint(), Point.of(32, 96).add(e.getPoint()))));
+        addComponent(new BoardOptionList(Rect.of(e.getPoint(), Point.of(32, 96).add(e.getPoint()))));
     }
 
     private void clear() {
-        List<Component> collect = components.stream().filter(c -> c instanceof BoardOptionList).collect(Collectors.toList());
+        List<AbstractComponent> collect = components.stream().filter(c -> c instanceof BoardOptionList).collect(Collectors.toList());
         components.removeAll(collect);
     }
 }

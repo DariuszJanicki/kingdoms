@@ -33,7 +33,7 @@ public class TileArray {
             for (int j = 0; j <= size.getY() + 1; ++j) {
                 Point point = new Coords(i, j).toPoint().add(board.getRect().getStartPoint());
                 Tile tile = new Tile(new Rect(point, point.add(FrameConstants.baseTile, FrameConstants.baseTile)));
-                board.add(tiles[i][j] = tile);
+                board.addComponent(tiles[i][j] = tile);
             }
         }
     }

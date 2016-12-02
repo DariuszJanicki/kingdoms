@@ -1,17 +1,19 @@
-package graphics.graphics.instances.components;
+package graphics.graphics.component;
 
+import graphics.graphics.component.setting.AbstractComponent;
 import graphics.graphics.GameGraphics;
-import graphics.graphics.clickable.Component;
 import graphics.graphics.details.points.Rect;
+import lombok.Getter;
 import utils.Opt;
 
 import java.awt.*;
 
-public abstract class LabelComponent extends Component {
+public abstract class LabelComponent extends AbstractComponent {
 
-    private static final int WIDTH_OFFSET = 5;
-    private static final int HEIGHT_OFFSET = 15;
+    public static final int WIDTH_OFFSET = 5;
+    public static final int HEIGHT_OFFSET = 15;
 
+    @Getter
     protected Opt<String> text = Opt.empty();
 
     /* ========== CONSTRUCTOR ========== */

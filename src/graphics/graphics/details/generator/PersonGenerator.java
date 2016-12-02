@@ -11,7 +11,7 @@ public enum PersonGenerator {
     /* ========== PUBLIC ========== */
     public Person createPerson() {
         Gender gender = Gender.random();
-        Person person = new Person(NameGenerator.generateName(gender), gender, FpsTimer.singleton().getCurrentDate());
+        Person person = new Person(NameGenerator.INSTANCE.generateName(gender), gender, FpsTimer.singleton().getCurrentDate());
 
         System.out.println("Nowy człowiek: " + person);
 

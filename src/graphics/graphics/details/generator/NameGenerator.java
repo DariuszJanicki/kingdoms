@@ -9,23 +9,24 @@ public enum NameGenerator {
 
     /* ========== STATIC ========== */
     private static String[] maleEndings = {"ek", "nus", "usz", "woj", "mir", "diusz", "ol"};
-    private static String[] femaleEndings = {"la", "cja", "mira", "woja", "usza", "nusa", "eka"};
-    private static String[] commonBeginnings = {"Ali", "Dar", "Mat", "Kub", "Sła", "Eli", "Iza"};
+    private static String[] femaleEndings = {"la", "icja", "mira", "woja", "usza", "ena", "ka"};
+    private static String[] commonBeginnings = {"Al", "Dar", "Mar", "Kub", "Sol", "El", "Iz"};
 
-    public static String generateName(Gender gender) {
+    /* ========== PUBLIC ========== */
+    public String generateName(Gender gender) {
         return gender.isMale().isTrue() ? generateMaleName() : generateFemaleName();
     }
 
     /* ========== PRIVATE ========== */
-    private static String generateFemaleName() {
+    private String generateFemaleName() {
         return getString(femaleEndings);
     }
 
-    private static String generateMaleName() {
+    private String generateMaleName() {
         return getString(maleEndings);
     }
 
-    private static String getString(String[] endings) {
+    private String getString(String[] endings) {
         return new Dice<String>().randomElementOf(commonBeginnings) + new Dice<String>().randomElementOf(endings);
     }
 }

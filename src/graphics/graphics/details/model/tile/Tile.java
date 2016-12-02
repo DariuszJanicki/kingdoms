@@ -1,12 +1,12 @@
 package graphics.graphics.details.model.tile;
 
+import graphics.graphics.component.setting.AbstractComponent;
 import graphics.graphics.GameGraphics;
-import graphics.graphics.clickable.Component;
 import graphics.graphics.details.model.tile.field.Field;
 import graphics.graphics.details.points.Rect;
 import graphics.input.GameMouseEvent;
 
-public class Tile extends Component {
+public class Tile extends AbstractComponent {
 
     private Field field;
 

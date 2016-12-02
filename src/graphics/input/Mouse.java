@@ -33,7 +33,7 @@ public class Mouse implements MouseListener {
     private void click(GameMouseEvent e) {
         DrawPanel.singleton()
                 .getMainComponent()
-                .getClickedComponent(e)
+                .getClicked(e)
                 .click(e);
     }
 }

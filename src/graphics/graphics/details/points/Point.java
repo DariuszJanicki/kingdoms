@@ -30,4 +30,8 @@ public final class Point extends Tuple {
     public Point add(Point point) {
         return add(point.x, point.y);
     }
+
+    public Point diff(Point point) {
+        return new Point(this.x - point.x, this.y - point.y);
+    }
 }

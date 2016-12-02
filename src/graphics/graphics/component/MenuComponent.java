@@ -1,17 +1,17 @@
-package graphics.graphics.instances.components;
+package graphics.graphics.component;
 
+import graphics.graphics.component.setting.AbstractComponent;
 import graphics.graphics.GameGraphics;
-import graphics.graphics.clickable.Component;
 import graphics.graphics.details.points.Rect;
 
 import java.awt.*;
 
 /**
- * Place for any other components.
+ * Place for any other component.
  *
  * @author Janicki Dariusz
  */
-public abstract class MenuComponent extends Component {
+public abstract class MenuComponent extends AbstractComponent {
 
     /* ========== CONSTRUCTOR ========== */
     public MenuComponent(Rect rect) {

@@ -47,4 +47,12 @@ public class GameGraphics {
     public void setColor(Color color) {
         graphics.setColor(color);
     }
+
+    public FontMetrics getFontMetrics() {
+        return graphics.getFontMetrics();
+    }
+
+    public int stringWidth(String string) {
+        return getFontMetrics().stringWidth(string);
+    }
 }

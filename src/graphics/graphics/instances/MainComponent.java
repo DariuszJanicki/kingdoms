@@ -1,7 +1,7 @@
 package graphics.graphics.instances;
 
+import graphics.graphics.component.setting.AbstractComponent;
 import graphics.graphics.GameGraphics;
-import graphics.graphics.clickable.Component;
 import graphics.graphics.details.generator.BoardGenerator;
 import graphics.graphics.details.model.board.Board;
 import graphics.graphics.details.model.map.GameMap;
@@ -10,7 +10,7 @@ import graphics.graphics.details.points.Size;
 import graphics.input.GameMouseEvent;
 import lombok.Getter;
 
-public class MainComponent extends Component {
+public class MainComponent extends AbstractComponent {
 
     @Getter
     private Board board;
@@ -37,14 +37,13 @@ public class MainComponent extends Component {
     private void createBoard() {
         GameMap map = BoardGenerator.INSTANCE.generateMap(Size.of(40, 40));
         board = new Board(Rect.of(160, 0, 960, 640), map);
-        add(board);
+        addComponent(board);
     }
 
     private void createMenu() {
         GameMenu menu = new GameMenu(Rect.of(0, 32, 192, 640));
-        add(menu);
-        menu.add(new TileInfo(Rect.of(0, 32, 96, 96)));
-
-        add(new GameMenu(Rect.of(0, 0, 960, 32)));
+        addComponent(menu);
+        menu.addComponent(new TileInfo(Rect.of(0, 32, 96, 96)));
+        addComponent(new GameMenu(Rect.of(0, 0, 960, 32)));
     }
 }

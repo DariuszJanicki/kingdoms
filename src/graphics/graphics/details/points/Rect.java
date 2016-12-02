@@ -46,4 +46,16 @@ public final class Rect {
     public Rect move(Point point) {
         return new Rect(startPoint.add(point), endPoint.add(point));
     }
+
+    public Rect setHeight(Integer height) {
+        return new Rect(startPoint, Point.of(endPoint.x, startPoint.y + height));
+    }
+
+    public Rect setWidth(Integer width) {
+        return new Rect(startPoint, Point.of(startPoint.x + width, endPoint.y));
+    }
+
+    public Rect plus(Point point) {
+        return new Rect(startPoint, Point.of(endPoint.x + point.x, endPoint.y + point.y));
+    }
 }
