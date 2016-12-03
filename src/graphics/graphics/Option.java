@@ -1,13 +1,19 @@
 package graphics.graphics;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 @Getter
-@AllArgsConstructor
 public final class Option {
 
-    private Integer value;
+    private ClickFunction click;
     private String text;
+
+    /* ========== PUBLIC ========== */
+    public Option(ClickFunction click, String text) {
+        this.click = click;
+        this.text = text;
+    }
+
+
 
 }

@@ -28,15 +28,7 @@ public abstract class OptionListComponent extends AbstractComponent {
     /* ========== PUBLIC ========== */
     @Override
     public void draw(GameGraphics g) {
-        Opt<Integer> maxWidth = Opt.of(components.stream()
-                .filter(c -> c instanceof OptionLabel)
-                .map(c -> (OptionLabel) c)
-                .map(c -> g.stringWidth(c.getText().get()))
-                .max(Integer::compareTo));
-
-        if (maxWidth.isPresent().isTrue()) {
-            rect = rect.setWidth(maxWidth.get());
-        }
+        updateRect(g);
 
         components.forEach(c -> c.draw(g));
 
@@ -48,7 +40,6 @@ public abstract class OptionListComponent extends AbstractComponent {
     protected void setOptions(OptionList options) {
         this.options = Opt.ofNullable(options);
         tryToAddOptions();
-        rect = rect.setHeight(calculateListHeight() + 5);
     }
 
     /* ========== PRIVATE ========== */
@@ -59,19 +50,32 @@ public abstract class OptionListComponent extends AbstractComponent {
     }
 
     private void addOptions() {
-        Point point = Point.of(-10, 0);
+        Point point = Point.of(0, 0);
         for (Option option : options.get().getOptions()) {
             OptionLabel component = new OptionLabel(rect.move(point).plus(Point.of(5, 0)), option);
-            component.registerLeftMouseAction((event) -> System.out.println(option.getValue()));
-            component.registerRightMouseAction((event) -> System.out.println(option.getValue()));
+            component.setClickFunction(option.getClick());
             addComponent(component);
             point = point.add(Point.of(0, LabelComponent.HEIGHT_OFFSET));
         }
     }
 
-    private Integer calculateListHeight() {
-        return Integer.valueOf(Long.toString(components.stream()
+    private void updateRect(GameGraphics g) {
+        calculateMaxWidth(g);
+        calculateMaxHeight();
+    }
+
+    private void calculateMaxWidth(GameGraphics g) {
+        Opt.of(components.stream()
                 .filter(c -> c instanceof OptionLabel)
-                .count() * LabelComponent.HEIGHT_OFFSET));
+                .map(c -> (OptionLabel) c)
+                .map(c -> g.stringWidth(c.getText().get()))
+                .max(Integer::compareTo))
+                .ifPresent(w -> rect = rect.setWidth(w + 5));
+    }
+
+    private void calculateMaxHeight() {
+        rect = rect.setHeight(Integer.valueOf(Long.toString(components.stream()
+                .filter(c -> c instanceof OptionLabel)
+                .count() * LabelComponent.HEIGHT_OFFSET)) + 5);
     }
 }

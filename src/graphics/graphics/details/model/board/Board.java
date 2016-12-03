@@ -37,7 +37,7 @@ public class Board extends AbstractComponent {
         this.map = map;
         this.size = rect.toSize().div(FrameConstants.baseTile);
         tiles = new TileArray(size.add(3, 3), this);
-        registerRightMouseAction(this::rightMouse);
+        getClickFunction().registerRight(this::rightMouse);
     }
 
     /* ========== PUBLIC ========== */

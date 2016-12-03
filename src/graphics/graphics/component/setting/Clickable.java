@@ -1,16 +1,17 @@
 package graphics.graphics.component.setting;
 
+import graphics.graphics.ClickFunction;
 import graphics.graphics.details.points.Rect;
 import graphics.input.GameMouseEvent;
+import lombok.Getter;
+import lombok.Setter;
 import utils.Bool;
-import utils.Opt;
 
-import java.util.function.Consumer;
-
+@Setter
+@Getter
 abstract class Clickable extends Tickable {
 
-    private Opt<Consumer<GameMouseEvent>> leftOnClick = Opt.empty();
-    private Opt<Consumer<GameMouseEvent>> rightOnClick = Opt.empty();
+    private ClickFunction clickFunction = new ClickFunction();
 
     /* ========== CONSTRUCTOR ========== */
     Clickable(Rect rect) {
@@ -19,30 +20,11 @@ abstract class Clickable extends Tickable {
 
     /* ========== PUBLIC ========== */
     public void click(GameMouseEvent e) {
-        e.isLeftClicked().ifTrue(() -> leftOnClick.ifPresent(c -> c.accept(e)));
-        e.isRightClicked().ifTrue(() -> rightOnClick.ifPresent(c -> c.accept(e)));
-    }
-
-    /* ========== PROTECTED ========== */
-    public void registerLeftMouseAction(Consumer<GameMouseEvent> functional) {
-        this.leftOnClick = Opt.ofNullable(functional);
-    }
-
-    public void registerRightMouseAction(Consumer<GameMouseEvent> functional) {
-        this.rightOnClick = Opt.ofNullable(functional);
+        clickFunction.click(e);
     }
 
     /* ========== DEFAULT ========== */
-    Bool hasAction(GameMouseEvent event) {
-        return isRightClicked(event).or(isLeftClicked(event));
-    }
-
-    /* ========== PRIVATE ========== */
-    private Bool isRightClicked(GameMouseEvent event) {
-        return event.isRightClicked().and(rightOnClick.isPresent());
-    }
-
-    private Bool isLeftClicked(GameMouseEvent event) {
-        return event.isLeftClicked().and(leftOnClick.isPresent());
+    Bool hasAction(GameMouseEvent e) {
+        return clickFunction.hasAction(e);
     }
 }

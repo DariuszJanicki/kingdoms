@@ -13,7 +13,7 @@ public class Tile extends AbstractComponent {
     /* ========== CONSTRUCTOR ========== */
     public Tile(Rect rect) {
         super(rect);
-        registerLeftMouseAction(this::leftMouse);
+        getClickFunction().registerLeft(this::leftMouse);
     }
 
     /* ========== PUBLIC ========== */

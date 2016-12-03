@@ -11,10 +11,6 @@ public final class OptionList {
     private List<Option> options = new ArrayList<>();
 
     /* ========== PUBLIC ========== */
-    public void add(Integer value, String text) {
-        options.add(new Option(value, text));
-    }
-
     public void add(Option option) {
         options.add(option);
     }

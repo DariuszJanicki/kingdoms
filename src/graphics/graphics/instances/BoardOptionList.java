@@ -1,5 +1,6 @@
 package graphics.graphics.instances;
 
+import graphics.graphics.ClickFunction;
 import graphics.graphics.Option;
 import graphics.graphics.OptionList;
 import graphics.graphics.component.OptionListComponent;
@@ -12,10 +13,8 @@ public class BoardOptionList extends OptionListComponent {
         super(rect);
 
         OptionList list = new OptionList();
-        list.add(new Option(0, "Test"));
-        list.add(new Option(1, "Test1"));
-        list.add(new Option(2, "Test2"));
-        list.add(new Option(3, "Test3"));
+        list.add(new Option(new ClickFunction().registerLeft(event -> System.out.println("Zbuduj zamek")), "Zbuduj zamek"));
+        list.add(new Option(new ClickFunction().registerLeft(event -> System.out.println("Test2")), "Zbuduj wioskę"));
         setOptions(list);
     }
 }
