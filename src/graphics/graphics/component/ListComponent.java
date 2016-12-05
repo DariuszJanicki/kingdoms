@@ -12,17 +12,13 @@ import java.util.Objects;
 
 public abstract class ListComponent extends AbstractComponent {
 
-    public static final int WIDTH_OFFSET = 5;
-    public static final int HEIGHT_OFFSET = 15;
+    private static final int WIDTH_OFFSET = 5;
+    private static final int HEIGHT_OFFSET = 15;
 
     @Getter
     protected List<String> texts = new ArrayList<>();
 
     /* ========== PUBLIC ========== */
-    public ListComponent(Rect rect) {
-        super(rect);
-    }
-
     @Override
     public void draw(GameGraphics g) {
         for(int i = 0; i < texts.size(); ++i) {
@@ -30,7 +26,12 @@ public abstract class ListComponent extends AbstractComponent {
         }
     }
 
-    public void setTexts(List<String> texts) {
+    /* ========== DEFAULT ========== */
+    ListComponent(Rect rect) {
+        super(rect);
+    }
+
+    void setTexts(List<String> texts) {
         if (Objects.nonNull(texts)) {
             this.texts = new ArrayList<>(texts);
         }

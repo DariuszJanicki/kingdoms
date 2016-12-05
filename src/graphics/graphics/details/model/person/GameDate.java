@@ -26,4 +26,8 @@ public class GameDate {
     public String toString() {
         return time % 365 + " dzień " + Season.of(time % 365) + ", roku " + time / 365;
     }
+
+    public GamePeriod difference(GameDate gameDate) {
+        return new GamePeriod(gameDate.time - time);
+    }
 }

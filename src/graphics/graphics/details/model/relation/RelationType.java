@@ -8,6 +8,7 @@ public enum RelationType {
     EX_LOVER,
     SPOUSE,
     CHILD,
-    PARENT
+    MOTHER,
+    FATHER
 
 }

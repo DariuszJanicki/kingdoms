@@ -10,8 +10,8 @@ import java.awt.*;
 
 public abstract class LabelComponent extends AbstractComponent {
 
-    public static final int WIDTH_OFFSET = 5;
-    public static final int HEIGHT_OFFSET = 15;
+    private static final int WIDTH_OFFSET = 5;
+    static final int HEIGHT_OFFSET = 15;
 
     @Getter
     protected Opt<String> text = Opt.empty();
@@ -26,7 +26,8 @@ public abstract class LabelComponent extends AbstractComponent {
         text.ifPresent(t -> drawText(g, t));
     }
 
-    public void setText(String text) {
+    /* ========== PROTECTED ========== */
+    protected void setText(String text) {
         this.text = Opt.ofNullable(text);
     }
 

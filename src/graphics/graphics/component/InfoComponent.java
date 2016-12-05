@@ -5,7 +5,7 @@ import graphics.graphics.details.points.Rect;
 
 import java.util.function.Supplier;
 
-public class InfoComponent extends LabelComponent {
+public final class InfoComponent extends LabelComponent {
 
     private final Supplier<String> supplier;
 

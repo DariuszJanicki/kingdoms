@@ -6,7 +6,7 @@ import graphics.graphics.details.points.Rect;
 import java.util.List;
 import java.util.function.Supplier;
 
-public class InfoListComponent extends ListComponent {
+public final class InfoListComponent extends ListComponent {
 
     private final Supplier<List<String>> supplier;
 

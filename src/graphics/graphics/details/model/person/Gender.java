@@ -21,6 +21,10 @@ public enum Gender {
         return Bool.of(this == MALE);
     }
 
+    public Bool isFemale() {
+        return Bool.of(this == FEMALE);
+    }
+
     @Override
     public String toString() {
         return name;
