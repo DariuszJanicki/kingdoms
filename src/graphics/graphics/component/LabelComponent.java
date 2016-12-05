@@ -16,23 +16,23 @@ public abstract class LabelComponent extends AbstractComponent {
     @Getter
     protected Opt<String> text = Opt.empty();
 
-    /* ========== CONSTRUCTOR ========== */
+    /* ========== PUBLIC ========== */
     public LabelComponent(Rect rect) {
         super(rect);
     }
 
-    /* ========== PUBLIC ========== */
     @Override
     public void draw(GameGraphics g) {
         text.ifPresent(t -> drawText(g, t));
     }
 
+    public void setText(String text) {
+        this.text = Opt.ofNullable(text);
+    }
+
     /* ========== PRIVATE ========== */
     private void drawText(GameGraphics g, String t) {
         g.setColor(Color.BLACK);
-        g.getGraphics().drawString(t,
-                rect.getStartPoint().getX() + WIDTH_OFFSET,
-                rect.getStartPoint().getY() + HEIGHT_OFFSET
-        );
+        g.drawString(t, rect.getStartPoint().add(WIDTH_OFFSET, HEIGHT_OFFSET));
     }
 }

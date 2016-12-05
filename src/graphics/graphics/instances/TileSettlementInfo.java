@@ -1,19 +1,19 @@
 package graphics.graphics.instances;
 
 import graphics.graphics.GameGraphics;
-import graphics.graphics.component.LabelComponent;
+import graphics.graphics.component.ListComponent;
 import graphics.graphics.details.points.Rect;
 
-public class TileInfo extends LabelComponent {
+public class TileSettlementInfo extends ListComponent {
 
     /* ========== CONSTRUCTOR ========== */
-    public TileInfo(Rect rect) {
+    public TileSettlementInfo(Rect rect) {
         super(rect);
     }
 
     @Override
     public void draw(GameGraphics g) {
-        setText(model.getCurrentTileInfo());
+        setTexts(model.getVillagers());
         super.draw(g);
     }
 }

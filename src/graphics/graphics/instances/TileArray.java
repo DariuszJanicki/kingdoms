@@ -1,11 +1,10 @@
-package graphics.graphics.details.model.board;
+package graphics.graphics.instances;
 
 import graphics.frame.constants.FrameConstants;
 import graphics.graphics.details.points.Point;
 import graphics.graphics.details.points.Rect;
 import graphics.graphics.details.points.Coords;
 import graphics.graphics.details.points.Size;
-import graphics.graphics.details.model.tile.Tile;
 import utils.Opt;
 
 public class TileArray {

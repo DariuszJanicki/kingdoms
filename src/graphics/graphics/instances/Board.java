@@ -1,11 +1,9 @@
-package graphics.graphics.details.model.board;
+package graphics.graphics.instances;
 
 import graphics.frame.constants.FrameConstants;
 import graphics.graphics.component.setting.AbstractComponent;
 import graphics.graphics.GameGraphics;
-import graphics.graphics.instances.BoardOptionList;
 import graphics.graphics.details.model.map.GameMap;
-import graphics.graphics.details.model.tile.Tile;
 import graphics.graphics.details.model.tile.field.Field;
 import graphics.graphics.details.points.Coords;
 import graphics.graphics.details.points.Point;
@@ -42,7 +40,7 @@ public class Board extends AbstractComponent {
 
     /* ========== PUBLIC ========== */
     @Override
-    public void draw    (GameGraphics g) {
+    public void draw(GameGraphics g) {
         for (int i = -1; i <= size.getX(); ++i) {
             for (int j = -1; j <= size.getY(); ++j) {
                 draw(g, new Coords(i, j));
@@ -75,13 +73,13 @@ public class Board extends AbstractComponent {
     }
 
     private void drawTile(GameGraphics g, Field field, Opt<Tile> tile) {
-        tile.ifPresent(t -> drawTile(g, field, t));
+        tile.ifPresent(t -> draw(g, field, t));
     }
 
-    private void drawTile(GameGraphics g, Field field, Tile tile) {
+    private void draw(GameGraphics g, Field field, Tile tile) {
         tile.setField(field);
-        g.draw(field.getTile().getImage(), tile.getRect().move(delta));
-        field.getSettlement().ifPresent(s -> g.draw(s.getTile().getImage(), tile.getRect().move(delta)));
+        tile.setDelta(delta);
+        tile.draw(g);
     }
 
     private boolean checkCoords(Coords coords) {

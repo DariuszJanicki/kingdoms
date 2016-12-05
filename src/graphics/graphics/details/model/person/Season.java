@@ -5,10 +5,10 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public enum Season {
 
-    SPRING(3, "Wiosna"),
-    SUMMER(6, "Lato"),
-    FALL(9, "Jesień"),
-    WINTER(12, "Zima");
+    SPRING(91, "Wiosny"),
+    SUMMER(182, "Lata"),
+    FALL(274, "Jesieni"),
+    WINTER(365, "Zimy");
 
     private Integer time;
     private String name;

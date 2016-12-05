@@ -1,6 +1,6 @@
 package graphics.frame;
 
-import graphics.graphics.details.model.person.GameDate;
+import graphics.graphics.details.model.ComponentModel;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
@@ -23,13 +23,7 @@ public final class FpsTimer implements Runnable {
     private long fpsTime = System.nanoTime();
     private long tpsTime = System.nanoTime();
 
-    private GameDate gameDate = GameDate.init();
-
     /* ========== PUBLIC ========== */
-    public GameDate getCurrentDate() {
-        return GameDate.of(gameDate);
-    }
-
     @Override
     public void run() {
         while (true) {
@@ -57,12 +51,12 @@ public final class FpsTimer implements Runnable {
     private void tick() {
         ticks++;
         DrawPanel.singleton().tick();
-        gameDate.dayPassed();
+        ComponentModel.INSTANCE.getGameDate().dayPassed();
     }
 
     private void reset(long currentTime) {
         if (currentTime >= fpsTime + SECOND) {
-            System.out.println("FPS: " + frames + " - TPS: " + ticks);
+            ComponentModel.INSTANCE.setFps("FPS: " + frames + " - TPS: " + ticks);
             fpsTime = currentTime;
             frames = 0;
             ticks = 0;

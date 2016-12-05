@@ -24,6 +24,6 @@ public class GameDate {
 
     @Override
     public String toString() {
-        return Season.of(time % 12) + ", roku " + time / 12;
+        return time % 365 + " dzień " + Season.of(time % 365) + ", roku " + time / 365;
     }
 }

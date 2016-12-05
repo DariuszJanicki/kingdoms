@@ -2,7 +2,7 @@ package graphics.input;
 
 import graphics.frame.DrawPanel;
 import graphics.graphics.details.points.Coords;
-import graphics.graphics.details.model.board.Board;
+import graphics.graphics.instances.Board;
 import utils.Functional;
 
 import java.awt.event.KeyEvent;

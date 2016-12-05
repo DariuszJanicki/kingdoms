@@ -55,4 +55,8 @@ public class GameGraphics {
     public int stringWidth(String string) {
         return getFontMetrics().stringWidth(string);
     }
+
+    public void drawString(String string, Point point) {
+        graphics.drawString(string, point.getX(), point.getY());
+    }
 }

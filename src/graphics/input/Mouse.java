@@ -10,11 +10,11 @@ public class Mouse implements MouseListener {
     /* ========== PUBLIC ========== */
     @Override
     public void mouseClicked(MouseEvent e) {
-        click(GameMouseEvent.of(e));
     }
 
     @Override
     public void mousePressed(MouseEvent e) {
+        click(GameMouseEvent.of(e));
     }
 
     @Override
