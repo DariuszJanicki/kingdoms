@@ -22,24 +22,21 @@ public class Pregnancy {
     public Bool nextStage() {
         if (stage == 270) {
             int k = Dice.k(20);
-            if (k < 16) {
+            if (k < 19) {
                 createChild();
-            } if (k < 19) {
-                createChild();
-                createChild();
-            } if (k < 20) {
-                createChild();
+            }
+            if (k < 20) {
                 createChild();
                 createChild();
             }
-            return Bool.of(true);
+            return Bool.TRUE;
         }
         stage++;
-        return Bool.of(false);
+        return Bool.FALSE;
     }
 
     private void createChild() {
-        Person child = PersonGenerator.INSTANCE.createPerson();
+        Person child = PersonGenerator.INSTANCE.createBaby();
         child.parents(mother, father);
         mother.child(child);
         children.add(child);

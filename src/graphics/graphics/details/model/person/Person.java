@@ -26,72 +26,66 @@ public class Person {
     }
 
     public void tick() {
-        if (pregnancy.isPresent().isTrue()) {
-            if (pregnancy.get().nextStage().isTrue()) {
-                if (settlement.isPresent().isTrue()) {
-                    settlement.get().addVillagers(pregnancy.get().getChildren());
-                }
-                pregnancy = Opt.empty();
-            }
-        }
-        pregnancy.ifPresent(p -> p.nextStage());
+        pregnancy.ifPresent(p -> p.nextStage().ifTrue(this::childbirth));
     }
 
     @Override
     public String toString() {
-        return gender + " " + name + " born in " + birthDate;
+        return name + ", " + ComponentModel.INSTANCE.getGameDate().difference(birthDate).getYears() + " lat.";
     }
 
-    public Bool isMale() {
+    /* ========== DEFAULT ========== */
+    Bool isMale() {
         return gender.isMale();
     }
 
-    public Bool isFemale() {
+    Bool isFemale() {
         return gender.isFemale();
     }
 
-    public Bool hasSpouse() {
+    Bool hasSpouse() {
         return relations.hasSpouse();
     }
 
-    public void marry(Person person) {
+    void marry(Person person) {
         relations.addSpouse(person);
         person.relations.addSpouse(this);
-
-        System.out.println(this + " żeni się z " + person);
     }
 
-    public Opt<Person> getSpouse() {
+    Opt<Person> getSpouse() {
         return relations.getSpouse();
     }
 
-    public void startPregnancy(Opt<Person> spouse) {
-        isFemale()
-                .and(spouse.isPresent())
-                .and(spouse.get().isMale())
+    void startPregnancy(Opt<Person> spouse) {
+        spouse.ifPresent(husband -> isFemale()
+                .and(husband.isMale())
                 .and(pregnancy.isEmpty())
-                .ifTrue(() -> this.startPregnancy(spouse.get()));
+                .ifTrue(() -> startPregnancy(husband)));
+    }
+
+    void parents(Person mother, Person father) {
+        relations.parents(mother, father);
+    }
+
+    void child(Person child) {
+        relations.child(child);
+    }
+
+    Bool eligibleToWed() {
+        return Bool.of(birthDate.difference(ComponentModel.INSTANCE.getGameDate()).getTime() > 5475);
+    }
+
+    Bool isPregnant() {
+        return pregnancy.isPresent();
     }
 
     /* ========== PRIVATE ========== */
     private void startPregnancy(Person male) {
-        System.out.println(this + " is pregnant with " + male);
         this.pregnancy = Opt.of(new Pregnancy(this, male));
     }
 
-    public void parents(Person mother, Person father) {
-        relations.parents(mother, father);
-    }
-
-    public void child(Person child) {
-        relations.child(child);
-    }
-
-    public Bool eligibleToWed() {
-        return Bool.of(birthDate.difference(ComponentModel.INSTANCE.getGameDate()).getTime() > 5475);
-    }
-
-    public Bool isPregnant() {
-        return pregnancy.isPresent();
+    private void childbirth() {
+        settlement.ifPresent(() -> settlement.get().addVillagers(pregnancy.get().getChildren()));
+        pregnancy = Opt.empty();
     }
 }

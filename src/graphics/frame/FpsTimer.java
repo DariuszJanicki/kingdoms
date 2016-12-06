@@ -14,7 +14,7 @@ public final class FpsTimer implements Runnable {
         return singleton == null ? singleton = new FpsTimer() : singleton;
     }
 
-    private final long TPS = 30;
+    private final long TPS = 20;
     private final long SECOND = 1000000000;
     private final long TICK = SECOND / TPS;
 

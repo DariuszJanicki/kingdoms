@@ -2,7 +2,6 @@ package graphics.graphics.instances;
 
 import graphics.graphics.GameGraphics;
 import graphics.graphics.component.setting.AbstractComponent;
-import graphics.graphics.details.model.person.Person;
 import graphics.graphics.details.model.settlement.Settlement;
 import graphics.graphics.details.model.tile.field.Field;
 import graphics.graphics.details.points.Point;
@@ -12,7 +11,6 @@ import lombok.Setter;
 import utils.Opt;
 
 import java.awt.*;
-import java.util.stream.Collectors;
 
 class Tile extends AbstractComponent {
 
@@ -51,15 +49,12 @@ class Tile extends AbstractComponent {
         field.ifPresent(f -> {
             model.setCurrentTileInfo(f.getTerrain() + " " + f.getCoords());
             f.getSettlement()
-                    .ifPresent(s -> model.setVillagers(s.getPeopleInSettlement()
-                            .stream()
-                            .map(Person::toString)
-                            .collect(Collectors.toList())));
+                    .ifPresent(settlement -> model.setVillagers(settlement.getVillagersList()));
         });
     }
 
     private void drawSettlement(GameGraphics g, Settlement settlement) {
-        String size = String.valueOf(settlement.getPeopleInSettlement().size());
+        String size = String.valueOf(settlement.getVillagersList().size());
         g.draw(settlement.getTile().getImage(), rect.move(delta));
         drawText(g, size);
     }
