@@ -1,8 +1,11 @@
 package graphics.graphics.details.model.person;
 
 import graphics.graphics.details.model.ComponentModel;
+import graphics.graphics.details.model.building.Building;
+import graphics.graphics.details.model.building.Buildings;
 import graphics.graphics.details.model.relation.Relations;
 import graphics.graphics.details.model.settlement.Settlement;
+import lombok.Getter;
 import lombok.Setter;
 import utils.Bool;
 import utils.Opt;
@@ -13,7 +16,12 @@ public class Person {
     private final Gender gender;
     private final GameDate birthDate;
     private final Relations relations = new Relations();
+    private final Buildings ownedBuildings = new Buildings();
+
     private Opt<Pregnancy> pregnancy = Opt.empty();
+
+    @Getter
+    private Opt<Building> house = Opt.empty();
 
     @Setter
     private Opt<Settlement> settlement = Opt.empty();
@@ -35,30 +43,31 @@ public class Person {
     }
 
     /* ========== DEFAULT ========== */
-    Bool isMale() {
+    public Bool isMale() {
         return gender.isMale();
     }
 
-    Bool isFemale() {
+    public Bool isFemale() {
         return gender.isFemale();
     }
 
-    Bool hasSpouse() {
+    public Bool hasSpouse() {
         return relations.hasSpouse();
     }
 
-    void marry(Person person) {
+    public void marry(Person person) {
         relations.addSpouse(person);
         person.relations.addSpouse(this);
     }
 
-    Opt<Person> getSpouse() {
+    public Opt<Person> getSpouse() {
         return relations.getSpouse();
     }
 
-    void startPregnancy(Opt<Person> spouse) {
+    public void startPregnancy(Opt<Person> spouse) {
         spouse.ifPresent(husband -> isFemale()
                 .and(husband.isMale())
+                .and(house.isPresent())
                 .and(pregnancy.isEmpty())
                 .ifTrue(() -> startPregnancy(husband)));
     }
@@ -71,11 +80,11 @@ public class Person {
         relations.child(child);
     }
 
-    Bool eligibleToWed() {
+    public Bool eligibleToWed() {
         return Bool.of(birthDate.difference(ComponentModel.INSTANCE.getGameDate()).getTime() > 5475);
     }
 
-    Bool isPregnant() {
+    public Bool isPregnant() {
         return pregnancy.isPresent();
     }
 
@@ -87,5 +96,23 @@ public class Person {
     private void childbirth() {
         settlement.ifPresent(() -> settlement.get().addVillagers(pregnancy.get().getChildren()));
         pregnancy = Opt.empty();
+    }
+
+    public Bool canJoinSettlement() {
+        return settlement.isPresent().negate();
+    }
+
+    public void claim(Building building) {
+        System.out.println(this + " buys " + building);
+        ownedBuildings.add(building);
+        building.setOwner(Opt.of(this));
+        house.ifNotPresent(() -> moveFamilyToHouse(building));
+        moveFamilyToHouse(building);
+    }
+
+    private void moveFamilyToHouse(Building newHouse) {
+        newHouse.moveIn(this);
+        relations.getFamily().getPeople()
+                .forEach(newHouse::moveIn);
     }
 }

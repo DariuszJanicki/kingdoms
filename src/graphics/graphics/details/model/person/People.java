@@ -1,6 +1,6 @@
 package graphics.graphics.details.model.person;
 
-import utils.Dice;
+import lombok.Getter;
 
 import java.util.ArrayList;
 import java.util.ConcurrentModificationException;
@@ -9,49 +9,35 @@ import java.util.stream.Collectors;
 
 public class People {
 
-    private final List<Person> people = new ArrayList<>();
+    protected final Integer maxNumberOfPeople;
+
+    @Getter
+    protected final List<Person> people;
+
+    /* ========== PUBLIC ========== */
+    public People() {
+        this(10000);
+    }
+
+    public People(List<Person> people) {
+        this.people = new ArrayList<>(people);
+        this.maxNumberOfPeople = people.size();
+    }
+
+    public People(Integer maxNumberOfPeople) {
+        this.people = new ArrayList<>(maxNumberOfPeople);
+        this.maxNumberOfPeople = maxNumberOfPeople;
+    }
 
     public void tick() {
         try {
             people.forEach(Person::tick);
-        } catch(ConcurrentModificationException e) {
+        } catch (ConcurrentModificationException e) {
             e.printStackTrace();
         }
     }
 
-    public void haveChildren() {
-        people.stream()
-                .filter(person -> person.isFemale().isTrue())
-                .filter(woman -> woman.hasSpouse().isTrue())
-                .filter(woman -> woman.isPregnant().isFalse())
-                .filter(woman -> Dice.test(100))
-                .forEach(woman -> woman.startPregnancy(woman.getSpouse()));
-    }
-
-    public void marryCitizens() {
-        List<Person> men = people.stream()
-                .filter(person -> person.isMale().isTrue())
-                .filter(man -> man.eligibleToWed().isTrue())
-                .filter(man -> man.hasSpouse().isFalse())
-                .collect(Collectors.toList());
-
-        List<Person> women = people.stream()
-                .filter(person -> person.isFemale().isTrue())
-                .filter(woman -> woman.eligibleToWed().isTrue())
-                .filter(woman -> woman.hasSpouse().isFalse())
-                .collect(Collectors.toList());
-
-        if (!men.isEmpty() && !women.isEmpty()) {
-            men.get(0).marry(women.get(0));
-        }
-    }
-
-    public void introduceNewPeople(People newPeople) {
-        people.addAll(newPeople.people);
-        newPeople.clear();
-    }
-
-    private void clear() {
+    public void clear() {
         people.clear();
     }
 
@@ -63,9 +49,18 @@ public class People {
         people.addAll(newPeople);
     }
 
-    public List<String> getVillagersList() {
+    public void introduceNewPeople(People newPeople) {
+        people.addAll(newPeople.people);
+        newPeople.clear();
+    }
+
+    public List<String> list() {
         return people.stream()
                 .map(Person::toString)
                 .collect(Collectors.toList());
+    }
+
+    public void remove(Person person) {
+        people.remove(person);
     }
 }

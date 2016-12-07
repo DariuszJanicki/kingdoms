@@ -11,4 +11,7 @@ public class Relation {
     private Person target;
     private RelationType type;
 
+    public boolean isFamily() {
+        return type.isFamily();
+    }
 }

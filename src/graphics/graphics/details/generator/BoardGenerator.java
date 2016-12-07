@@ -1,10 +1,7 @@
 package graphics.graphics.details.generator;
 
-import graphics.graphics.details.loader.tile.list.SettlementTileTypeList;
 import graphics.graphics.details.loader.tile.list.TerrainTileTypeList;
 import graphics.graphics.details.model.map.GameMap;
-import graphics.graphics.details.model.settlement.Settlement;
-import graphics.graphics.details.model.settlement.SettlementType;
 import graphics.graphics.details.model.terrain.Direction;
 import graphics.graphics.details.model.terrain.Terrain;
 import graphics.graphics.details.model.tile.field.Field;
@@ -57,10 +54,8 @@ public enum BoardGenerator {
     private void process(GameMap map, Field field) {
         setTerrainTile(map, field);
 
-        if (Dice.k(20) == 0 && field.getTerrain() != Terrain.WATER) {
-            SettlementType type = new Dice<SettlementType>().randomElementOf(SettlementType.values());
-            Settlement settlement = new Settlement(type, field, SettlementTileTypeList.singleton().getTile(type));
-            field.setSettlement(Opt.of(settlement));
+        if (Dice.k(100) == 0 && field.getTerrain() != Terrain.WATER) {
+            field.setSettlement(Opt.of(SettlementGenerator.INSTANCE.createRandom(field)));
         }
     }
 

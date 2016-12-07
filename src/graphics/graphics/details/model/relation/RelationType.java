@@ -9,6 +9,9 @@ public enum RelationType {
     SPOUSE,
     CHILD,
     MOTHER,
-    FATHER
+    FATHER;
 
+    public boolean isFamily() {
+        return this == SPOUSE || this == CHILD;
+    }
 }

@@ -1,5 +1,6 @@
 package graphics.graphics.details.model.relation;
 
+import graphics.graphics.details.model.person.People;
 import graphics.graphics.details.model.person.Person;
 import lombok.val;
 import utils.Bool;
@@ -7,12 +8,13 @@ import utils.Opt;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static graphics.graphics.details.model.relation.RelationType.*;
 
 public class Relations {
 
-    private List<Relation> relation = new ArrayList<>();
+    private List<Relation> relations = new ArrayList<>();
 
     /* ========== PUBLIC ========== */
     public Bool hasSpouse() {
@@ -20,7 +22,7 @@ public class Relations {
     }
 
     public void addSpouse(Person person) {
-        relation.add(new Relation(person, SPOUSE));
+        relations.add(new Relation(person, SPOUSE));
     }
 
     public Opt<Person> getSpouse() {
@@ -29,18 +31,25 @@ public class Relations {
     }
 
     public void parents(Person mother, Person father) {
-        relation.add(new Relation(mother, MOTHER));
-        relation.add(new Relation(father, FATHER));
+        relations.add(new Relation(mother, MOTHER));
+        relations.add(new Relation(father, FATHER));
     }
 
     public void child(Person child) {
-        relation.add(new Relation(child, CHILD));
+        relations.add(new Relation(child, CHILD));
     }
 
     /* ========== PRIVATE ========== */
     private Opt<Relation> getSpouseRelation() {
-        return Opt.of(relation.stream()
+        return Opt.of(relations.stream()
                     .filter(relation -> relation.getType() == SPOUSE)
                     .findFirst());
+    }
+
+    public People getFamily() {
+        return new People(relations.stream()
+                .filter(Relation::isFamily)
+                .map(Relation::getTarget)
+                .collect(Collectors.toList()));
     }
 }

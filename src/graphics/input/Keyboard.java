@@ -32,7 +32,6 @@ public class Keyboard implements KeyListener {
         Functional functional = keyMapping.get(e.getKeyCode());
 
         if (functional != null) {
-            System.out.println(functional);
             functional.execute();
         }
     }

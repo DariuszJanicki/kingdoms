@@ -49,12 +49,12 @@ class Tile extends AbstractComponent {
         field.ifPresent(f -> {
             model.setCurrentTileInfo(f.getTerrain() + " " + f.getCoords());
             f.getSettlement()
-                    .ifPresent(settlement -> model.setVillagers(settlement.getVillagersList()));
+                    .ifPresent(settlement -> model.setVillagers(settlement.getInhabitants().list()));
         });
     }
 
     private void drawSettlement(GameGraphics g, Settlement settlement) {
-        String size = String.valueOf(settlement.getVillagersList().size());
+        String size = String.valueOf(settlement.getInhabitants().list().size());
         g.draw(settlement.getTile().getImage(), rect.move(delta));
         drawText(g, size);
     }
