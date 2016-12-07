@@ -2,7 +2,7 @@ package graphics.input;
 
 import graphics.frame.DrawPanel;
 import graphics.graphics.details.points.Coords;
-import graphics.graphics.instances.Board;
+import graphics.graphics.instances.BoardOfTiles;
 import utils.Functional;
 
 import java.awt.event.KeyEvent;
@@ -47,22 +47,22 @@ public class Keyboard implements KeyListener {
     }
 
     private void up() {
-        Board board = DrawPanel.singleton().getMainComponent().getBoard();
+        BoardOfTiles board = DrawPanel.singleton().getMainComponent().getBoard();
         board.setDestination(Coords.toNorth());
     }
 
     private void down() {
-        Board board = DrawPanel.singleton().getMainComponent().getBoard();
+        BoardOfTiles board = DrawPanel.singleton().getMainComponent().getBoard();
         board.setDestination(Coords.toSouth());
     }
 
     private void right() {
-        Board board = DrawPanel.singleton().getMainComponent().getBoard();
+        BoardOfTiles board = DrawPanel.singleton().getMainComponent().getBoard();
         board.setDestination(Coords.toEast());
     }
 
     private void left() {
-        Board board = DrawPanel.singleton().getMainComponent().getBoard();
+        BoardOfTiles board = DrawPanel.singleton().getMainComponent().getBoard();
         board.setDestination(Coords.toWest());
     }
 }

@@ -23,6 +23,7 @@ public class Mouse implements MouseListener {
 
     @Override
     public void mouseEntered(MouseEvent e) {
+        hover(GameMouseEvent.of(e));
     }
 
     @Override
@@ -35,5 +36,12 @@ public class Mouse implements MouseListener {
                 .getMainComponent()
                 .getClicked(e)
                 .click(e);
+    }
+
+    private void hover(GameMouseEvent e) {
+        DrawPanel.singleton()
+                .getMainComponent()
+                .getHovered(e)
+                .hover(e);
     }
 }

@@ -35,4 +35,8 @@ public final class GameMouseEvent {
     public Bool isRightClicked() {
         return Bool.of(event.getButton() == MouseEvent.BUTTON3);
     }
+
+    public Bool isHover() {
+        return Bool.TRUE;
+    }
 }

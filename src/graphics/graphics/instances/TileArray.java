@@ -12,7 +12,7 @@ public class TileArray {
     private Tile[][] tiles;
     private Size size;
 
-    public TileArray(Size size, Board board) {
+    public TileArray(Size size, BoardOfTiles board) {
         createTiles(size, board);
         this.size = size;
     }
@@ -25,7 +25,7 @@ public class TileArray {
     }
 
     /* ========== PRIVATE ========== */
-    private void createTiles(Size size, Board board) {
+    private void createTiles(Size size, BoardOfTiles board) {
         tiles = new Tile[size.getX() + 2][];
         for (int i = 0; i <= size.getX() + 1; ++i) {
             tiles[i] = new Tile[size.getY() + 2];

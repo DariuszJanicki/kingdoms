@@ -17,7 +17,7 @@ import utils.Opt;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class Board extends AbstractComponent {
+public final class BoardOfTiles extends AbstractComponent {
 
     private GameMap map;
     private TileArray tiles;
@@ -29,7 +29,7 @@ public class Board extends AbstractComponent {
     private Coords destination = new Coords(0, 0);
     private Coords current = new Coords(0, 0);
 
-    public Board(Rect rect, GameMap map) {
+    public BoardOfTiles(Rect rect, GameMap map) {
         super(rect);
 
         this.map = map;
@@ -126,7 +126,9 @@ public class Board extends AbstractComponent {
     }
 
     private void clear() {
-        List<AbstractComponent> collect = components.stream().filter(c -> c instanceof BoardOptionList).collect(Collectors.toList());
-        components.removeAll(collect);
+        List<AbstractComponent> collect = components.stream()
+                .filter(c -> c instanceof BoardOptionList)
+                .collect(Collectors.toList());
+        componentsToRemove.addAll(collect);
     }
 }

@@ -22,6 +22,7 @@ class Tile extends AbstractComponent {
     Tile(Rect rect) {
         super(rect);
         getClickFunction().registerLeft(this::leftMouse);
+        getHoverFunction().registerHover(this::leftMouse);
     }
 
     /* ========== PUBLIC ========== */

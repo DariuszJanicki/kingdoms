@@ -14,7 +14,7 @@ import lombok.Getter;
 public class MainComponent extends AbstractComponent {
 
     @Getter
-    private Board board;
+    private BoardOfTiles board;
 
     /* ========== PUBLIC ========== */
     public MainComponent(Rect rect) {
@@ -38,7 +38,7 @@ public class MainComponent extends AbstractComponent {
     /* ========== PRIVATE ========== */
     private void createBoard() {
         GameMap map = BoardGenerator.INSTANCE.generateMap(Size.of(40, 40));
-        board = new Board(Rect.of(160, 0, 960, 640), map);
+        board = new BoardOfTiles(Rect.of(160, 0, 960, 640), map);
         addComponent(board);
     }
 
