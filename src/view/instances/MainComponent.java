@@ -2,6 +2,7 @@ package view.instances;
 
 import engine.generator.BoardGenerator;
 import engine.model.map.GameMap;
+import engine.model.tile.field.Field;
 import engine.points.Rect;
 import engine.points.Size;
 import lombok.Getter;
@@ -13,7 +14,7 @@ import view.interfaces.GameGraphics;
 public class MainComponent extends AbstractComponent {
 
     @Getter
-    private BoardOfTiles board;
+    private MapInTileBoard board;
 
     /* ========== PUBLIC ========== */
     public MainComponent(Rect rect) {
@@ -32,8 +33,8 @@ public class MainComponent extends AbstractComponent {
 
     /* ========== PRIVATE ========== */
     private void createBoard() {
-        GameMap map = BoardGenerator.INSTANCE.generateMap(Size.of(40, 40));
-        board = new BoardOfTiles(Rect.of(0, 0, 800, 640), map);
+        GameMap<Field> map = BoardGenerator.INSTANCE.generateMap(Size.of(40, 40));
+        board = new MapInTileBoard(Rect.of(0, 0, 800, 640), map);
         addComponent(board);
     }
 

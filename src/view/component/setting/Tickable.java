@@ -10,6 +10,6 @@ abstract class Tickable extends Drawable {
     }
 
     /* ========== PUBLIC ========== */
-    public void tick() {
+    public void performTicks() {
     }
 }

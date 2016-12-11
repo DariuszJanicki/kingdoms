@@ -7,6 +7,10 @@ import java.util.Objects;
 public final class Coords extends Tuple {
 
     /* ========== CONSTRUCTOR ========== */
+    public Coords() {
+        this(0, 0);
+    }
+
     public Coords(Integer x, Integer y) {
         super(x, y);
     }

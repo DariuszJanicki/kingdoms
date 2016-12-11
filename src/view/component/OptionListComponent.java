@@ -53,7 +53,7 @@ public abstract class OptionListComponent extends AbstractComponent {
         Point point = Point.of(0, 0);
         for (Option option : options.get().getOptions()) {
             OptionLabel component = new OptionLabel(rect.move(point).plus(Point.of(5, 0)), option);
-            component.registerClick(option.getClick());
+            component.getClickFunctionMapper().copy(option.getClick());
             addComponent(component);
             point = point.add(Point.of(0, LabelComponent.HEIGHT_OFFSET));
         }

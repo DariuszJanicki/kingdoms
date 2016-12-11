@@ -4,8 +4,7 @@ import engine.points.Rect;
 import input.Mouse;
 import lombok.Getter;
 import lombok.Setter;
-import view.interfaces.ClickFunction;
-import view.interfaces.HoverFunction;
+import view.click.ClickFunctionMapper;
 
 @Setter
 @Getter
@@ -19,11 +18,8 @@ abstract class Clickable extends Tickable {
         addMouseListener(listener);
     }
 
-    public void registerClick(ClickFunction click) {
-        listener.setClickFunction(click);
+    public ClickFunctionMapper getClickFunctionMapper() {
+        return listener.getClickFunctionMapper();
     }
 
-    public void registerHover(HoverFunction hover) {
-        listener.setHoverFunction(hover);
-    }
 }

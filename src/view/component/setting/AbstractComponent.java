@@ -31,8 +31,8 @@ public abstract class AbstractComponent extends Clickable {
     }
 
     public void preTick() {
-        tick();
-        components.forEach(Clickable::tick);
+        performTicks();
+        components.forEach(Clickable::performTicks);
     }
 
     /* ========== PROTECTED ========== */

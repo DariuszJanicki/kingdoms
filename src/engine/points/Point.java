@@ -12,6 +12,10 @@ public final class Point extends Tuple {
         return new Point(x, y);
     }
 
+    public static Point of() {
+        return Point.of(0, 0);
+    }
+
     /* ========== OVERRIDE ========== */
     @Override
     public String toString() {

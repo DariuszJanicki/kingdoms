@@ -8,12 +8,11 @@ import lombok.Setter;
 import utils.Bool;
 import utils.Opt;
 import view.component.setting.AbstractComponent;
-import view.interfaces.ClickFunction;
 import view.interfaces.GameGraphics;
-import view.interfaces.HoverFunction;
+import view.click.GameMouseEvent;
+import view.click.MouseAction;
 
 import java.awt.*;
-import java.awt.event.MouseEvent;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -27,8 +26,11 @@ class Tile extends AbstractComponent {
     /* ========== CONSTRUCTOR ========== */
     Tile(Rect rect) {
         super(rect);
-        registerClick(ClickFunction.of().registerLeft(this::leftMouse).registerRight(this::rightMouse));
-        registerHover(HoverFunction.of().registerHover(this::hover).registerHoverOff(this::hoverOff));
+        getClickFunctionMapper()
+                .register(MouseAction.LEFT_CLICK, this::leftMouse)
+                .register(MouseAction.RIGHT_CLICK, this::rightMouse)
+                .register(MouseAction.HOVER, this::hover)
+                .register(MouseAction.HOVER_EXIT, this::hoverOff);
     }
 
     /* ========== PUBLIC ========== */
@@ -51,12 +53,12 @@ class Tile extends AbstractComponent {
     }
 
     @Override
-    public void tick() {
+    public void performTicks() {
         field.ifPresent(Field::tick);
     }
 
     /* ========== PRIVATE ========== */
-    private void leftMouse(MouseEvent e) {
+    private void leftMouse(GameMouseEvent e) {
         field.ifPresent(f -> {
             model.setCurrentTileInfo(f.getTerrain() + " " + f.getCoords());
             f.getSettlement()
@@ -64,9 +66,9 @@ class Tile extends AbstractComponent {
         });
     }
 
-    private void rightMouse(MouseEvent e) {
+    private void rightMouse(GameMouseEvent e) {
         clear();
-        addComponent(new BoardOptionList(Rect.of(Point.of(e.getPoint()), Point.of(32, 96).add(Point.of(e.getPoint())))));
+        addComponent(new BoardOptionList(Rect.of(e.getPoint(), Point.of(32, 96).add(e.getPoint()))));
     }
 
     private void clear() {
@@ -76,11 +78,11 @@ class Tile extends AbstractComponent {
         componentsToRemove.addAll(collect);
     }
 
-    private void hover(MouseEvent e) {
+    private void hover(GameMouseEvent e) {
         highlight = Bool.TRUE;
     }
 
-    private void hoverOff(MouseEvent e) {
+    private void hoverOff(GameMouseEvent e) {
         highlight = Bool.FALSE;
     }
 

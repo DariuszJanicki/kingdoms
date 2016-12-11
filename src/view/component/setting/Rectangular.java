@@ -20,7 +20,7 @@ abstract class Rectangular extends Container {
 
     Rectangular(Rect rect) {
         this.rect = rect;
-        setBounds(rect.move(Point.of(-8, -16)).toRectangle());
+        setBounds(rect.move(Point.of(-4, -16)).toRectangle());
         setVisible(true);
     }
 }

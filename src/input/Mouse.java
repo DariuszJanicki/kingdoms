@@ -1,15 +1,16 @@
 package input;
 
-import view.interfaces.ClickFunction;
-import view.interfaces.HoverFunction;
+import lombok.Getter;
+import view.click.ClickFunctionMapper;
+import view.click.GameMouseEvent;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 public final class Mouse implements MouseListener {
 
-    private ClickFunction click = new ClickFunction();
-    private HoverFunction hover = new HoverFunction();
+    @Getter
+    private ClickFunctionMapper clickFunctionMapper = ClickFunctionMapper.of();
 
     /* ========== PUBLIC ========== */
     @Override
@@ -18,7 +19,7 @@ public final class Mouse implements MouseListener {
 
     @Override
     public void mousePressed(MouseEvent e) {
-        click.click(e);
+        clickFunctionMapper.click(new GameMouseEvent(e));
     }
 
     @Override
@@ -27,19 +28,11 @@ public final class Mouse implements MouseListener {
 
     @Override
     public void mouseEntered(MouseEvent e) {
-        hover.hover(e);
+        clickFunctionMapper.click(new GameMouseEvent(e));
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
-        hover.hoverOff(e);
-    }
-
-    public void setClickFunction(ClickFunction click) {
-        this.click = click;
-    }
-
-    public void setHoverFunction(HoverFunction hover) {
-        this.hover = hover;
+        clickFunctionMapper.click(new GameMouseEvent(e));
     }
 }

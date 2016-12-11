@@ -1,19 +1,13 @@
 package view.interfaces;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import view.click.ClickFunctionMapper;
 
 @Getter
+@AllArgsConstructor
 public final class Option {
 
-    private ClickFunction click;
+    private ClickFunctionMapper click;
     private String text;
-
-    /* ========== PUBLIC ========== */
-    public Option(ClickFunction click, String text) {
-        this.click = click;
-        this.text = text;
-    }
-
-
-
 }

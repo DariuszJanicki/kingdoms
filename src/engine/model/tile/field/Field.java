@@ -7,9 +7,10 @@ import engine.points.Coords;
 import lombok.Getter;
 import lombok.Setter;
 import utils.Opt;
+import view.interfaces.Tickable;
 
 @Getter
-public class Field {
+public class Field implements Tickable {
 
     private final Terrain terrain;
 
@@ -26,6 +27,7 @@ public class Field {
         this.coords = coords;
     }
 
+    @Override
     public void tick() {
         settlement.ifPresent(Settlement::tick);
     }

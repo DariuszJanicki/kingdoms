@@ -15,9 +15,9 @@ public enum BoardGenerator {
     INSTANCE;
 
     /* ========== PUBLIC ========== */
-    public GameMap generateMap(Size size) {
+    public GameMap<Field> generateMap(Size size) {
         Field[][] rows = createRows(size);
-        GameMap map = new GameMap(size, rows);
+        GameMap<Field> map = new GameMap<>(size, rows);
         fillTerrain(map);
         return map;
     }
@@ -43,7 +43,7 @@ public enum BoardGenerator {
         map[row][column] = new Field(type, new Coords(row, column));
     }
 
-    private void fillTerrain(GameMap map) {
+    private void fillTerrain(GameMap<Field> map) {
         for (int i = 0; i < map.getSize().getX(); ++i) {
             for (int j = 0; j < map.getSize().getY(); ++j) {
                 map.get(new Coords(i, j)).ifPresent(f -> process(map, f));
@@ -51,7 +51,7 @@ public enum BoardGenerator {
         }
     }
 
-    private void process(GameMap map, Field field) {
+    private void process(GameMap<Field> map, Field field) {
         setTerrainTile(map, field);
 
         if (Dice.k(100) == 0 && field.getTerrain() != Terrain.WATER) {
@@ -59,7 +59,7 @@ public enum BoardGenerator {
         }
     }
 
-    private void setTerrainTile(GameMap map, Field field) {
+    private void setTerrainTile(GameMap<Field> map, Field field) {
         Terrain terrain = field.getTerrain();
         Coords coords = field.getCoords();
 
