@@ -8,7 +8,7 @@ import lombok.Getter;
 import lombok.Setter;
 import view.interfaces.Tickable;
 
-class BoardScreenMover implements Tickable {
+final class BoardScreenMover implements Tickable {
 
     private static final Integer ANIMATION_SPEED = 8;
 

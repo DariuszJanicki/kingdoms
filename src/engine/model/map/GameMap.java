@@ -9,7 +9,7 @@ import view.interfaces.Tickable;
 
 @Getter
 @AllArgsConstructor
-public class GameMap<T extends Tickable> {
+public final class GameMap<T extends Tickable> {
 
     private Size size;
     private T[][] map;

@@ -10,7 +10,7 @@ import java.awt.event.KeyListener;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Keyboard implements KeyListener {
+public final class Keyboard implements KeyListener {
 
     private Map<Integer, Functional> keyMapping = new HashMap<>();
 

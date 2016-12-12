@@ -3,7 +3,7 @@ package engine.model.person;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
-public enum Season {
+enum Season {
 
     SPRING(91, "Wiosny"),
     SUMMER(182, "Lata"),
@@ -13,7 +13,7 @@ public enum Season {
     private Integer time;
     private String name;
 
-    /* ========== PUBLIC STATIC ========== */
+    /* ========== STATIC ========== */
     public static String of(int time) {
         for (Season season : values()) {
             if (season.time >= time) {

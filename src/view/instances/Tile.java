@@ -16,13 +16,13 @@ import java.awt.*;
 import java.util.List;
 import java.util.stream.Collectors;
 
-class Tile extends TileComponent<Field> {
+final class Tile extends TileComponent<Field> {
 
     @Setter
     private Point delta;
     private Bool highlight = Bool.FALSE;
 
-    /* ========== CONSTRUCTOR ========== */
+    /* ========== DEFAULT ========== */
     Tile(Rect rect) {
         super(rect);
         getClickFunctionMapper()
@@ -32,7 +32,7 @@ class Tile extends TileComponent<Field> {
                 .register(MouseAction.HOVER_EXIT, g -> highlight = Bool.FALSE);
     }
 
-    /* ========== PUBLIC ========== */
+    /* ========== PROTECTED ========== */
     protected void draw(GameGraphics g, Field field) {
         g.draw(field.getTile().getImage(), rect.move(this.delta));
         field.getSettlement().ifPresent(s -> drawSettlement(g, s));

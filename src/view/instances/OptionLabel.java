@@ -4,8 +4,9 @@ import view.interfaces.Option;
 import view.component.LabelComponent;
 import engine.points.Rect;
 
-public class OptionLabel extends LabelComponent {
+public final class OptionLabel extends LabelComponent {
 
+    /* ========== PUBLIC ========== */
     public OptionLabel(Rect rect, Option option) {
         super(rect);
 

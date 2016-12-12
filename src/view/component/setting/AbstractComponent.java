@@ -37,6 +37,6 @@ public abstract class AbstractComponent extends Clickable {
 
     /* ========== PROTECTED ========== */
     protected List<AbstractComponent> components = new ArrayList<>();
-    protected List<AbstractComponent> newComponents = new ArrayList<>();
     protected List<AbstractComponent> componentsToRemove = new ArrayList<>();
+    private List<AbstractComponent> newComponents = new ArrayList<>();
 }

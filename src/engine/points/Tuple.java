@@ -5,7 +5,7 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-class Tuple {
+abstract class Tuple {
 
     protected Integer x;
     protected Integer y;

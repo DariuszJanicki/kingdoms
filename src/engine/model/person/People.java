@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 
 public class People {
 
-    protected final Integer maxNumberOfPeople;
+    private final Integer maxNumberOfPeople;
 
     @Getter
     protected final List<Person> people;

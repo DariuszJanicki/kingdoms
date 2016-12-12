@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class Buildings {
+public final class Buildings {
 
     private List<Building> buildings = new ArrayList<>();
 

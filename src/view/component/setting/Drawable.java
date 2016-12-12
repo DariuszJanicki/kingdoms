@@ -5,7 +5,7 @@ import engine.points.Rect;
 
 abstract class Drawable extends Rectangular {
 
-    /* ========== CONSTRUCTOR ========== */
+    /* ========== DEFAULT ========== */
     Drawable(Rect rect) {
         super(rect);
     }

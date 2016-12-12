@@ -13,17 +13,13 @@ public final class MapInTileBoard extends TileBoardComponent {
     private final BoardScreenMover boardScreenMover = new BoardScreenMover();
     private final GameMap<Field> map;
 
-    /* ========== PUBLIC ========== */
+    /* ========== DEFAULT ========== */
     MapInTileBoard(Rect rect, GameMap<Field> map) {
         super(rect);
         this.map = map;
     }
 
-    protected void draw(GameGraphics g, Coords tileCoords) {
-        map.get(tileCoords.plus(boardScreenMover.getCurrentView()))
-                .ifPresent(field -> draw(g, field, getTiles().get(tileCoords)));
-    }
-
+    /* ========== PUBLIC ========== */
     @Override
     public void performTicks() {
         boardScreenMover.tick();
@@ -35,6 +31,12 @@ public final class MapInTileBoard extends TileBoardComponent {
         if (checkCoords(plus) && boardScreenMover.checkDifference()) {
             boardScreenMover.setDestinationView(plus);
         }
+    }
+
+    /* ========== PROTECTED ========== */
+    protected void draw(GameGraphics g, Coords tileCoords) {
+        map.get(tileCoords.plus(boardScreenMover.getCurrentView()))
+                .ifPresent(field -> draw(g, field, getTiles().get(tileCoords)));
     }
 
     /* ========== PRIVATE ========== */

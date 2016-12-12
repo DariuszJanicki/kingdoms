@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RequiredArgsConstructor
-public class Pregnancy {
+final class Pregnancy {
 
     private final Person mother;
     private final Person father;
@@ -19,7 +19,7 @@ public class Pregnancy {
     @Getter
     private List<Person> children = new ArrayList<>();
 
-    public Bool nextStage() {
+    Bool nextStage() {
         if (stage == 270) {
             int k = Dice.k(20);
             if (k < 19) {

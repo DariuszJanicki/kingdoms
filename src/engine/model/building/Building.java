@@ -8,7 +8,7 @@ import lombok.Setter;
 import utils.Bool;
 import utils.Opt;
 
-public class Building {
+public final class Building {
 
     @Setter
     @Getter

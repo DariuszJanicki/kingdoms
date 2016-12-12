@@ -4,13 +4,12 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
-public class GamePeriod {
+final class GamePeriod {
 
     @Getter
     private final Integer time;
 
-    public Integer getYears() {
+    Integer getYears() {
         return time / 365;
     }
-
 }

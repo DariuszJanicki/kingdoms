@@ -10,7 +10,7 @@ import java.awt.image.BufferedImage;
 
 @Getter
 @AllArgsConstructor
-public class GameGraphics {
+public final class GameGraphics {
 
     private Graphics graphics;
 

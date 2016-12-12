@@ -11,7 +11,7 @@ import view.component.InfoListComponent;
 import view.component.setting.AbstractComponent;
 import view.interfaces.GameGraphics;
 
-public class MainComponent extends AbstractComponent {
+public final class MainComponent extends AbstractComponent {
 
     @Getter
     private MapInTileBoard board;
@@ -26,7 +26,6 @@ public class MainComponent extends AbstractComponent {
         leftMenu();
     }
 
-    /* ========== PUBLIC ========== */
     @Override
     public void draw(GameGraphics g) {
     }

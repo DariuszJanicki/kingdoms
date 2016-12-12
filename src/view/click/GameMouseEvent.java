@@ -7,7 +7,7 @@ import utils.Opt;
 import java.awt.event.MouseEvent;
 
 @Getter
-public class GameMouseEvent {
+public final class GameMouseEvent {
 
     private MouseEvent event;
     private Opt<MouseAction> action = Opt.empty();

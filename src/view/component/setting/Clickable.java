@@ -21,5 +21,4 @@ abstract class Clickable extends Tickable {
     public ClickFunctionMapper getClickFunctionMapper() {
         return listener.getClickFunctionMapper();
     }
-
 }
