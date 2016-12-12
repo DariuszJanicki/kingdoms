@@ -15,7 +15,7 @@ public abstract class AbstractComponent extends Clickable {
 
     /* ========== PUBLIC ========== */
     public void addComponent(AbstractComponent component) {
-        newComponents.add(0, component);
+        newComponents.add(component);
     }
 
     public void preDraw(GameGraphics g) {

@@ -43,7 +43,7 @@ public final class MapInTileBoard extends TileBoardComponent {
     }
 
     private void draw(GameGraphics g, Field field, Tile tile) {
-        tile.setField(field);
+        tile.setElement(field);
         tile.setDelta(boardScreenMover.getDelta());
         tile.draw(g);
     }

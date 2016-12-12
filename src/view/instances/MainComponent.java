@@ -20,10 +20,10 @@ public class MainComponent extends AbstractComponent {
     public MainComponent(Rect rect) {
         super(rect);
 
-        leftMenu();
-        bottomMenu();
-        rightMenu();
         createBoard();
+        rightMenu();
+        bottomMenu();
+        leftMenu();
     }
 
     /* ========== PUBLIC ========== */
