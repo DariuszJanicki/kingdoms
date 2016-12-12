@@ -3,7 +3,7 @@ package input;
 import base.frame.MainFrame;
 import engine.points.Coords;
 import utils.Functional;
-import view.instances.MapInTileBoard;
+import view.instances.FieldTileBoard;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -47,22 +47,22 @@ public final class Keyboard implements KeyListener {
     }
 
     private void up() {
-        MapInTileBoard board = MainFrame.singleton().getMainComponent().getBoard();
+        FieldTileBoard board = MainFrame.singleton().getMainComponent().getBoard();
         board.setDestinationView(Coords.toNorth());
     }
 
     private void down() {
-        MapInTileBoard board = MainFrame.singleton().getMainComponent().getBoard();
+        FieldTileBoard board = MainFrame.singleton().getMainComponent().getBoard();
         board.setDestinationView(Coords.toSouth());
     }
 
     private void right() {
-        MapInTileBoard board = MainFrame.singleton().getMainComponent().getBoard();
+        FieldTileBoard board = MainFrame.singleton().getMainComponent().getBoard();
         board.setDestinationView(Coords.toEast());
     }
 
     private void left() {
-        MapInTileBoard board = MainFrame.singleton().getMainComponent().getBoard();
+        FieldTileBoard board = MainFrame.singleton().getMainComponent().getBoard();
         board.setDestinationView(Coords.toWest());
     }
 }

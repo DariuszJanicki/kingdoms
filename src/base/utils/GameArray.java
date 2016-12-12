@@ -7,14 +7,15 @@ import utils.Opt;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class GameArray<T> {
+public final class GameArray<T> {
 
     private List<List<T>> array;
     private Size size;
 
     /* ========== PUBLIC ========== */
-    public GameArray(Size size) {
+    public GameArray(Size size, ObjFactory<T> factory) {
         this.size = size;
+        createTiles(factory);
     }
 
     public Opt<T> get(Coords coords) {
@@ -23,8 +24,8 @@ public abstract class GameArray<T> {
                 : null);
     }
 
-    /* ========== PROTECTED ========== */
-    protected void createTiles(ObjFactory<T> factory) {
+    /* ========== PRIVATE ========== */
+    private void createTiles(ObjFactory<T> factory) {
         array = new ArrayList<>(size.getX() + 2);
         for (int i = 0; i <= size.getX() + 1; ++i) {
             array.add(i, new ArrayList<>(size.getY() + 2));

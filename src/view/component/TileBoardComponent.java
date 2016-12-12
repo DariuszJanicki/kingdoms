@@ -1,25 +1,26 @@
 package view.component;
 
 import base.frame.constants.FrameConstants;
+import base.utils.GameArray;
 import engine.points.Coords;
 import engine.points.Rect;
 import engine.points.Size;
 import lombok.Getter;
 import view.component.setting.AbstractComponent;
-import view.instances.TileArray;
 import view.interfaces.GameGraphics;
 
 @Getter
-public abstract class TileBoardComponent extends AbstractComponent {
+public abstract class TileBoardComponent<T extends TileComponent> extends AbstractComponent {
 
-    private TileArray tiles;
+    private GameArray<T> tiles;
     private Size boardSize;
 
     /* ========== PUBLIC ========== */
     public TileBoardComponent(Rect rect) {
         super(rect);
         this.boardSize = rect.toSize().div(FrameConstants.baseTile);
-        tiles = new TileArray(boardSize.add(3, 3), this);
+        Size size = boardSize.add(3, 3);
+        tiles = new GameArray<>(size, this::tileFactoryMethod);
     }
 
     @Override
@@ -33,4 +34,6 @@ public abstract class TileBoardComponent extends AbstractComponent {
 
     /* ========== PROTECTED ========== */
     protected abstract void draw(GameGraphics g, Coords coords);
+
+    protected abstract T tileFactoryMethod(Coords coords);
 }

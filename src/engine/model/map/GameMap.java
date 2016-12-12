@@ -1,20 +1,27 @@
 package engine.model.map;
 
+import base.utils.GameArray;
+import engine.generator.AreaGenerator;
 import engine.points.Coords;
 import engine.points.Size;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import utils.Opt;
 import view.interfaces.Tickable;
 
 @Getter
-@AllArgsConstructor
 public final class GameMap<T extends Tickable> {
 
     private Size size;
     private T[][] map;
+    private GameArray<T> array;
 
     /* ========== PUBLIC ========== */
+    public GameMap(Size size, T[][] map) {
+        this.size = size;
+        this.map = map;
+        array = new GameArray<T>(size, coords -> (T) AreaGenerator.INSTANCE.createField(coords));
+    }
+
     public Opt<T> get(Coords coords) {
         return Opt.ofNullable(coords.check(size)
                 ? map[coords.getX()][coords.getY()]

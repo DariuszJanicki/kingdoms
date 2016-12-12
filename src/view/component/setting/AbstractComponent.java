@@ -14,10 +14,6 @@ public abstract class AbstractComponent extends Clickable {
     }
 
     /* ========== PUBLIC ========== */
-    public void addComponent(AbstractComponent component) {
-        newComponents.add(component);
-    }
-
     public void preDraw(GameGraphics g) {
         components.addAll(newComponents);
 
@@ -35,8 +31,14 @@ public abstract class AbstractComponent extends Clickable {
         components.forEach(Clickable::performTicks);
     }
 
+    public void addComponent(AbstractComponent component) {
+        newComponents.add(component);
+    }
+
     /* ========== PROTECTED ========== */
     protected List<AbstractComponent> components = new ArrayList<>();
     protected List<AbstractComponent> componentsToRemove = new ArrayList<>();
+
+    /* ========== PRIVATE ========== */
     private List<AbstractComponent> newComponents = new ArrayList<>();
 }

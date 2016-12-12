@@ -1,7 +1,5 @@
 package engine.points;
 
-import base.frame.constants.FrameConstants;
-
 import java.util.Objects;
 
 public final class Coords extends Tuple {
@@ -16,10 +14,6 @@ public final class Coords extends Tuple {
     }
 
     /* ========== PUBLIC ========== */
-    public Point toPoint() {
-        return Point.of(x, y).mul(FrameConstants.baseTile);
-    }
-
     public Coords plus(Coords coords) {
         return plus(coords.x, coords.y);
     }

@@ -16,14 +16,14 @@ import java.awt.*;
 import java.util.List;
 import java.util.stream.Collectors;
 
-final class Tile extends TileComponent<Field> {
+final class FieldTile extends TileComponent<Field> {
 
     @Setter
     private Point delta;
     private Bool highlight = Bool.FALSE;
 
     /* ========== DEFAULT ========== */
-    Tile(Rect rect) {
+    FieldTile(Rect rect) {
         super(rect);
         getClickFunctionMapper()
                 .register(MouseAction.LEFT_CLICK, this::leftMouse)
@@ -50,7 +50,7 @@ final class Tile extends TileComponent<Field> {
 
     private void rightMouse(GameMouseEvent e) {
         clear();
-        addComponent(new BoardOptionList(Rect.of(e.getPoint(), Point.of(32, 96).add(e.getPoint()))));
+        addComponent(new TileContextList(Rect.of(e.getPoint(), Point.of(32, 96).add(e.getPoint()))));
     }
 
     private void printInformationToModel(Field field) {
@@ -61,7 +61,7 @@ final class Tile extends TileComponent<Field> {
 
     private void clear() {
         List<AbstractComponent> collect = components.stream()
-                .filter(c -> c instanceof BoardOptionList)
+                .filter(c -> c instanceof TileContextList)
                 .collect(Collectors.toList());
         componentsToRemove.addAll(collect);
     }

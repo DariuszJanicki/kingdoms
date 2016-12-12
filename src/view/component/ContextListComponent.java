@@ -16,12 +16,12 @@ import java.awt.*;
  *
  * @author Janicki Dariusz
  */
-public abstract class OptionListComponent extends AbstractComponent {
+public abstract class ContextListComponent extends AbstractComponent {
 
     private Opt<OptionList> options = Opt.empty();
 
     /* ========== CONSTRUCTOR ========== */
-    public OptionListComponent(Rect rect) {
+    public ContextListComponent(Rect rect) {
         super(rect);
     }
 

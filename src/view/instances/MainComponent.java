@@ -1,7 +1,9 @@
 package view.instances;
 
+import engine.generator.AreaGenerator;
 import engine.generator.BoardGenerator;
 import engine.model.map.GameMap;
+import engine.model.tile.field.Area;
 import engine.model.tile.field.Field;
 import engine.points.Rect;
 import engine.points.Size;
@@ -14,7 +16,10 @@ import view.interfaces.GameGraphics;
 public final class MainComponent extends AbstractComponent {
 
     @Getter
-    private MapInTileBoard board;
+    private FieldTileBoard board;
+
+    @Getter
+    private AreaTileBoard areaBoard;
 
     /* ========== PUBLIC ========== */
     public MainComponent(Rect rect) {
@@ -33,8 +38,11 @@ public final class MainComponent extends AbstractComponent {
     /* ========== PRIVATE ========== */
     private void createBoard() {
         GameMap<Field> map = BoardGenerator.INSTANCE.generateMap(Size.of(40, 40));
-        board = new MapInTileBoard(Rect.of(0, 0, 800, 640), map);
+        GameMap<Area> areaMap = AreaGenerator.INSTANCE.generateMap(Size.of(40, 40));
+        board = new FieldTileBoard(Rect.of(0, 0, 800, 640), map);
+        areaBoard = new AreaTileBoard(Rect.of(50, 200, 400, 400), areaMap);
         addComponent(board);
+        addComponent(areaBoard);
     }
 
     private void rightMenu() {
