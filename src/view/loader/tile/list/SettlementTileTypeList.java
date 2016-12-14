@@ -1,7 +1,7 @@
-package engine.loader.tile.list;
+package view.loader.tile.list;
 
-import engine.loader.loader.SettlementTileLoader;
-import engine.loader.tile.SettlementTileType;
+import view.loader.loader.SettlementTileLoader;
+import view.loader.tile.SettlementTileType;
 import engine.model.settlement.SettlementType;
 import engine.points.Point;
 

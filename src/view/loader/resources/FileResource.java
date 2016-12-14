@@ -1,4 +1,4 @@
-package engine.loader.resources;
+package view.loader.resources;
 
 import java.io.File;
 

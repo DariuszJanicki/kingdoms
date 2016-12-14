@@ -1,4 +1,4 @@
-package engine.loader.tile;
+package view.loader.tile;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

@@ -7,13 +7,15 @@ import lombok.Getter;
 import lombok.Setter;
 import utils.Bool;
 import utils.Opt;
+import view.interfaces.Tickable;
 
-public final class Building {
+public final class Building implements Tickable {
 
     @Setter
     @Getter
     private Opt<Person> owner = Opt.empty();
     private final People inhabitants = new People(10);
+    @Getter
     private final BuildingType type;
 
     @Setter
@@ -40,5 +42,10 @@ public final class Building {
     @Override
     public String toString() {
         return type + " in " + settlement.get().getName();
+    }
+
+    @Override
+    public void tick() {
+
     }
 }

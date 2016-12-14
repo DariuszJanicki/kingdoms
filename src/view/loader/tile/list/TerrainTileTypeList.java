@@ -1,11 +1,10 @@
-package engine.loader.tile.list;
+package view.loader.tile.list;
 
-import engine.loader.loader.TerrainTileLoader;
-import engine.loader.tile.TerrainTileType;
 import engine.model.terrain.Direction;
 import engine.model.terrain.Terrain;
 import engine.points.Point;
-import utils.Dice;
+import view.loader.loader.TerrainTileLoader;
+import view.loader.tile.TerrainTileType;
 
 import java.awt.image.BufferedImage;
 import java.util.List;
@@ -37,7 +36,7 @@ public final class TerrainTileTypeList extends AbstractTileTypeList<TerrainTileT
             return list.get(0);
         }
 
-        return new Dice<TerrainTileType>().randomElementOf(collect);
+        return collect.get(0);
     }
 
     /* ========== PRIVATE ========== */

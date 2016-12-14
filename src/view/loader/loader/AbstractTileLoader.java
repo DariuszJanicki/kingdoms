@@ -1,7 +1,7 @@
-package engine.loader.loader;
+package view.loader.loader;
 
+import base.frame.constants.FrameConstants;
 import engine.points.Point;
-import engine.model.tile.constants.TileConstants;
 
 import java.awt.image.BufferedImage;
 
@@ -12,10 +12,10 @@ public abstract class AbstractTileLoader {
     /* ========== PUBLIC ========== */
     public BufferedImage loadTile(Point point) {
         return image.getSubimage(
-                point.getX() * TileConstants.terrain,
-                point.getY() * TileConstants.terrain,
-                TileConstants.terrain,
-                TileConstants.terrain);
+                point.getX() * FrameConstants.baseTile,
+                point.getY() * FrameConstants.baseTile,
+                FrameConstants.baseTile,
+                FrameConstants.baseTile);
     }
 
 }

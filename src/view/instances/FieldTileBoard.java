@@ -1,8 +1,8 @@
 package view.instances;
 
 import base.frame.constants.FrameConstants;
+import engine.model.field.Field;
 import engine.model.map.GameMap;
-import engine.model.tile.field.Field;
 import engine.points.Coords;
 import engine.points.Point;
 import engine.points.Rect;
@@ -57,6 +57,7 @@ public final class FieldTileBoard extends TileBoardComponent<FieldTile> {
 
     private void draw(GameGraphics g, Field field, FieldTile tile) {
         tile.setElement(field);
+        tile.setMap(map);
         tile.setDelta(boardScreenMover.getDelta());
         tile.draw(g);
     }

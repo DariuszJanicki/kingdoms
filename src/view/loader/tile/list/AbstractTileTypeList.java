@@ -1,6 +1,6 @@
-package engine.loader.tile.list;
+package view.loader.tile.list;
 
-import engine.loader.tile.AbstractTileType;
+import view.loader.tile.AbstractTileType;
 import lombok.val;
 import utils.Dice;
 

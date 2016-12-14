@@ -1,6 +1,6 @@
-package engine.loader.loader;
+package view.loader.loader;
 
-import engine.loader.resources.FileResource;
+import view.loader.resources.FileResource;
 
 import javax.imageio.ImageIO;
 import java.io.IOException;

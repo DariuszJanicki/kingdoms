@@ -27,7 +27,7 @@ public abstract class TileComponent<T extends Tickable> extends AbstractComponen
 
     @Override
     public void performTicks() {
-        element.ifPresent(T::tick);
+        element.ifPresent(Tickable::tick);
     }
 
     protected abstract void draw(GameGraphics g, T t);

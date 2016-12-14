@@ -1,20 +1,18 @@
 package engine.model.settlement;
 
-import engine.generator.BuildingGenerator;
-import engine.generator.PersonGenerator;
-import engine.loader.tile.SettlementTileType;
 import engine.model.building.Building;
 import engine.model.building.Buildings;
+import engine.model.field.Field;
 import engine.model.person.People;
 import engine.model.person.Person;
-import engine.model.tile.field.Field;
 import lombok.Getter;
 import utils.Bool;
 import utils.Opt;
+import view.interfaces.Tickable;
 
 import java.util.List;
 
-public class Settlement {
+public class Settlement implements Tickable {
 
     @Getter
     private final String name;
@@ -22,8 +20,6 @@ public class Settlement {
     private final Field field;
     @Getter
     private final SettlementType type;
-    @Getter
-    private final SettlementTileType tile;
 
     @Getter
     private final SettlementPeople inhabitants = new SettlementPeople();
@@ -32,19 +28,10 @@ public class Settlement {
     private final Buildings newBuildings = new Buildings();
 
     /* ========== PUBLIC ========== */
-    public Settlement(SettlementType type, String name, Field field, SettlementTileType tile) {
+    public Settlement(SettlementType type, String name, Field field) {
         this.type = type;
         this.name = name;
         this.field = field;
-        this.tile = tile;
-
-        for (int i = 0; i < 10; ++i) {
-            addBuilding(BuildingGenerator.INSTANCE.createRandom());
-        }
-
-        for (int i = 0; i < 5; ++i) {
-            addVillager(PersonGenerator.INSTANCE.createRandomPerson());
-        }
     }
 
     public void addVillagers(List<Person> people) {

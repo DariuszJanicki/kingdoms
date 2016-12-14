@@ -1,4 +1,4 @@
-package engine.loader.tile;
+package view.loader.tile;
 
 import engine.model.terrain.Direction;
 import engine.model.terrain.Terrain;

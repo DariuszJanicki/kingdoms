@@ -1,16 +1,16 @@
 package view.instances;
 
-import engine.generator.AreaGenerator;
-import engine.generator.BoardGenerator;
+import engine.model.field.Area;
+import engine.model.field.Field;
 import engine.model.map.GameMap;
-import engine.model.tile.field.Area;
-import engine.model.tile.field.Field;
 import engine.points.Rect;
 import engine.points.Size;
 import lombok.Getter;
 import view.component.InfoComponent;
 import view.component.InfoListComponent;
 import view.component.setting.AbstractComponent;
+import view.generator.AreaGenerator;
+import view.generator.BoardGenerator;
 import view.interfaces.GameGraphics;
 
 public final class MainComponent extends AbstractComponent {

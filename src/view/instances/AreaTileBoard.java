@@ -1,7 +1,7 @@
 package view.instances;
 
+import engine.model.field.Area;
 import engine.model.map.GameMap;
-import engine.model.tile.field.Area;
 import engine.points.Coords;
 import engine.points.Point;
 import engine.points.Rect;
@@ -50,6 +50,8 @@ public final class AreaTileBoard extends TileBoardComponent<AreaTile> {
     private void draw(GameGraphics g, Area field, AreaTile tile) {
         tile.setElement(field);
         tile.setDelta(boardScreenMover.getDelta());
+        tile.setMap(map);
+        tile.draw(g, field);
         tile.draw(g);
     }
 

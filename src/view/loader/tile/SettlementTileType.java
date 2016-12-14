@@ -1,4 +1,4 @@
-package engine.loader.tile;
+package view.loader.tile;
 
 import engine.model.settlement.SettlementType;
 import lombok.Getter;

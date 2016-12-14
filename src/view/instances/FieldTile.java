@@ -1,7 +1,7 @@
 package view.instances;
 
-import engine.model.settlement.Settlement;
-import engine.model.tile.field.Field;
+import engine.model.field.Field;
+import engine.model.map.GameMap;
 import engine.points.Point;
 import engine.points.Rect;
 import lombok.Setter;
@@ -10,6 +10,7 @@ import view.click.GameMouseEvent;
 import view.click.MouseAction;
 import view.component.TileComponent;
 import view.component.setting.AbstractComponent;
+import view.drawer.FieldDrawer;
 import view.interfaces.GameGraphics;
 
 import java.awt.*;
@@ -21,6 +22,8 @@ final class FieldTile extends TileComponent<Field> {
     @Setter
     private Point delta;
     private Bool highlight = Bool.FALSE;
+    @Setter
+    private GameMap<Field> map;
 
     /* ========== DEFAULT ========== */
     FieldTile(Rect rect) {
@@ -33,9 +36,9 @@ final class FieldTile extends TileComponent<Field> {
     }
 
     /* ========== PROTECTED ========== */
-    protected void draw(GameGraphics g, Field field) {
-        g.draw(field.getTile().getImage(), rect.move(this.delta));
-        field.getSettlement().ifPresent(s -> drawSettlement(g, s));
+    protected void draw(GameGraphics g, Field wrapper) {
+
+        FieldDrawer.draw(g, wrapper, map, rect, delta);
 
         highlight.ifTrue(() -> {
             g.setColor(new Color(255, 255, 255, 200));
@@ -53,9 +56,9 @@ final class FieldTile extends TileComponent<Field> {
         addComponent(new TileContextList(Rect.of(e.getPoint(), Point.of(32, 96).add(e.getPoint()))));
     }
 
-    private void printInformationToModel(Field field) {
-        model.setCurrentTileInfo(field.getTerrain() + " " + field.getCoords());
-        field.getSettlement()
+    private void printInformationToModel(Field wrapper) {
+        model.setCurrentTileInfo(wrapper.getTerrain() + " " + wrapper.getCoords());
+        wrapper.getSettlement()
                 .ifPresent(settlement -> model.setVillagers(settlement.getInhabitants().list()));
     }
 
@@ -64,19 +67,5 @@ final class FieldTile extends TileComponent<Field> {
                 .filter(c -> c instanceof TileContextList)
                 .collect(Collectors.toList());
         componentsToRemove.addAll(collect);
-    }
-
-    private void drawSettlement(GameGraphics g, Settlement settlement) {
-        String size = String.valueOf(settlement.getInhabitants().list().size());
-        g.draw(settlement.getTile().getImage(), rect.move(delta));
-        drawText(g, size);
-    }
-
-    private void drawText(GameGraphics g, String size) {
-        Point add = rect.getStartPoint().add(0, 12);
-        g.setColor(new Color(255, 255, 255, 200));
-        g.draw(Rect.of(rect.getStartPoint(), rect.getStartPoint().add(g.stringWidth(size), 15)).move(delta));
-        g.setColor(Color.BLACK);
-        g.drawString(size, add.add(delta));
     }
 }

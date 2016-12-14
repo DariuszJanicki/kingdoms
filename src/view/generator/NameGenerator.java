@@ -1,4 +1,4 @@
-package engine.generator;
+package view.generator;
 
 import engine.model.person.Gender;
 import utils.Dice;

@@ -1,4 +1,4 @@
-package engine.generator;
+package view.generator;
 
 import engine.model.ComponentModel;
 import engine.model.person.GameDate;

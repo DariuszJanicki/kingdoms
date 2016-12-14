@@ -1,10 +1,8 @@
-package engine.generator;
+package view.generator;
 
-import engine.loader.tile.list.TerrainTileTypeList;
+import engine.model.field.Field;
 import engine.model.map.GameMap;
-import engine.model.terrain.Direction;
 import engine.model.terrain.Terrain;
-import engine.model.tile.field.Field;
 import engine.points.Coords;
 import engine.points.Size;
 import utils.Dice;
@@ -52,27 +50,8 @@ public enum BoardGenerator {
     }
 
     private void process(GameMap<Field> map, Field field) {
-        setTerrainTile(map, field);
-
         if (Dice.k(100) == 0 && field.getTerrain() != Terrain.WATER) {
             field.setSettlement(Opt.of(SettlementGenerator.INSTANCE.createRandom(field)));
         }
-    }
-
-    private void setTerrainTile(GameMap<Field> map, Field field) {
-        Terrain terrain = field.getTerrain();
-        Coords coords = field.getCoords();
-
-        Direction direction = Direction.getDirection(
-                equals(terrain, map.get(coords.north())),
-                equals(terrain, map.get(coords.south())),
-                equals(terrain, map.get(coords.east())),
-                equals(terrain, map.get(coords.west())));
-
-        field.setTile(TerrainTileTypeList.singleton().getTile(terrain, direction));
-    }
-
-    private boolean equals(Terrain terrain, Opt<Field> field) {
-        return field.isPresent().isTrue() && field.get().getTerrain() == terrain;
     }
 }

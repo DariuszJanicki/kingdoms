@@ -1,6 +1,6 @@
 package engine.model.person;
 
-import engine.generator.PersonGenerator;
+import view.generator.PersonGenerator;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import utils.Bool;

@@ -1,14 +1,11 @@
-package engine.generator;
+package view.generator;
 
-import engine.loader.tile.list.TerrainTileTypeList;
+import engine.model.field.Area;
 import engine.model.map.GameMap;
-import engine.model.terrain.Direction;
 import engine.model.terrain.Terrain;
-import engine.model.tile.field.Area;
 import engine.points.Coords;
 import engine.points.Size;
 import utils.Dice;
-import utils.Opt;
 
 public enum AreaGenerator {
 
@@ -50,29 +47,8 @@ public enum AreaGenerator {
     private void fillTerrain(GameMap<Area> map) {
         for (int i = 0; i < map.getSize().getX(); ++i) {
             for (int j = 0; j < map.getSize().getY(); ++j) {
-                map.get(new Coords(i, j)).ifPresent(f -> process(map, f));
+//                map.get(new Coords(i, j)).ifPresent(f -> process(map, f));
             }
         }
-    }
-
-    private void process(GameMap<Area> map, Area field) {
-        setTerrainTile(map, field);
-    }
-
-    private void setTerrainTile(GameMap<Area> map, Area field) {
-        Terrain terrain = field.getTerrain();
-        Coords coords = field.getCoords();
-
-        Direction direction = Direction.getDirection(
-                equals(terrain, map.get(coords.north())),
-                equals(terrain, map.get(coords.south())),
-                equals(terrain, map.get(coords.east())),
-                equals(terrain, map.get(coords.west())));
-
-        field.setTile(TerrainTileTypeList.singleton().getTile(terrain, direction));
-    }
-
-    private boolean equals(Terrain terrain, Opt<Area> field) {
-        return field.isPresent().isTrue() && field.get().getTerrain() == terrain;
     }
 }

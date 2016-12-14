@@ -1,11 +1,11 @@
 package engine.model.map;
 
 import base.utils.GameArray;
-import engine.generator.AreaGenerator;
 import engine.points.Coords;
 import engine.points.Size;
 import lombok.Getter;
 import utils.Opt;
+import view.generator.AreaGenerator;
 import view.interfaces.Tickable;
 
 @Getter
@@ -19,7 +19,7 @@ public final class GameMap<T extends Tickable> {
     public GameMap(Size size, T[][] map) {
         this.size = size;
         this.map = map;
-        array = new GameArray<T>(size, coords -> (T) AreaGenerator.INSTANCE.createField(coords));
+        array = new GameArray<>(size, coords -> (T) AreaGenerator.INSTANCE.createField(coords));
     }
 
     public Opt<T> get(Coords coords) {
@@ -31,7 +31,7 @@ public final class GameMap<T extends Tickable> {
     public void tick() {
         for (int i = 0; i <= size.getX(); ++i) {
             for (int j = 0; j <= size.getY(); ++j) {
-                get(new Coords(i, j)).ifPresent(T::tick);
+                get(new Coords(i, j)).ifPresent(t -> t.tick());
             }
         }
     }
