@@ -1,6 +1,5 @@
 package view.instances;
 
-import view.interfaces.Option;
 import view.component.LabelComponent;
 import engine.points.Rect;
 

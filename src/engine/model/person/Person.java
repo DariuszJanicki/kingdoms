@@ -1,5 +1,6 @@
 package engine.model.person;
 
+import engine.date.GameDate;
 import engine.model.ComponentModel;
 import engine.model.building.Building;
 import engine.model.building.Buildings;

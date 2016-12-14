@@ -6,7 +6,7 @@ import input.Keyboard;
 import lombok.Getter;
 import utils.Opt;
 import view.instances.MainComponent;
-import view.interfaces.GameGraphics;
+import view.component.GameGraphics;
 
 import javax.swing.*;
 import java.awt.*;

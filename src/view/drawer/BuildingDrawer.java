@@ -5,7 +5,7 @@ import engine.points.Point;
 import engine.points.Rect;
 import lombok.Getter;
 import lombok.Setter;
-import view.interfaces.GameGraphics;
+import view.component.GameGraphics;
 import view.loader.tile.list.BuildingTileTypeList;
 
 @Setter

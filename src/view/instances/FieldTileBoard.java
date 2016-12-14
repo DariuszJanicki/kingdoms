@@ -1,19 +1,20 @@
 package view.instances;
 
 import base.frame.constants.FrameConstants;
-import engine.model.field.Field;
+import engine.model.map.MapArea;
 import engine.model.map.GameMap;
 import engine.points.Coords;
 import engine.points.Point;
 import engine.points.Rect;
 import utils.Opt;
 import view.component.TileBoardComponent;
-import view.interfaces.GameGraphics;
+import view.component.GameGraphics;
 
 public final class FieldTileBoard extends TileBoardComponent<FieldTile> {
 
     private final BoardScreenMover boardScreenMover = new BoardScreenMover();
-    private final GameMap<Field> map;
+    private final GameMap<MapArea> map;
+    private final AreaTileBoard board;
 
     /* ========== PUBLIC ========== */
     @Override
@@ -39,24 +40,25 @@ public final class FieldTileBoard extends TileBoardComponent<FieldTile> {
     @Override
     protected FieldTile tileFactoryMethod(Coords coords) {
         Point point = Point.of(coords.getX(), coords.getY()).mul(FrameConstants.baseTile).add(rect.getStartPoint());
-        FieldTile tileComponent = new FieldTile(new Rect(point, point.add(FrameConstants.baseTile, FrameConstants.baseTile)));
+        FieldTile tileComponent = new FieldTile(new Rect(point, point.add(FrameConstants.baseTile, FrameConstants.baseTile)), board);
         addComponent(tileComponent);
         return tileComponent;
     }
 
     /* ========== DEFAULT ========== */
-    FieldTileBoard(Rect rect, GameMap<Field> map) {
+    FieldTileBoard(Rect rect, GameMap<MapArea> map, AreaTileBoard board) {
         super(rect);
         this.map = map;
+        this.board = board;
     }
 
     /* ========== PRIVATE ========== */
-    private void draw(GameGraphics g, Field field, Opt<FieldTile> tile) {
-        tile.ifPresent(t -> draw(g, field, t));
+    private void draw(GameGraphics g, MapArea mapArea, Opt<FieldTile> tile) {
+        tile.ifPresent(t -> draw(g, mapArea, t));
     }
 
-    private void draw(GameGraphics g, Field field, FieldTile tile) {
-        tile.setElement(field);
+    private void draw(GameGraphics g, MapArea mapArea, FieldTile tile) {
+        tile.setElement(mapArea);
         tile.setMap(map);
         tile.setDelta(boardScreenMover.getDelta());
         tile.draw(g);

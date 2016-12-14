@@ -1,7 +1,7 @@
 package view.loader.tile.list;
 
-import engine.model.terrain.Direction;
-import engine.model.terrain.Terrain;
+import view.loader.Direction;
+import engine.model.terrain.TerrainType;
 import engine.points.Point;
 import view.loader.loader.TerrainTileLoader;
 import view.loader.tile.TerrainTileType;
@@ -10,7 +10,7 @@ import java.awt.image.BufferedImage;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static engine.model.terrain.Direction.*;
+import static view.loader.Direction.*;
 
 public final class TerrainTileTypeList extends AbstractTileTypeList<TerrainTileType> {
 
@@ -27,7 +27,7 @@ public final class TerrainTileTypeList extends AbstractTileTypeList<TerrainTileT
     }
 
     /* ========== PUBLIC ========== */
-    public TerrainTileType getTile(Terrain terrain, Direction direction) {
+    public TerrainTileType getTile(TerrainType terrain, Direction direction) {
         List<TerrainTileType> collect = list.stream()
                 .filter(t -> t.getType() == terrain && t.getDirection() == direction)
                 .collect(Collectors.toList());
@@ -40,13 +40,13 @@ public final class TerrainTileTypeList extends AbstractTileTypeList<TerrainTileT
     }
 
     /* ========== PRIVATE ========== */
-    private void load(Terrain terrain, BufferedImage image, Direction direction) {
+    private void load(TerrainType terrain, BufferedImage image, Direction direction) {
         list.add(new TerrainTileType(image, terrain, direction));
     }
 
     private void loadTerrainTypes() {
-        load(Terrain.GRASS, TerrainTileLoader.singleton().loadTile(Point.of(0, 0)), NONE);
-        load(Terrain.GRASS, TerrainTileLoader.singleton().loadTile(Point.of(1, 0)), NONE);
+        load(TerrainType.GRASS, TerrainTileLoader.singleton().loadTile(Point.of(0, 0)), NONE);
+        load(TerrainType.GRASS, TerrainTileLoader.singleton().loadTile(Point.of(1, 0)), NONE);
 
         createWater();
 
@@ -58,7 +58,7 @@ public final class TerrainTileTypeList extends AbstractTileTypeList<TerrainTileT
 
     private void loadRiver() {
         TerrainTileLoader loader = TerrainTileLoader.singleton();
-        Terrain terrain = Terrain.RIVER;
+        TerrainType terrain = TerrainType.RIVER;
 
         load(terrain, loader.loadTile(Point.of(10, 6)), NONE);
         load(terrain, loader.loadTile(Point.of(11, 6)), NONE);
@@ -98,7 +98,7 @@ public final class TerrainTileTypeList extends AbstractTileTypeList<TerrainTileT
 
     private void loadMountain() {
         TerrainTileLoader loader = TerrainTileLoader.singleton();
-        Terrain terrain = Terrain.MOUNTAIN;
+        TerrainType terrain = TerrainType.MOUNTAIN;
 
         load(terrain, loader.loadTile(Point.of(18, 4)), NONE);
         load(terrain, loader.loadTile(Point.of(19, 4)), NONE);
@@ -137,7 +137,7 @@ public final class TerrainTileTypeList extends AbstractTileTypeList<TerrainTileT
     }
 
     private void loadDesert() {
-        Terrain terrain = Terrain.DESERT;
+        TerrainType terrain = TerrainType.DESERT;
         TerrainTileLoader loader = TerrainTileLoader.singleton();
 
         load(terrain, loader.loadTile(Point.of(6, 3)), NONE);
@@ -177,7 +177,7 @@ public final class TerrainTileTypeList extends AbstractTileTypeList<TerrainTileT
 
     private void loadForest() {
         TerrainTileLoader loader = TerrainTileLoader.singleton();
-        Terrain terrain = Terrain.FOREST;
+        TerrainType terrain = TerrainType.FOREST;
 
         load(terrain, loader.loadTile(Point.of(14, 1)), NONE);
         load(terrain, loader.loadTile(Point.of(15, 1)), NONE);
@@ -217,7 +217,7 @@ public final class TerrainTileTypeList extends AbstractTileTypeList<TerrainTileT
 
     private void createWater() {
         TerrainTileLoader loader = TerrainTileLoader.singleton();
-        Terrain terrain = Terrain.WATER;
+        TerrainType terrain = TerrainType.WATER;
 
         load(terrain, loader.loadTile(Point.of(2, 0)), NORTH_SOUTH_EAST_WEST);
         load(terrain, loader.loadTile(Point.of(3, 0)), NORTH_SOUTH_EAST_WEST);

@@ -1,31 +1,31 @@
 package view.drawer;
 
-import engine.model.field.Field;
+import engine.model.map.MapArea;
 import engine.model.map.GameMap;
-import engine.model.terrain.Direction;
-import engine.model.terrain.Terrain;
+import view.loader.Direction;
+import engine.model.terrain.TerrainType;
 import engine.points.Coords;
 import engine.points.Point;
 import engine.points.Rect;
 import lombok.Getter;
 import lombok.Setter;
 import utils.Opt;
-import view.interfaces.GameGraphics;
+import view.component.GameGraphics;
 import view.loader.tile.TerrainTileType;
 import view.loader.tile.list.TerrainTileTypeList;
 
 @Setter
 @Getter
-public class FieldDrawer extends AbstractDrawer<Field> {
+public class FieldDrawer extends AbstractDrawer<MapArea> {
 
-    public static void draw(GameGraphics g, Field wrapper, GameMap<Field> map, Rect rect, Point delta) {
+    public static void draw(GameGraphics g, MapArea wrapper, GameMap<MapArea> map, Rect rect, Point delta) {
         g.draw(setTerrainTile(map, wrapper).getImage(), rect.move(delta));
         wrapper.getSettlement().ifPresent(s -> SettlementDrawer.draw(g, s, rect, delta));
     }
 
-    private static TerrainTileType setTerrainTile(GameMap<Field> map, Field field) {
-        Terrain terrain = field.getTerrain();
-        Coords coords = field.getCoords();
+    private static TerrainTileType setTerrainTile(GameMap<MapArea> map, MapArea mapArea) {
+        TerrainType terrain = mapArea.getTerrain();
+        Coords coords = mapArea.getCoords();
 
         Direction direction = Direction.getDirection(
                 equals(terrain, map.get(coords.north())),
@@ -36,7 +36,7 @@ public class FieldDrawer extends AbstractDrawer<Field> {
         return TerrainTileTypeList.singleton().getTile(terrain, direction);
     }
 
-    private static boolean equals(Terrain terrain, Opt<Field> field) {
+    private static boolean equals(TerrainType terrain, Opt<MapArea> field) {
         return field.isPresent().isTrue() && field.get().getTerrain() == terrain;
     }
 }

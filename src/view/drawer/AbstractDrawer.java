@@ -2,7 +2,7 @@ package view.drawer;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import view.interfaces.Tickable;
+import engine.model.Tickable;
 
 @Getter
 @AllArgsConstructor

@@ -1,4 +1,4 @@
-package view.interfaces;
+package view.instances;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

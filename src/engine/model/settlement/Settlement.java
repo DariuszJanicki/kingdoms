@@ -1,37 +1,53 @@
 package engine.model.settlement;
 
+import engine.model.Tickable;
 import engine.model.building.Building;
 import engine.model.building.Buildings;
-import engine.model.field.Field;
+import engine.model.map.GameMap;
+import engine.model.map.MapArea;
+import engine.model.map.SettlementArea;
 import engine.model.person.People;
 import engine.model.person.Person;
+import engine.points.Size;
 import lombok.Getter;
 import utils.Bool;
 import utils.Opt;
-import view.interfaces.Tickable;
+import view.generator.AreaGenerator;
+import view.generator.BuildingGenerator;
+import view.generator.PersonGenerator;
 
 import java.util.List;
 
-public class Settlement implements Tickable {
+public final class Settlement implements Tickable {
 
     @Getter
     private final String name;
     @Getter
-    private final Field field;
+    private final MapArea mapArea;
     @Getter
     private final SettlementType type;
 
     @Getter
-    private final SettlementPeople inhabitants = new SettlementPeople();
+    private final SettlementPeople settlementPeople = new SettlementPeople();
     private final People newPeople = new People();
     private final Buildings buildings = new Buildings();
     private final Buildings newBuildings = new Buildings();
+    @Getter
+    private GameMap<SettlementArea> settlementAreaMap = AreaGenerator.INSTANCE.generateMap(Size.of(10, 10));
 
     /* ========== PUBLIC ========== */
-    public Settlement(SettlementType type, String name, Field field) {
+    public Settlement(SettlementType type, String name, MapArea mapArea) {
         this.type = type;
         this.name = name;
-        this.field = field;
+        this.mapArea = mapArea;
+
+        for (int i = 0; i < 10; ++i) {
+            addBuilding(BuildingGenerator.INSTANCE.createRandom());
+        }
+
+        for (int i = 0; i < 5; ++i) {
+            addVillager(PersonGenerator.INSTANCE.createRandomPerson());
+        }
     }
 
     public void addVillagers(List<Person> people) {
@@ -39,11 +55,11 @@ public class Settlement implements Tickable {
     }
 
     public void tick() {
-        inhabitants.tick();
-        inhabitants.marryCitizens();
-        inhabitants.haveChildren();
-        inhabitants.introduceNewPeople(newPeople);
-        inhabitants.buyEstates(buildings);
+        settlementPeople.tick();
+        settlementPeople.marryCitizens();
+        settlementPeople.haveChildren();
+        settlementPeople.merge(newPeople);
+        settlementPeople.buyEstates(buildings);
         buildings.addBuildings(newBuildings);
     }
 

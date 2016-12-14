@@ -3,7 +3,7 @@ package view.generator;
 import engine.model.person.Gender;
 import utils.Dice;
 
-public enum NameGenerator {
+enum NameGenerator {
 
     INSTANCE;
 

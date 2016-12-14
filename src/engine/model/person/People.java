@@ -3,7 +3,6 @@ package engine.model.person;
 import lombok.Getter;
 
 import java.util.ArrayList;
-import java.util.ConcurrentModificationException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -30,11 +29,7 @@ public class People {
     }
 
     public void tick() {
-        try {
-            people.forEach(Person::tick);
-        } catch (ConcurrentModificationException e) {
-            e.printStackTrace();
-        }
+        people.forEach(Person::tick);
     }
 
     public void clear() {
@@ -49,7 +44,7 @@ public class People {
         people.addAll(newPeople);
     }
 
-    public void introduceNewPeople(People newPeople) {
+    public void merge(People newPeople) {
         people.addAll(newPeople.people);
         newPeople.clear();
     }

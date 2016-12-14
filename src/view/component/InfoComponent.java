@@ -1,6 +1,5 @@
 package view.component;
 
-import view.interfaces.GameGraphics;
 import engine.points.Rect;
 
 import java.util.function.Supplier;

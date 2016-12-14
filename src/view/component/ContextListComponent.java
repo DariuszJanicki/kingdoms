@@ -1,8 +1,7 @@
 package view.component;
 
-import view.interfaces.GameGraphics;
-import view.interfaces.Option;
-import view.interfaces.OptionList;
+import view.instances.Option;
+import view.instances.OptionList;
 import view.component.setting.AbstractComponent;
 import engine.points.Point;
 import engine.points.Rect;

@@ -1,7 +1,7 @@
 package view.instances;
 
-import engine.model.field.Area;
-import engine.model.field.Field;
+import engine.model.map.SettlementArea;
+import engine.model.map.MapArea;
 import engine.model.map.GameMap;
 import engine.points.Rect;
 import engine.points.Size;
@@ -11,7 +11,7 @@ import view.component.InfoListComponent;
 import view.component.setting.AbstractComponent;
 import view.generator.AreaGenerator;
 import view.generator.BoardGenerator;
-import view.interfaces.GameGraphics;
+import view.component.GameGraphics;
 
 public final class MainComponent extends AbstractComponent {
 
@@ -37,10 +37,10 @@ public final class MainComponent extends AbstractComponent {
 
     /* ========== PRIVATE ========== */
     private void createBoard() {
-        GameMap<Field> map = BoardGenerator.INSTANCE.generateMap(Size.of(40, 40));
-        GameMap<Area> areaMap = AreaGenerator.INSTANCE.generateMap(Size.of(40, 40));
-        board = new FieldTileBoard(Rect.of(0, 0, 800, 640), map);
+        GameMap<MapArea> map = BoardGenerator.INSTANCE.generateMap(Size.of(40, 40));
+        GameMap<SettlementArea> areaMap = AreaGenerator.INSTANCE.generateMap(Size.of(40, 40));
         areaBoard = new AreaTileBoard(Rect.of(50, 200, 400, 400), areaMap);
+        board = new FieldTileBoard(Rect.of(0, 0, 800, 640), map, areaBoard);
         addComponent(board);
         addComponent(areaBoard);
     }

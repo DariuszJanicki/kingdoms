@@ -1,7 +1,7 @@
 package view.component.setting;
 
 import engine.points.Rect;
-import view.interfaces.GameGraphics;
+import view.component.GameGraphics;
 
 import java.util.ArrayList;
 import java.util.List;

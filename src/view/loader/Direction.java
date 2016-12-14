@@ -1,4 +1,4 @@
-package engine.model.terrain;
+package view.loader;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

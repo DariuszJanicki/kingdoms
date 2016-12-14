@@ -1,4 +1,4 @@
-package view.interfaces;
+package view.component;
 
 import engine.points.Rect;
 import engine.points.Point;

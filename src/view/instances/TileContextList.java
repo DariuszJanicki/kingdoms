@@ -2,8 +2,6 @@ package view.instances;
 
 import view.click.ClickFunctionMapper;
 import view.click.MouseAction;
-import view.interfaces.Option;
-import view.interfaces.OptionList;
 import view.component.ContextListComponent;
 import engine.points.Rect;
 

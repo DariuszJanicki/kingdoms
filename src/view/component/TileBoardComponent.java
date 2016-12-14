@@ -7,7 +7,6 @@ import engine.points.Rect;
 import engine.points.Size;
 import lombok.Getter;
 import view.component.setting.AbstractComponent;
-import view.interfaces.GameGraphics;
 
 @Getter
 public abstract class TileBoardComponent<T extends TileComponent> extends AbstractComponent {

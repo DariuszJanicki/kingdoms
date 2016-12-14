@@ -3,8 +3,7 @@ package view.component;
 import engine.points.Rect;
 import utils.Opt;
 import view.component.setting.AbstractComponent;
-import view.interfaces.GameGraphics;
-import view.interfaces.Tickable;
+import engine.model.Tickable;
 
 public abstract class TileComponent<T extends Tickable> extends AbstractComponent {
 

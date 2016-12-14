@@ -1,7 +1,7 @@
 package view.loader.tile;
 
-import engine.model.terrain.Direction;
-import engine.model.terrain.Terrain;
+import view.loader.Direction;
+import engine.model.terrain.TerrainType;
 import lombok.Getter;
 
 import java.awt.image.BufferedImage;
@@ -9,10 +9,10 @@ import java.awt.image.BufferedImage;
 @Getter
 public class TerrainTileType extends AbstractTileType {
 
-    private Terrain type;
+    private TerrainType type;
     private Direction direction;
 
-    public TerrainTileType(BufferedImage image, Terrain terrain, Direction direction) {
+    public TerrainTileType(BufferedImage image, TerrainType terrain, Direction direction) {
         super(image);
         this.type = terrain;
         this.direction = direction;

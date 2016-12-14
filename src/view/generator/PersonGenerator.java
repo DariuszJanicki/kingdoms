@@ -1,7 +1,7 @@
 package view.generator;
 
 import engine.model.ComponentModel;
-import engine.model.person.GameDate;
+import engine.date.GameDate;
 import engine.model.person.Gender;
 import engine.model.person.Person;
 import utils.Dice;

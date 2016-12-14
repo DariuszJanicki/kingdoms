@@ -1,6 +1,6 @@
 package engine.model;
 
-import engine.model.person.GameDate;
+import engine.date.GameDate;
 import lombok.Getter;
 import lombok.Setter;
 

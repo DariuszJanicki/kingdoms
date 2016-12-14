@@ -1,6 +1,5 @@
 package view.component;
 
-import view.interfaces.GameGraphics;
 import view.component.setting.AbstractComponent;
 import engine.points.Rect;
 import lombok.Getter;

@@ -6,7 +6,7 @@ import engine.points.Coords;
 import engine.points.Point;
 import lombok.Getter;
 import lombok.Setter;
-import view.interfaces.Tickable;
+import engine.model.Tickable;
 
 final class BoardScreenMover implements Tickable {
 

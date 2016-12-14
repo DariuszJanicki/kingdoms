@@ -1,7 +1,6 @@
 package view.component;
 
 import view.component.setting.AbstractComponent;
-import view.interfaces.GameGraphics;
 import engine.points.Rect;
 
 import java.awt.*;

@@ -7,7 +7,7 @@ import lombok.Getter;
 import lombok.Setter;
 import utils.Bool;
 import utils.Opt;
-import view.interfaces.Tickable;
+import engine.model.Tickable;
 
 public final class Building implements Tickable {
 

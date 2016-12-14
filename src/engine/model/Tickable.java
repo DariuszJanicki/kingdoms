@@ -1,4 +1,4 @@
-package view.interfaces;
+package engine.model;
 
 @FunctionalInterface
 public interface Tickable {

@@ -1,18 +1,22 @@
 package view.instances;
 
-import engine.model.field.Area;
+import engine.model.map.SettlementArea;
 import engine.model.map.GameMap;
 import engine.points.Coords;
 import engine.points.Point;
 import engine.points.Rect;
+import lombok.Setter;
+import utils.Bool;
 import utils.Opt;
 import view.component.TileBoardComponent;
-import view.interfaces.GameGraphics;
+import view.component.GameGraphics;
 
-public final class AreaTileBoard extends TileBoardComponent<AreaTile> {
+final class AreaTileBoard extends TileBoardComponent<AreaTile> {
 
     private final BoardScreenMover boardScreenMover = new BoardScreenMover();
-    private final GameMap<Area> map;
+    @Setter
+    private GameMap<SettlementArea> map;
+    private Bool isVisible = Bool.FALSE;
 
     /* ========== PUBLIC ========== */
     @Override
@@ -21,11 +25,16 @@ public final class AreaTileBoard extends TileBoardComponent<AreaTile> {
         map.tick();
     }
 
+    public void show() {
+        isVisible = Bool.TRUE;
+    }
+
     /* ========== PROTECTED ========== */
     @Override
     protected void draw(GameGraphics g, Coords tileCoords) {
-        map.get(tileCoords.plus(boardScreenMover.getCurrentView()))
-                .ifPresent(field -> draw(g, field, getTiles().get(tileCoords)));
+        isVisible.ifTrue(() ->
+                map.get(tileCoords.plus(boardScreenMover.getCurrentView()))
+                        .ifPresent(field -> draw(g, field, getTiles().get(tileCoords))));
     }
 
     @Override
@@ -37,25 +46,21 @@ public final class AreaTileBoard extends TileBoardComponent<AreaTile> {
     }
 
     /* ========== DEFAULT ========== */
-    AreaTileBoard(Rect rect, GameMap<Area> map) {
+    AreaTileBoard(Rect rect, GameMap<SettlementArea> map) {
         super(rect);
         this.map = map;
     }
 
     /* ========== PRIVATE ========== */
-    private void draw(GameGraphics g, Area field, Opt<AreaTile> tile) {
+    private void draw(GameGraphics g, SettlementArea field, Opt<AreaTile> tile) {
         tile.ifPresent(t -> draw(g, field, t));
     }
 
-    private void draw(GameGraphics g, Area field, AreaTile tile) {
+    private void draw(GameGraphics g, SettlementArea field, AreaTile tile) {
         tile.setElement(field);
         tile.setDelta(boardScreenMover.getDelta());
         tile.setMap(map);
         tile.draw(g, field);
         tile.draw(g);
-    }
-
-    private boolean checkCoords(Coords coords) {
-        return coords.check(map.getSize(), getBoardSize());
     }
 }

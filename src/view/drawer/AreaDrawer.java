@@ -1,30 +1,30 @@
 package view.drawer;
 
-import engine.model.field.Area;
+import engine.model.map.SettlementArea;
 import engine.model.map.GameMap;
-import engine.model.terrain.Direction;
-import engine.model.terrain.Terrain;
+import view.loader.Direction;
+import engine.model.terrain.TerrainType;
 import engine.points.Coords;
 import engine.points.Point;
 import engine.points.Rect;
 import lombok.Getter;
 import lombok.Setter;
 import utils.Opt;
-import view.interfaces.GameGraphics;
+import view.component.GameGraphics;
 import view.loader.tile.TerrainTileType;
 import view.loader.tile.list.TerrainTileTypeList;
 
 @Setter
 @Getter
-public class AreaDrawer extends AbstractDrawer<Area> {
+public class AreaDrawer extends AbstractDrawer<SettlementArea> {
 
-    public static void draw(GameGraphics g, Area area, GameMap<Area> map, Rect rect, Point delta) {
+    public static void draw(GameGraphics g, SettlementArea area, GameMap<SettlementArea> map, Rect rect, Point delta) {
         g.draw(setTerrainTile(map, area).getImage(), rect.move(delta));
         area.getBuilding().ifPresent(building -> BuildingDrawer.draw(g, building, rect, delta));
     }
 
-    private static TerrainTileType setTerrainTile(GameMap<Area> map, Area area) {
-        Terrain terrain = area.getTerrain();
+    private static TerrainTileType setTerrainTile(GameMap<SettlementArea> map, SettlementArea area) {
+        TerrainType terrain = area.getTerrain();
         Coords coords = area.getCoords();
 
         Direction direction = Direction.getDirection(
@@ -36,7 +36,7 @@ public class AreaDrawer extends AbstractDrawer<Area> {
         return TerrainTileTypeList.singleton().getTile(terrain, direction);
     }
 
-    private static boolean equals(Terrain terrain, Opt<Area> area) {
+    private static boolean equals(TerrainType terrain, Opt<SettlementArea> area) {
         return area.isPresent().isTrue() && area.get().getTerrain() == terrain;
     }
 }

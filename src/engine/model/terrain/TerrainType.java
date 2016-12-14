@@ -1,11 +1,6 @@
 package engine.model.terrain;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-
-@Getter
-@AllArgsConstructor
-public enum Terrain {
+public enum TerrainType {
 
     GRASS,
     SAND,

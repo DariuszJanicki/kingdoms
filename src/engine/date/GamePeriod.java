@@ -1,15 +1,15 @@
-package engine.model.person;
+package engine.date;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
-final class GamePeriod {
+final public class GamePeriod {
 
     @Getter
     private final Integer time;
 
-    Integer getYears() {
+    public Integer getYears() {
         return time / 365;
     }
 }
