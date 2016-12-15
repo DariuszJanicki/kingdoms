@@ -8,13 +8,13 @@ import lombok.Setter;
 import utils.Opt;
 
 @Getter
-public final class MapArea extends AbstractArea {
+public final class Field extends AbstractArea {
 
     @Setter
     private Opt<Settlement> settlement = Opt.empty();
 
     /* ========== PUBLIC ========== */
-    public MapArea(TerrainType terrain, Coords coords) {
+    public Field(TerrainType terrain, Coords coords) {
         super(terrain, coords);
     }
 

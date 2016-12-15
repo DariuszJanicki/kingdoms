@@ -13,6 +13,7 @@ import utils.Opt;
 public final class GameMap<T extends AbstractArea> {
 
     private final Size size;
+    @Getter
     private final GameArray<T> array;
 
     /* ========== PUBLIC ========== */

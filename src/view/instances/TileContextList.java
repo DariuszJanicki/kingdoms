@@ -1,14 +1,15 @@
 package view.instances;
 
+import engine.points.Rect;
+import utils.Bool;
 import view.click.ClickFunctionMapper;
 import view.click.MouseAction;
 import view.component.ContextListComponent;
-import engine.points.Rect;
 
 final class TileContextList extends ContextListComponent {
 
-    /* ========== DEFAULT ========== */
-    TileContextList(Rect rect) {
+    /* ========== PUBLIC ========== */
+    public TileContextList(Rect rect) {
         super(rect);
 
         OptionList list = new OptionList();
@@ -19,5 +20,10 @@ final class TileContextList extends ContextListComponent {
                 .of()
                 .register(MouseAction.LEFT_CLICK, event -> System.out.println("Test2")), "Zbuduj wioskę"));
         setOptions(list);
+    }
+
+    @Override
+    public Bool isTemporary() {
+        return Bool.TRUE;
     }
 }

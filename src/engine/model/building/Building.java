@@ -1,13 +1,11 @@
 package engine.model.building;
 
+import engine.model.Tickable;
 import engine.model.person.People;
 import engine.model.person.Person;
-import engine.model.settlement.Settlement;
 import lombok.Getter;
 import lombok.Setter;
-import utils.Bool;
 import utils.Opt;
-import engine.model.Tickable;
 
 public final class Building implements Tickable {
 
@@ -18,16 +16,9 @@ public final class Building implements Tickable {
     @Getter
     private final BuildingType type;
 
-    @Setter
-    private Opt<Settlement> settlement = Opt.empty();
-
     /* ========== PUBLIC ========== */
     public Building(BuildingType type) {
         this.type = type;
-    }
-
-    public Bool canBeBuiltInSettlement() {
-        return Bool.TRUE;
     }
 
     public void moveOut(Person person) {
@@ -37,11 +28,6 @@ public final class Building implements Tickable {
     public void moveIn(Person person) {
         person.getHouse().ifPresent(home -> home.moveOut(person));
         inhabitants.add(person);
-    }
-
-    @Override
-    public String toString() {
-        return type + " in " + settlement.get().getName();
     }
 
     @Override

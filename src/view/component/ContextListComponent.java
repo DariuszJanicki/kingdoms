@@ -29,7 +29,7 @@ public abstract class ContextListComponent extends AbstractComponent {
     public void draw(GameGraphics g) {
         updateRect(g);
 
-        components.forEach(c -> c.draw(g));
+        gameComponents.forEach(c -> c.draw(g));
 
         g.setColor(Color.white);
         g.draw(rect);
@@ -64,7 +64,7 @@ public abstract class ContextListComponent extends AbstractComponent {
     }
 
     private void calculateMaxWidth(GameGraphics g) {
-        Opt.of(components.stream()
+        Opt.of(gameComponents.stream()
                 .filter(c -> c instanceof OptionLabel)
                 .map(c -> (OptionLabel) c)
                 .map(c -> g.stringWidth(c.getText().get()))
@@ -73,7 +73,7 @@ public abstract class ContextListComponent extends AbstractComponent {
     }
 
     private void calculateMaxHeight() {
-        rect = rect.setHeight(Integer.valueOf(Long.toString(components.stream()
+        rect = rect.setHeight(Integer.valueOf(Long.toString(gameComponents.stream()
                 .filter(c -> c instanceof OptionLabel)
                 .count() * LabelComponent.HEIGHT_OFFSET)) + 5);
     }

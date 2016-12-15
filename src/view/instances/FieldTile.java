@@ -1,36 +1,24 @@
 package view.instances;
 
-import engine.model.map.GameMap;
-import engine.model.map.MapArea;
+import engine.model.map.Field;
+import engine.model.settlement.Settlement;
 import engine.points.Point;
 import engine.points.Rect;
-import lombok.Setter;
 import utils.Bool;
-import utils.Opt;
 import view.click.GameMouseEvent;
 import view.click.MouseAction;
 import view.component.GameGraphics;
 import view.component.TileComponent;
-import view.component.setting.AbstractComponent;
 import view.drawer.FieldDrawer;
 
-import java.awt.*;
-import java.util.List;
-import java.util.stream.Collectors;
+final class FieldTile extends TileComponent<Field> {
 
-final class FieldTile extends TileComponent<MapArea> {
-
-    @Setter
-    private Point delta;
-    private Bool highlight = Bool.FALSE;
-    @Setter
-    private GameMap<MapArea> map;
-    private Opt<AreaTileBoard> board;
+    private final FieldTileBoard parent;
 
     /* ========== DEFAULT ========== */
-    FieldTile(Rect rect, AreaTileBoard board) {
+    FieldTile(Rect rect, FieldTileBoard parent) {
         super(rect);
-        this.board = Opt.ofNullable(board);
+        this.parent = parent;
         getClickFunctionMapper()
                 .register(MouseAction.LEFT_CLICK, this::leftMouse)
                 .register(MouseAction.RIGHT_CLICK, this::rightMouse)
@@ -39,37 +27,30 @@ final class FieldTile extends TileComponent<MapArea> {
     }
 
     /* ========== PROTECTED ========== */
-    protected void draw(GameGraphics g, MapArea wrapper) {
-
-        FieldDrawer.draw(g, wrapper, map, rect, delta);
-
-        highlight.ifTrue(() -> {
-            g.setColor(new Color(255, 255, 255, 200));
-            g.draw(rect.move(this.delta));
-        });
+    protected void draw(GameGraphics g, Field wrapper) {
+        FieldDrawer.draw(g, wrapper, parent.getMap(), rect, delta);
+        highlight(g);
     }
 
     /* ========== PRIVATE ========== */
     private void leftMouse(GameMouseEvent e) {
+        parent.clear();
         element.ifPresent(this::printInformationToModel);
-        board.ifPresent(AreaTileBoard::show);
+        element.ifPresent(field -> field.getSettlement()
+                .ifPresent(this::showAreaMap));
+    }
+
+    private void showAreaMap(Settlement s) {
+        parent.addComponent(new AreaTileBoard(Rect.of(50, 200, 400, 400), s.getSettlementAreaMap()));
     }
 
     private void rightMouse(GameMouseEvent e) {
-        clear();
-        addComponent(new TileContextList(Rect.of(e.getPoint(), Point.of(32, 96).add(e.getPoint()))));
+        parent.addComponent(new TileContextList(Rect.of(e.getPoint(), Point.of(32, 96).add(e.getPoint()))));
     }
 
-    private void printInformationToModel(MapArea wrapper) {
+    private void printInformationToModel(Field wrapper) {
         model.setCurrentTileInfo(wrapper.getTerrain() + " " + wrapper.getCoords());
         wrapper.getSettlement()
                 .ifPresent(settlement -> model.setVillagers(settlement.getSettlementPeople().list()));
-    }
-
-    private void clear() {
-        List<AbstractComponent> collect = components.stream()
-                .filter(c -> c instanceof TileContextList)
-                .collect(Collectors.toList());
-        componentsToRemove.addAll(collect);
     }
 }

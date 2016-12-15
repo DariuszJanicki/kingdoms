@@ -30,8 +30,8 @@ public final class BuildingTileTypeList extends AbstractTileTypeList<BuildingTil
     }
 
     private void loadTerrainTypes() {
-        load(BuildingType.SHOP, SettlementTileLoader.singleton().loadTile(Point.of(0, 8)));
-        load(BuildingType.HOUSE, SettlementTileLoader.singleton().loadTile(Point.of(6, 7)));
-        load(BuildingType.BIG_HOUSE, SettlementTileLoader.singleton().loadTile(Point.of(0, 9)));
+        load(BuildingType.SHOP, SettlementTileLoader.singleton().loadTile(Point.of(0, 7)));
+        load(BuildingType.HOUSE, SettlementTileLoader.singleton().loadTile(Point.of(1, 7)));
+        load(BuildingType.BIG_HOUSE, SettlementTileLoader.singleton().loadTile(Point.of(2, 7)));
     }
 }

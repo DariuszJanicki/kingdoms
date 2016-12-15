@@ -2,7 +2,7 @@ package view.generator;
 
 import base.utils.GameArray;
 import engine.model.map.GameMap;
-import engine.model.map.SettlementArea;
+import engine.model.map.Area;
 import engine.model.terrain.TerrainType;
 import engine.points.Coords;
 import engine.points.Size;
@@ -13,13 +13,13 @@ public enum AreaGenerator {
     INSTANCE;
 
     /* ========== PUBLIC ========== */
-    public GameMap<SettlementArea> generateMap(Size size) {
+    public GameMap<Area> generateMap(Size size) {
         return new GameMap<>(size, new GameArray<>(size, this::createField));
     }
 
     /* ========== PRIVATE ========== */
-    private SettlementArea createField(Coords coords) {
+    private Area createField(Coords coords) {
         TerrainType type = new Dice<TerrainType>().randomElementOf(TerrainType.values());
-        return new SettlementArea(type, coords);
+        return new Area(type, coords);
     }
 }

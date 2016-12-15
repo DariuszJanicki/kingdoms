@@ -13,8 +13,8 @@ import view.loader.tile.list.BuildingTileTypeList;
 public class BuildingDrawer extends AbstractDrawer<Building> {
 
     public static void draw(GameGraphics g, Building building, Rect rect, Point delta) {
-        g.draw(BuildingTileTypeList.singleton().getTile(building.getType()).getImage(), rect.move(
-                delta));
+        g.draw(BuildingTileTypeList
+                .singleton()
+                .getTile(building.getType()).getImage(), rect.move(delta));
     }
-
 }

@@ -1,22 +1,30 @@
 package view.instances;
 
 import base.frame.constants.FrameConstants;
-import engine.model.map.MapArea;
+import engine.model.map.Field;
 import engine.model.map.GameMap;
 import engine.points.Coords;
 import engine.points.Point;
 import engine.points.Rect;
+import lombok.Getter;
 import utils.Opt;
-import view.component.TileBoardComponent;
 import view.component.GameGraphics;
+import view.component.TileBoardComponent;
+
+import java.util.stream.Collectors;
 
 public final class FieldTileBoard extends TileBoardComponent<FieldTile> {
 
     private final BoardScreenMover boardScreenMover = new BoardScreenMover();
-    private final GameMap<MapArea> map;
-    private final AreaTileBoard board;
+    @Getter
+    private final GameMap<Field> map;
 
     /* ========== PUBLIC ========== */
+    public FieldTileBoard(Rect rect, GameMap<Field> map) {
+        super(rect);
+        this.map = map;
+    }
+
     @Override
     public void performTicks() {
         boardScreenMover.tick();
@@ -30,6 +38,14 @@ public final class FieldTileBoard extends TileBoardComponent<FieldTile> {
         }
     }
 
+    public void clear() {
+        componentsToRemove
+                .addAll(gameComponents
+                        .stream()
+                        .filter(c -> c.isTemporary().isTrue())
+                        .collect(Collectors.toList()));
+    }
+
     /* ========== PROTECTED ========== */
     @Override
     protected void draw(GameGraphics g, Coords tileCoords) {
@@ -40,26 +56,19 @@ public final class FieldTileBoard extends TileBoardComponent<FieldTile> {
     @Override
     protected FieldTile tileFactoryMethod(Coords coords) {
         Point point = Point.of(coords.getX(), coords.getY()).mul(FrameConstants.baseTile).add(rect.getStartPoint());
-        FieldTile tileComponent = new FieldTile(new Rect(point, point.add(FrameConstants.baseTile, FrameConstants.baseTile)), board);
-        addComponent(tileComponent);
-        return tileComponent;
-    }
-
-    /* ========== DEFAULT ========== */
-    FieldTileBoard(Rect rect, GameMap<MapArea> map, AreaTileBoard board) {
-        super(rect);
-        this.map = map;
-        this.board = board;
+        FieldTile tile = new FieldTile(
+                new Rect(point, point.add(FrameConstants.baseTile, FrameConstants.baseTile)), this);
+        addComponent(tile);
+        return tile;
     }
 
     /* ========== PRIVATE ========== */
-    private void draw(GameGraphics g, MapArea mapArea, Opt<FieldTile> tile) {
-        tile.ifPresent(t -> draw(g, mapArea, t));
+    private void draw(GameGraphics g, Field field, Opt<FieldTile> tile) {
+        tile.ifPresent(t -> draw(g, field, t));
     }
 
-    private void draw(GameGraphics g, MapArea mapArea, FieldTile tile) {
-        tile.setElement(mapArea);
-        tile.setMap(map);
+    private void draw(GameGraphics g, Field field, FieldTile tile) {
+        tile.setElement(field);
         tile.setDelta(boardScreenMover.getDelta());
         tile.draw(g);
     }

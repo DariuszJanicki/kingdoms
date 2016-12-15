@@ -1,11 +1,12 @@
 package engine.model.settlement;
 
-import engine.model.building.Buildings;
+import engine.model.building.Building;
 import engine.model.person.People;
 import engine.model.person.Person;
 import lombok.val;
 import utils.Dice;
 
+import java.util.List;
 import java.util.stream.Collectors;
 
 public final class SettlementPeople extends People {
@@ -37,8 +38,10 @@ public final class SettlementPeople extends People {
         }
     }
 
-    public void buyEstates(Buildings buildings) {
-        buildings.available()
+    public void buyEstates(List<Building> buildings) {
+        buildings.stream()
+                .filter(building -> building.getOwner().isPresent().isFalse())
+                .collect(Collectors.toList())
                 .forEach(building -> new Dice<Person>().randomElementOf(people).claim(building));
     }
 

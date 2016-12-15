@@ -3,7 +3,6 @@ package engine.model.person;
 import engine.date.GameDate;
 import engine.model.ComponentModel;
 import engine.model.building.Building;
-import engine.model.building.Buildings;
 import engine.model.relation.Relations;
 import engine.model.settlement.Settlement;
 import lombok.Getter;
@@ -11,13 +10,16 @@ import lombok.Setter;
 import utils.Bool;
 import utils.Opt;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Person {
 
     private final String name;
     private final Gender gender;
     private final GameDate birthDate;
     private final Relations relations = new Relations();
-    private final Buildings ownedBuildings = new Buildings();
+    private final List<Building> ownedBuildings = new ArrayList<>();
 
     private Opt<Pregnancy> pregnancy = Opt.empty();
 

@@ -1,6 +1,7 @@
 package view.component.setting;
 
 import engine.points.Rect;
+import utils.Bool;
 import view.component.GameGraphics;
 
 import java.util.ArrayList;
@@ -15,28 +16,32 @@ public abstract class AbstractComponent extends Clickable {
 
     /* ========== PUBLIC ========== */
     public void preDraw(GameGraphics g) {
-        components.addAll(newComponents);
+        gameComponents.addAll(newComponents);
 
         newComponents.forEach(this::add);
 
         newComponents.clear();
-        components.removeAll(componentsToRemove);
+        gameComponents.removeAll(componentsToRemove);
         componentsToRemove.clear();
         draw(g);
-        components.forEach(c -> c.preDraw(g));
+        gameComponents.forEach(c -> c.preDraw(g));
     }
 
     public void preTick() {
         performTicks();
-        components.forEach(Clickable::performTicks);
+        gameComponents.forEach(Clickable::performTicks);
     }
 
     public void addComponent(AbstractComponent component) {
         newComponents.add(component);
     }
 
+    public Bool isTemporary() {
+        return Bool.FALSE;
+    }
+
     /* ========== PROTECTED ========== */
-    protected List<AbstractComponent> components = new ArrayList<>();
+    protected List<AbstractComponent> gameComponents = new ArrayList<>();
     protected List<AbstractComponent> componentsToRemove = new ArrayList<>();
 
     /* ========== PRIVATE ========== */
