@@ -1,11 +1,11 @@
 package view.component;
 
-import view.instances.Option;
-import view.instances.OptionList;
+import view.instances.contextlist.Option;
+import view.instances.contextlist.OptionList;
 import view.component.setting.AbstractComponent;
 import engine.points.Point;
 import engine.points.Rect;
-import view.instances.OptionLabel;
+import view.instances.contextlist.OptionLabel;
 import utils.Opt;
 
 import java.awt.*;

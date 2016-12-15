@@ -1,4 +1,4 @@
-package view.instances;
+package view.component;
 
 import base.frame.constants.FrameConstants;
 import base.utils.Mat;
@@ -8,7 +8,7 @@ import lombok.Getter;
 import lombok.Setter;
 import engine.model.Tickable;
 
-final class BoardScreenMover implements Tickable {
+public final class BoardScreenMover implements Tickable {
 
     private static final Integer ANIMATION_SPEED = 8;
 
@@ -30,11 +30,11 @@ final class BoardScreenMover implements Tickable {
     }
 
     /* ========== DEFAULT ========== */
-    boolean checkDifference() {
+    public boolean checkDifference() {
         return currentView.difference(destinationView).length() < 3;
     }
 
-    Coords transform(Coords coords) {
+    public Coords transform(Coords coords) {
         return destinationView.plus(coords);
     }
 

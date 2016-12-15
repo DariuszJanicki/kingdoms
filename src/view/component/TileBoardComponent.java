@@ -13,6 +13,7 @@ public abstract class TileBoardComponent<T extends TileComponent> extends Abstra
 
     private GameArray<T> tiles;
     private Size boardSize;
+    protected final BoardScreenMover boardScreenMover = new BoardScreenMover();
 
     /* ========== PUBLIC ========== */
     public TileBoardComponent(Rect rect) {

@@ -10,6 +10,7 @@ import view.component.InfoComponent;
 import view.component.InfoListComponent;
 import view.component.setting.AbstractComponent;
 import view.generator.BoardGenerator;
+import view.instances.tile.FieldTileBoard;
 
 public final class MainComponent extends AbstractComponent {
 

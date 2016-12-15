@@ -1,4 +1,4 @@
-package view.instances;
+package view.instances.tile;
 
 import engine.model.map.Field;
 import engine.model.settlement.Settlement;
@@ -10,6 +10,7 @@ import view.click.MouseAction;
 import view.component.GameGraphics;
 import view.component.TileComponent;
 import view.drawer.FieldDrawer;
+import view.instances.contextlist.TileContextList;
 
 final class FieldTile extends TileComponent<Field> {
 
@@ -28,8 +29,8 @@ final class FieldTile extends TileComponent<Field> {
 
     /* ========== PROTECTED ========== */
     @Override
-    protected void draw(GameGraphics g, Field element) {
-        FieldDrawer.draw(g, element, parent.getMap(), rect, delta);
+    public void draw(GameGraphics g) {
+        element.ifPresent(() -> FieldDrawer.draw(g, element.get(), parent.getMap(), rect, delta));
         highlight(g);
     }
 

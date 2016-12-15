@@ -1,4 +1,4 @@
-package view.instances;
+package view.instances.tile;
 
 import engine.model.map.Area;
 import engine.model.map.GameMap;
@@ -15,7 +15,6 @@ import java.awt.*;
 
 final class AreaTileBoard extends TileBoardComponent<AreaTile> {
 
-    private final BoardScreenMover boardScreenMover = new BoardScreenMover();
     @Setter
     private Opt<GameMap<Area>> map = Opt.empty();
 

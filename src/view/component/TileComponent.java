@@ -29,18 +29,11 @@ public abstract class TileComponent<T extends AbstractArea> extends AbstractComp
     }
 
     @Override
-    public void draw(GameGraphics g) {
-        element.ifPresent(t -> draw(g, t));
-    }
-
-    @Override
     public void performTicks() {
         element.ifPresent(Tickable::tick);
     }
 
     /* ========== PROTECTED ========== */
-    protected abstract void draw(GameGraphics g, T element);
-
     protected void highlight(GameGraphics g) {
         highlight.ifTrue(() -> {
             g.setColor(new Color(255, 255, 255, 200));

@@ -1,4 +1,4 @@
-package view.instances;
+package view.instances.contextlist;
 
 import view.component.LabelComponent;
 import engine.points.Rect;

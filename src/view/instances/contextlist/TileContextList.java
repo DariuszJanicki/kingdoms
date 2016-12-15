@@ -1,4 +1,4 @@
-package view.instances;
+package view.instances.contextlist;
 
 import engine.points.Rect;
 import utils.Bool;
@@ -6,7 +6,7 @@ import view.click.ClickFunctionMapper;
 import view.click.MouseAction;
 import view.component.ContextListComponent;
 
-final class TileContextList extends ContextListComponent {
+public final class TileContextList extends ContextListComponent {
 
     /* ========== PUBLIC ========== */
     public TileContextList(Rect rect) {

@@ -1,4 +1,4 @@
-package view.instances;
+package view.instances.tile;
 
 import engine.model.map.Area;
 import engine.model.map.GameMap;
@@ -20,12 +20,16 @@ final class AreaTile extends TileComponent<Area> {
     public AreaTile(Rect rect) {
         super(rect);
         getClickFunctionMapper()
+                .register(MouseAction.LEFT_CLICK, g -> System.out.println("LEFT"))
+                .register(MouseAction.RIGHT_CLICK, g -> System.out.println("RIGHT"))
                 .register(MouseAction.HOVER, g -> highlight = Bool.TRUE)
                 .register(MouseAction.HOVER_EXIT, g -> highlight = Bool.FALSE);
     }
 
-    public void draw(GameGraphics g, Area area) {
-        map.ifPresent(m -> AreaDrawer.draw(g, area, m, rect, delta));
+    public void draw(GameGraphics g) {
+        map.isPresent()
+                .and(element.isPresent())
+                .ifTrue(() -> AreaDrawer.draw(g, element.get(), map.get(), rect, delta));
         highlight(g);
     }
 }

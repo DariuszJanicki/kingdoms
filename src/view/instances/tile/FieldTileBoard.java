@@ -1,4 +1,4 @@
-package view.instances;
+package view.instances.tile;
 
 import base.frame.constants.FrameConstants;
 import engine.model.map.Field;
@@ -15,7 +15,6 @@ import java.util.stream.Collectors;
 
 public final class FieldTileBoard extends TileBoardComponent<FieldTile> {
 
-    private final BoardScreenMover boardScreenMover = new BoardScreenMover();
     @Getter
     private final GameMap<Field> map;
 

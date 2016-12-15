@@ -1,4 +1,4 @@
-package view.instances;
+package view.instances.contextlist;
 
 import lombok.Getter;
 

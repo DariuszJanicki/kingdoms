@@ -3,7 +3,7 @@ package input;
 import base.frame.MainFrame;
 import engine.points.Coords;
 import utils.Functional;
-import view.instances.FieldTileBoard;
+import view.instances.tile.FieldTileBoard;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
