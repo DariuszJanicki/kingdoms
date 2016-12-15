@@ -11,6 +11,8 @@ import utils.Opt;
 import view.component.GameGraphics;
 import view.component.TileBoardComponent;
 
+import java.awt.*;
+
 final class AreaTileBoard extends TileBoardComponent<AreaTile> {
 
     private final BoardScreenMover boardScreenMover = new BoardScreenMover();
@@ -37,30 +39,31 @@ final class AreaTileBoard extends TileBoardComponent<AreaTile> {
     /* ========== PROTECTED ========== */
     @Override
     protected void draw(GameGraphics g, Coords tileCoords) {
+        g.setColor(Color.white);
+        g.draw(rect);
+
         map.ifPresent(map -> map
                 .get(tileCoords.plus(boardScreenMover.getCurrentView()))
-                .ifPresent(field -> draw(g, field, getTiles()
-                        .get(tileCoords))));
+                .ifPresent(area -> prepareToDraw(area, getTiles().get(tileCoords))));
     }
 
     @Override
     protected AreaTile tileFactoryMethod(Coords coords) {
         int size = 32;
         Point point = Point.of(coords.getX(), coords.getY()).mul(size).add(rect.getStartPoint());
-        AreaTile tileComponent = new AreaTile(new Rect(point, point.add(size, size)));
-        addComponent(tileComponent);
-        return tileComponent;
+        AreaTile tile = new AreaTile(new Rect(point, point.add(size, size)));
+        addComponent(tile);
+        return tile;
     }
 
     /* ========== PRIVATE ========== */
-    private void draw(GameGraphics g, Area area, Opt<AreaTile> tile) {
-        tile.ifPresent(t -> draw(g, area, t));
+    private void prepareToDraw(Area area, Opt<AreaTile> tile) {
+        tile.ifPresent(t -> prepareToDraw(area, t));
     }
 
-    private void draw(GameGraphics g, Area area, AreaTile tile) {
+    private void prepareToDraw(Area area, AreaTile tile) {
         tile.setElement(area);
-        tile.setDelta(boardScreenMover.getDelta());
         tile.setMap(map);
-        tile.draw(g, area);
+        tile.setDelta(boardScreenMover.getDelta().add(15, 15));
     }
 }

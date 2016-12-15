@@ -1,6 +1,7 @@
 package view.component;
 
 import engine.model.Tickable;
+import engine.model.map.AbstractArea;
 import engine.points.Point;
 import engine.points.Rect;
 import lombok.Setter;
@@ -10,7 +11,7 @@ import view.component.setting.AbstractComponent;
 
 import java.awt.*;
 
-public abstract class TileComponent<T extends Tickable> extends AbstractComponent {
+public abstract class TileComponent<T extends AbstractArea> extends AbstractComponent {
 
     @Setter
     protected Point delta;
@@ -29,7 +30,7 @@ public abstract class TileComponent<T extends Tickable> extends AbstractComponen
 
     @Override
     public void draw(GameGraphics g) {
-        element.ifPresent(f -> draw(g, f));
+        element.ifPresent(t -> draw(g, t));
     }
 
     @Override
@@ -38,7 +39,7 @@ public abstract class TileComponent<T extends Tickable> extends AbstractComponen
     }
 
     /* ========== PROTECTED ========== */
-    protected abstract void draw(GameGraphics g, T t);
+    protected abstract void draw(GameGraphics g, T element);
 
     protected void highlight(GameGraphics g) {
         highlight.ifTrue(() -> {

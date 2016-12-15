@@ -7,7 +7,4 @@ import engine.model.Tickable;
 @Getter
 @AllArgsConstructor
 public abstract class AbstractDrawer<T extends Tickable> {
-//
-//    public abstract void draw(GameGraphics g, T t);
-
 }

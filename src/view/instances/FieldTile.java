@@ -27,8 +27,9 @@ final class FieldTile extends TileComponent<Field> {
     }
 
     /* ========== PROTECTED ========== */
-    protected void draw(GameGraphics g, Field wrapper) {
-        FieldDrawer.draw(g, wrapper, parent.getMap(), rect, delta);
+    @Override
+    protected void draw(GameGraphics g, Field element) {
+        FieldDrawer.draw(g, element, parent.getMap(), rect, delta);
         highlight(g);
     }
 
@@ -41,7 +42,7 @@ final class FieldTile extends TileComponent<Field> {
     }
 
     private void showAreaMap(Settlement s) {
-        parent.addComponent(new AreaTileBoard(Rect.of(50, 200, 400, 400), s.getSettlementAreaMap()));
+        parent.addComponent(new AreaTileBoard(Rect.of(50, 200, 400, 550), s.getSettlementAreaMap()));
     }
 
     private void rightMouse(GameMouseEvent e) {

@@ -50,7 +50,7 @@ public final class FieldTileBoard extends TileBoardComponent<FieldTile> {
     @Override
     protected void draw(GameGraphics g, Coords tileCoords) {
         map.get(tileCoords.plus(boardScreenMover.getCurrentView()))
-                .ifPresent(field -> draw(g, field, getTiles().get(tileCoords)));
+                .ifPresent(field -> draw(field, getTiles().get(tileCoords)));
     }
 
     @Override
@@ -63,14 +63,13 @@ public final class FieldTileBoard extends TileBoardComponent<FieldTile> {
     }
 
     /* ========== PRIVATE ========== */
-    private void draw(GameGraphics g, Field field, Opt<FieldTile> tile) {
-        tile.ifPresent(t -> draw(g, field, t));
+    private void draw(Field field, Opt<FieldTile> tile) {
+        tile.ifPresent(t -> draw(field, t));
     }
 
-    private void draw(GameGraphics g, Field field, FieldTile tile) {
+    private void draw(Field field, FieldTile tile) {
         tile.setElement(field);
         tile.setDelta(boardScreenMover.getDelta());
-        tile.draw(g);
     }
 
     private boolean checkCoords(Coords coords) {

@@ -1,7 +1,7 @@
 package view.instances;
 
-import engine.model.map.GameMap;
 import engine.model.map.Area;
+import engine.model.map.GameMap;
 import engine.points.Rect;
 import lombok.Setter;
 import utils.Bool;
@@ -25,7 +25,7 @@ final class AreaTile extends TileComponent<Area> {
     }
 
     public void draw(GameGraphics g, Area area) {
-        map.ifPresent(map -> AreaDrawer.draw(g, area, map, rect, delta));
+        map.ifPresent(m -> AreaDrawer.draw(g, area, m, rect, delta));
         highlight(g);
     }
 }

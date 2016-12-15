@@ -8,7 +8,7 @@ import engine.model.Tickable;
 
 @Getter
 @RequiredArgsConstructor
-abstract class AbstractArea implements Tickable {
+public abstract class AbstractArea implements Tickable {
 
     private final TerrainType terrain;
     private final Coords coords;
