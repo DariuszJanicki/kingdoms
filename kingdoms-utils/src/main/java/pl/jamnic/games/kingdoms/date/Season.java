@@ -14,7 +14,7 @@ enum Season {
     private String name;
 
     /* ========== STATIC ========== */
-    public static String of(int time) {
+    public static String of(Long time) {
         for (Season season : values()) {
             if (season.time >= time) {
                 return season.name;

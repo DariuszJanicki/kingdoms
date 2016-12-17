@@ -1,5 +1,6 @@
 package pl.jamnic.games.kingdoms.base;
 
+import pl.jamnic.games.kingdoms.date.Timer;
 import pl.jamnic.games.kingdoms.uicomponents.components.ComponentModel;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
@@ -50,8 +51,8 @@ public final class FpsTimer implements Runnable {
 
     private void tick() {
         ticks++;
+        Timer.getSingleton().addTime();
         MainFrame.singleton().tick();
-        ComponentModel.INSTANCE.getGameDate().dayPassed();
     }
 
     private void reset(long currentTime) {

@@ -3,6 +3,7 @@ package pl.jamnic.games.kingdoms.model.model.person;
 import lombok.Getter;
 import lombok.Setter;
 import pl.jamnic.games.kingdoms.date.GameDate;
+import pl.jamnic.games.kingdoms.date.Timer;
 import pl.jamnic.games.kingdoms.model.model.building.Building;
 import pl.jamnic.games.kingdoms.model.model.relation.Relations;
 import pl.jamnic.games.kingdoms.model.model.settlement.Settlement;
@@ -41,7 +42,7 @@ public class Person {
 
     @Override
     public String toString() {
-        return name + ", " + birthDate + " lat."; // TODO djanicki
+        return name + ", " + birthDate.difference(Timer.getSingleton().getTime()).getYears() + " lat.";
     }
 
     /* ========== DEFAULT ========== */
@@ -83,7 +84,7 @@ public class Person {
     }
 
     public Bool eligibleToWed() {
-        return Bool.TRUE; // TODO djanicki
+        return birthDate.difference(Timer.getSingleton().getTime()).greaterThanYears(16L);
     }
 
     public Bool isPregnant() {

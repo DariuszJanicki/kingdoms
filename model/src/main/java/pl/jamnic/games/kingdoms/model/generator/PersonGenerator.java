@@ -1,6 +1,7 @@
 package pl.jamnic.games.kingdoms.model.generator;
 
 import pl.jamnic.games.kingdoms.date.GameDate;
+import pl.jamnic.games.kingdoms.date.Timer;
 import pl.jamnic.games.kingdoms.model.model.person.Gender;
 import pl.jamnic.games.kingdoms.model.model.person.Person;
 import utils.Dice;
@@ -15,7 +16,7 @@ public enum PersonGenerator {
         return new Person(
                 NameGenerator.INSTANCE.generateName(gender),
                 gender,
-                GameDate.of(10)); // TODO djanicki
+                Timer.getSingleton().getTime());
     }
 
     public Person createRandomPerson() {
@@ -23,6 +24,6 @@ public enum PersonGenerator {
         return new Person(
                 NameGenerator.INSTANCE.generateName(gender),
                 gender,
-                GameDate.of(-Dice.k(5000) - 5000));
+                GameDate.of(-Dice.k(5000) - 5000L));
     }
 }

@@ -6,32 +6,24 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public final class GameDate {
 
-    private Integer time;
+    private Long time;
 
     /* ========== STATIC ========== */
     public static GameDate of(GameDate gameDate) {
         return new GameDate(gameDate.time);
     }
 
-    public static GameDate of(Integer time) {
+    public static GameDate of(Long time) {
         return new GameDate(time);
     }
 
-    public static GameDate init() {
-        return new GameDate(0);
-    }
-
     /* ========== PUBLIC ========== */
-    public void dayPassed() {
-        time += 1;
-    }
-
     @Override
     public String toString() {
         return time % 365 + " dzień " + Season.of(time % 365) + ", roku " + time / 365;
     }
 
-    public Integer getYear() {
+    public Long getYear() {
         return time / 365;
     }
 

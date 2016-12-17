@@ -1,6 +1,7 @@
 package pl.jamnic.games.kingdoms.view.instances;
 
 import lombok.Getter;
+import pl.jamnic.games.kingdoms.date.Timer;
 import pl.jamnic.games.kingdoms.model.generator.BoardGenerator;
 import pl.jamnic.games.kingdoms.model.model.map.Field;
 import pl.jamnic.games.kingdoms.model.model.map.GameMap;
@@ -47,7 +48,7 @@ public final class MainComponent extends AbstractComponent {
     private void bottomMenu() {
         GameMenu menu = new GameMenu(Rect.of(0, 600, 960, 640));
         addComponent(menu);
-        menu.addComponent(new InfoComponent(Rect.of(440, 600, 960, 640), () -> model.getGameDate().toString()));
+        menu.addComponent(new InfoComponent(Rect.of(440, 600, 960, 640), () -> Timer.getSingleton().getTime().toString()));
         menu.addComponent(new InfoComponent(Rect.of(760, 600, 960, 640), model::getFps));
     }
 

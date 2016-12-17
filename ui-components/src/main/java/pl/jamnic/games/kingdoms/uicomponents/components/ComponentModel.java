@@ -1,6 +1,5 @@
 package pl.jamnic.games.kingdoms.uicomponents.components;
 
-import pl.jamnic.games.kingdoms.date.GameDate;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -19,10 +18,6 @@ public enum ComponentModel {
     @Getter
     @Setter
     private List<String> villagers;
-
-    @Getter
-    @Setter
-    private GameDate gameDate = GameDate.init();
 
     @Getter
     @Setter
