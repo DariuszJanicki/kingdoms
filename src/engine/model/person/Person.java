@@ -1,7 +1,7 @@
 package engine.model.person;
 
 import engine.date.GameDate;
-import engine.model.ComponentModel;
+import engine.ComponentModel;
 import engine.model.building.Building;
 import engine.model.relation.Relations;
 import engine.model.settlement.Settlement;

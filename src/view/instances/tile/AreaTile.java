@@ -8,7 +8,6 @@ import utils.Bool;
 import utils.Opt;
 import components.input.mouse.MouseAction;
 import components.components.GameGraphics;
-import components.components.TileComponent;
 import view.drawer.AreaDrawer;
 
 final class AreaTile extends TileComponent<Area> {

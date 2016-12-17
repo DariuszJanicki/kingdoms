@@ -1,6 +1,6 @@
 package engine.generator;
 
-import engine.model.ComponentModel;
+import engine.ComponentModel;
 import engine.date.GameDate;
 import engine.model.person.Gender;
 import engine.model.person.Person;

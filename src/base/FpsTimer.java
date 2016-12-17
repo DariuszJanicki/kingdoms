@@ -1,6 +1,6 @@
 package base;
 
-import engine.model.ComponentModel;
+import engine.ComponentModel;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 

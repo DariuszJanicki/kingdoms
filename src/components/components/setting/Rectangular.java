@@ -1,6 +1,6 @@
 package components.components.setting;
 
-import engine.model.ComponentModel;
+import engine.ComponentModel;
 import utils.points.Rect;
 import utils.points.Point;
 import lombok.Getter;

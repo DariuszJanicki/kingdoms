@@ -8,7 +8,6 @@ import utils.Bool;
 import components.input.mouse.GameMouseEvent;
 import components.input.mouse.MouseAction;
 import components.components.GameGraphics;
-import components.components.TileComponent;
 import view.drawer.FieldDrawer;
 import view.instances.contextlist.TileContextList;
 

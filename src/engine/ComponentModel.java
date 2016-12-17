@@ -1,4 +1,4 @@
-package engine.model;
+package engine;
 
 import engine.date.GameDate;
 import lombok.Getter;

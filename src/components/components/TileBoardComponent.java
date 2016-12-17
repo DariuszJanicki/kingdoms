@@ -7,6 +7,7 @@ import utils.points.Coords;
 import utils.points.Rect;
 import utils.points.Size;
 import lombok.Getter;
+import view.instances.tile.TileComponent;
 
 @Getter
 public abstract class TileBoardComponent<T extends TileComponent> extends AbstractComponent {

@@ -1,5 +1,6 @@
-package components.components;
+package view.instances.tile;
 
+import components.components.GameGraphics;
 import engine.model.Tickable;
 import engine.model.map.AbstractArea;
 import utils.points.Point;
@@ -15,16 +16,16 @@ public abstract class TileComponent<T extends AbstractArea> extends AbstractComp
 
     @Setter
     protected Point delta;
-    protected Bool highlight = Bool.FALSE;
+    Bool highlight = Bool.FALSE;
 
-    protected Opt<T> element = Opt.empty();
+    Opt<T> element = Opt.empty();
 
     /* ========== PUBLIC ========== */
-    public TileComponent(Rect rect) {
+    TileComponent(Rect rect) {
         super(rect);
     }
 
-    public void setElement(T element) {
+    void setElement(T element) {
         this.element = Opt.ofNullable(element);
     }
 
@@ -34,7 +35,7 @@ public abstract class TileComponent<T extends AbstractArea> extends AbstractComp
     }
 
     /* ========== PROTECTED ========== */
-    protected void highlight(GameGraphics g) {
+    void highlight(GameGraphics g) {
         highlight.ifTrue(() -> {
             g.setColor(new Color(255, 255, 255, 200));
             g.draw(rect.move(this.delta));

@@ -1,14 +1,13 @@
 package components.components;
 
 import constants.FrameConstants;
+import lombok.Getter;
+import lombok.Setter;
 import utils.math.Mat;
 import utils.points.Coords;
 import utils.points.Point;
-import lombok.Getter;
-import lombok.Setter;
-import engine.model.Tickable;
 
-public final class BoardScreenMover implements Tickable {
+public final class BoardScreenMover {
 
     private static final Integer ANIMATION_SPEED = 8;
 
@@ -22,7 +21,6 @@ public final class BoardScreenMover implements Tickable {
     private Point delta = Point.of();
 
     /* ========== PUBLIC ========== */
-    @Override
     public void tick() {
         if (currentView.notEqual(destinationView)) {
             move();
