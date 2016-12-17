@@ -1,10 +1,10 @@
 package view.instances.contextlist;
 
-import engine.points.Rect;
+import utils.points.Rect;
 import utils.Bool;
-import view.click.ClickFunctionMapper;
-import view.click.MouseAction;
-import view.component.ContextListComponent;
+import components.input.mouse.MouseFunctionMapper;
+import components.input.mouse.MouseAction;
+import components.components.ContextListComponent;
 
 public final class TileContextList extends ContextListComponent {
 
@@ -13,10 +13,10 @@ public final class TileContextList extends ContextListComponent {
         super(rect);
 
         OptionList list = new OptionList();
-        list.add(new Option(ClickFunctionMapper
+        list.add(new Option(MouseFunctionMapper
                 .of()
                 .register(MouseAction.LEFT_CLICK, event -> System.out.println("Zbuduj zamek")), "Zbuduj zamek"));
-        list.add(new Option(ClickFunctionMapper
+        list.add(new Option(MouseFunctionMapper
                 .of()
                 .register(MouseAction.LEFT_CLICK, event -> System.out.println("Test2")), "Zbuduj wioskę"));
         setOptions(list);

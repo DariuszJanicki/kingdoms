@@ -1,7 +1,7 @@
 package view.instances.contextlist;
 
-import view.component.LabelComponent;
-import engine.points.Rect;
+import components.components.LabelComponent;
+import utils.points.Rect;
 
 public final class OptionLabel extends LabelComponent {
 

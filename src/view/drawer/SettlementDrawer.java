@@ -1,12 +1,12 @@
 package view.drawer;
 
 import engine.model.settlement.Settlement;
-import engine.points.Point;
-import engine.points.Rect;
+import utils.points.Point;
+import utils.points.Rect;
 import lombok.Getter;
 import lombok.Setter;
-import view.component.GameGraphics;
-import view.loader.tile.list.SettlementTileTypeList;
+import components.components.GameGraphics;
+import engine.loader.tile.list.SettlementTileTypeList;
 
 import java.awt.*;
 

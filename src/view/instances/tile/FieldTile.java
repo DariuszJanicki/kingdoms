@@ -2,13 +2,13 @@ package view.instances.tile;
 
 import engine.model.map.Field;
 import engine.model.settlement.Settlement;
-import engine.points.Point;
-import engine.points.Rect;
+import utils.points.Point;
+import utils.points.Rect;
 import utils.Bool;
-import view.click.GameMouseEvent;
-import view.click.MouseAction;
-import view.component.GameGraphics;
-import view.component.TileComponent;
+import components.input.mouse.GameMouseEvent;
+import components.input.mouse.MouseAction;
+import components.components.GameGraphics;
+import components.components.TileComponent;
 import view.drawer.FieldDrawer;
 import view.instances.contextlist.TileContextList;
 
@@ -20,7 +20,7 @@ final class FieldTile extends TileComponent<Field> {
     FieldTile(Rect rect, FieldTileBoard parent) {
         super(rect);
         this.parent = parent;
-        getClickFunctionMapper()
+        createClickMapper()
                 .register(MouseAction.LEFT_CLICK, this::leftMouse)
                 .register(MouseAction.RIGHT_CLICK, this::rightMouse)
                 .register(MouseAction.HOVER, g -> highlight = Bool.TRUE)

@@ -2,14 +2,14 @@ package view.instances.tile;
 
 import engine.model.map.Area;
 import engine.model.map.GameMap;
-import engine.points.Coords;
-import engine.points.Point;
-import engine.points.Rect;
+import utils.points.Coords;
+import utils.points.Point;
+import utils.points.Rect;
 import lombok.Setter;
 import utils.Bool;
 import utils.Opt;
-import view.component.GameGraphics;
-import view.component.TileBoardComponent;
+import components.components.GameGraphics;
+import components.components.TileBoardComponent;
 
 import java.awt.*;
 

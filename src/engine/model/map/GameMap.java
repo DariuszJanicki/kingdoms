@@ -1,9 +1,9 @@
 package engine.model.map;
 
-import base.utils.GameArray;
+import utils.datastructure.GameArray;
 import engine.model.Tickable;
-import engine.points.Coords;
-import engine.points.Size;
+import utils.points.Coords;
+import utils.points.Size;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import utils.Opt;

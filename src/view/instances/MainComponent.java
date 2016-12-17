@@ -1,15 +1,15 @@
 package view.instances;
 
-import engine.model.map.GameMap;
+import components.components.GameGraphics;
+import components.components.InfoComponent;
+import components.components.InfoListComponent;
+import components.components.setting.AbstractComponent;
+import engine.generator.BoardGenerator;
 import engine.model.map.Field;
-import engine.points.Rect;
-import engine.points.Size;
+import engine.model.map.GameMap;
 import lombok.Getter;
-import view.component.GameGraphics;
-import view.component.InfoComponent;
-import view.component.InfoListComponent;
-import view.component.setting.AbstractComponent;
-import view.generator.BoardGenerator;
+import utils.points.Rect;
+import utils.points.Size;
 import view.instances.tile.FieldTileBoard;
 
 public final class MainComponent extends AbstractComponent {
@@ -20,7 +20,6 @@ public final class MainComponent extends AbstractComponent {
     /* ========== PUBLIC ========== */
     public MainComponent(Rect rect) {
         super(rect);
-
         createBoard();
         rightMenu();
         bottomMenu();

@@ -2,7 +2,7 @@ package engine.model.map;
 
 import engine.model.settlement.Settlement;
 import engine.model.terrain.TerrainType;
-import engine.points.Coords;
+import utils.points.Coords;
 import lombok.Getter;
 import lombok.Setter;
 import utils.Opt;

@@ -2,17 +2,17 @@ package view.drawer;
 
 import engine.model.map.Field;
 import engine.model.map.GameMap;
-import view.loader.Direction;
+import engine.loader.Direction;
 import engine.model.terrain.TerrainType;
-import engine.points.Coords;
-import engine.points.Point;
-import engine.points.Rect;
+import utils.points.Coords;
+import utils.points.Point;
+import utils.points.Rect;
 import lombok.Getter;
 import lombok.Setter;
 import utils.Opt;
-import view.component.GameGraphics;
-import view.loader.tile.TerrainTileType;
-import view.loader.tile.list.TerrainTileTypeList;
+import components.components.GameGraphics;
+import engine.loader.tile.TerrainTileType;
+import engine.loader.tile.list.TerrainTileTypeList;
 
 @Setter
 @Getter

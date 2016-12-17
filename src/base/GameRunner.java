@@ -1,7 +1,5 @@
 package base;
 
-import base.frame.MainFrame;
-
 import java.awt.*;
 
 /**

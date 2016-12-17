@@ -1,7 +1,7 @@
 package view.instances;
 
-import engine.points.Rect;
-import view.component.MenuComponent;
+import utils.points.Rect;
+import components.components.MenuComponent;
 
 final class GameMenu extends MenuComponent {
 

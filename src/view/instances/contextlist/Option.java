@@ -2,12 +2,12 @@ package view.instances.contextlist;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import view.click.ClickFunctionMapper;
+import components.input.mouse.MouseFunctionMapper;
 
 @Getter
 @AllArgsConstructor
 public final class Option {
 
-    private ClickFunctionMapper click;
+    private MouseFunctionMapper click;
     private String text;
 }
