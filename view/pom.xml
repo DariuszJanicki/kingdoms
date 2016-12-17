@@ -20,7 +20,7 @@
         </dependency>
         <dependency>
             <groupId>pl.jamnic.games</groupId>
-            <artifactId>kingdoms.ui-components</artifactId>
+            <artifactId>kingdoms-uicomponents</artifactId>
             <version>0.1.0-SNAPSHOT</version>
         </dependency>
     </dependencies>
