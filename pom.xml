@@ -11,11 +11,11 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>ui-components</module>
-        <module>model</module>
-        <module>view</module>
-        <module>base</module>
         <module>kingdoms-utils</module>
+        <module>kingdoms-ui-components</module>
+        <module>kingdoms-model</module>
+        <module>kingdoms-view</module>
+        <module>kingdoms-base</module>
     </modules>
 
     <properties>
