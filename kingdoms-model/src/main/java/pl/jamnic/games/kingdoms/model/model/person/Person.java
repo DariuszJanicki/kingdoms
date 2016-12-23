@@ -6,6 +6,7 @@ import pl.jamnic.games.kingdoms.date.GameDate;
 import pl.jamnic.games.kingdoms.date.Timer;
 import pl.jamnic.games.kingdoms.model.model.building.Building;
 import pl.jamnic.games.kingdoms.model.model.relation.Relations;
+import pl.jamnic.games.kingdoms.model.model.schedule.tasks.Task;
 import pl.jamnic.games.kingdoms.model.model.settlement.Settlement;
 import utils.Bool;
 import utils.Dice;
@@ -19,17 +20,22 @@ import static pl.jamnic.games.kingdoms.model.model.person.PersonStatus.DEAD;
 public class Person {
 
     private final String name;
+    @Getter
     private final Gender gender;
     private final GameDate birthDate;
+
     private final Relations relations = new Relations();
     private final List<Building> ownedBuildings = new ArrayList<>();
+
     private PersonStatus status = PersonStatus.LIVING;
+    private PersonTaskScheduler scheduler = new PersonTaskScheduler(this);
 
     private Opt<Pregnancy> pregnancy = Opt.empty();
 
     @Getter
     private Opt<Building> house = Opt.empty();
 
+    @Getter
     @Setter
     private Opt<Settlement> settlement = Opt.empty();
 
@@ -41,17 +47,14 @@ public class Person {
     }
 
     public void tick() {
+        scheduler.prepareTasks();
+        scheduler.getTask().ifPresent(Task::executeTask);
         pregnancy.ifPresent(p -> p.nextStage().ifTrue(this::childbirth));
     }
 
     @Override
     public String toString() {
         return name + ", " + birthDate.difference(Timer.getSingleton().getTime()).getYears() + " lat.";
-    }
-
-    /* ========== DEFAULT ========== */
-    public Bool isMale() {
-        return gender.isMale();
     }
 
     public Bool isFemale() {
@@ -63,6 +66,7 @@ public class Person {
     }
 
     public void marry(Person person) {
+        System.out.println(this + " and " + person + " are now married.");
         relations.addSpouse(person);
         person.relations.addSpouse(this);
     }
@@ -86,7 +90,7 @@ public class Person {
         relations.child(child);
     }
 
-    public Bool eligibleToWed() {
+    public Bool isEligibleToWed() {
         return birthDate.difference(Timer.getSingleton().getTime()).greaterThanYears(16L);
     }
 
@@ -106,6 +110,10 @@ public class Person {
     }
 
     /* ========== PRIVATE ========== */
+    private Bool isMale() {
+        return gender.isMale();
+    }
+
     private void startPregnancy(Person male) {
         this.pregnancy = Opt.of(new Pregnancy(this, male));
     }
@@ -131,5 +139,9 @@ public class Person {
         newHouse.moveIn(this);
         relations.getFamily().getPeople()
                 .forEach(newHouse::moveIn);
+    }
+
+    public void addTask(Task task) {
+        scheduler.addTask(task);
     }
 }
